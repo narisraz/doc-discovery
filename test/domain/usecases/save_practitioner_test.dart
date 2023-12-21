@@ -18,7 +18,7 @@ void main() {
   });
 
   const practitioner = PractitionerEntity(
-      address: Address(road: "B 55"),
+      address: AddressEntity(road: "B 55"),
       familyName: "Smith",
       givenName: "John",
       tel: "555-555-5555",

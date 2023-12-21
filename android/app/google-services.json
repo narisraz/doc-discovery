@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "105793117016",
+    "project_id": "docdiscovery-ae6c4",
+    "storage_bucket": "docdiscovery-ae6c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105793117016:android:13b15f4b9092d92466e32d",
+        "android_client_info": {
+          "package_name": "com.example.docdiscovery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105793117016-ae3gv07956givtgppmji87o1erf9jhv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEoFy0FoBW9C9ECgCLq9iWcurY6kFj0R0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105793117016-ae3gv07956givtgppmji87o1erf9jhv3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "105793117016-9hu0nrpubn0p9mhqc45g8emd2qh00976.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.siran.docdiscovery"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105793117016:android:ce5eb8161f5f93cc66e32d",
+        "android_client_info": {
+          "package_name": "com.siran.docdiscovery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105793117016-ae3gv07956givtgppmji87o1erf9jhv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEoFy0FoBW9C9ECgCLq9iWcurY6kFj0R0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105793117016-ae3gv07956givtgppmji87o1erf9jhv3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "105793117016-9hu0nrpubn0p9mhqc45g8emd2qh00976.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.siran.docdiscovery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

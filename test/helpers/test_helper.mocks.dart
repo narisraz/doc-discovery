@@ -46,11 +46,11 @@ class MockPractitionerRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>> savePractitioner(
-          _i6.PractitionerEntity practitioner) =>
+          _i6.PractitionerEntity? practitioner) =>
       (super.noSuchMethod(
         Invocation.method(
           #savePractitioner,
-          [],
+          [practitioner],
         ),
         returnValue:
             _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
@@ -58,7 +58,7 @@ class MockPractitionerRepository extends _i1.Mock
           this,
           Invocation.method(
             #savePractitioner,
-            [],
+            [practitioner],
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
