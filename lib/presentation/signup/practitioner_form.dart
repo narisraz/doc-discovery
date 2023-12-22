@@ -68,8 +68,12 @@ class PractitionerForm extends ConsumerWidget {
                       city: cityController.value.text,
                       country: countryController.value.text,
                     )))
-                .then((value) => ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("Saved"))));
+                .then((value) {
+              if (value.isRight()) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text("Saved")));
+              }
+            });
           },
           key: const Key('submit_button'),
           child: const Text('Enregistrer'),

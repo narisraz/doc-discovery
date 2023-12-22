@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:docdiscovery/core/error/failure.dart';
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
@@ -67,5 +68,26 @@ void main() {
     await tester.pumpAndSettle();
     verify(practitionerRepository.savePractitioner(any)).called(1);
     expect(find.byType(SnackBar), findsOneWidget);
+  });
+
+  testWidgets('should do nothing when form is not valid', (tester) async {
+    // arrange
+    await tester.pumpWidget(ProviderScope(
+        overrides: [
+          practitionerRepositoryProvider
+              .overrideWithValue(practitionerRepository)
+        ],
+        child: const MaterialApp(
+            home: Material(child: Scaffold(body: PractitionerForm())))));
+    when(practitionerRepository.savePractitioner(any))
+        .thenAnswer((_) => Future.value(const Left(ObjectNotValidFailure())));
+
+    // act
+    await tester.tap(find.byKey(const Key('submit_button')));
+
+    // assert
+    await tester.pumpAndSettle();
+    verify(practitionerRepository.savePractitioner(any)).called(1);
+    expect(find.byType(SnackBar), findsNothing);
   });
 }
