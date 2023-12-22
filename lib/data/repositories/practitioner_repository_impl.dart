@@ -26,8 +26,11 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
   }
 
   @override
-  getById(String practitionerId) {
-    // TODO: implement getById
-    throw UnimplementedError();
+  Future<Either<Failure, PractitionerEntity>> getById(String practitionerId) {
+    return FirestoreCollections.getPractitionerCollection(firestore)
+        .doc(practitionerId)
+        .get()
+        .then((value) =>
+            Right(value.data()!.toPractitionerEntity().copyWith(id: value.id)));
   }
 }

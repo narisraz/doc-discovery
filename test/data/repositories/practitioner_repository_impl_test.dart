@@ -43,4 +43,16 @@ void main() {
     expect(expectedPractitioner.email, practitioner.email);
     expect(expectedPractitioner.onm, practitioner.onm);
   });
+
+  test('should get practitioner from firestore', () async {
+    final practitionerRepository = PractitionerRepositoryImpl(firestore);
+    final saved = await practitionerRepository.savePractitioner(practitioner);
+    final id = (saved as Right<Failure, PractitionerEntity>).value.id;
+    final result = await practitionerRepository.getById(id!);
+
+    expect(result.isRight(), true);
+    final expectedPractitioner =
+        (result as Right<Failure, PractitionerEntity>).value;
+    expect(expectedPractitioner.id, id);
+  });
 }
