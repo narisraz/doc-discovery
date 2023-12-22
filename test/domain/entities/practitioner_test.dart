@@ -27,4 +27,48 @@ void main() {
           onm: 'onm',
         ));
   });
+
+  test('should have family name', () {
+    const practitioner = PractitionerEntity(
+      familyName: '',
+      givenName: 'John',
+      tel: '555-555-5555',
+      address: AddressEntity(road: "B 55"),
+    );
+
+    expect(practitioner.isValid(), false);
+  });
+
+  test('should have given name', () {
+    const practitioner = PractitionerEntity(
+      familyName: 'Smith',
+      givenName: '',
+      tel: '555-555-5555',
+      address: AddressEntity(road: "B 55"),
+    );
+
+    expect(practitioner.isValid(), false);
+  });
+
+  test('should have tel', () {
+    const practitioner = PractitionerEntity(
+      familyName: 'Smith',
+      givenName: 'John',
+      tel: '',
+      address: AddressEntity(road: "B 55"),
+    );
+
+    expect(practitioner.isValid(), false);
+  });
+
+  test('should have address', () {
+    const practitioner = PractitionerEntity(
+      familyName: 'Smith',
+      givenName: 'John',
+      tel: '555-555-5555',
+      address: AddressEntity(road: "", city: "", country: ""),
+    );
+
+    expect(practitioner.isValid(), false);
+  });
 }

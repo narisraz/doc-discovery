@@ -33,6 +33,16 @@ class PractitionerEntity extends Equatable {
     );
   }
 
+  isValid() {
+    return familyName.isNotEmpty &&
+        givenName.isNotEmpty &&
+        tel.isNotEmpty &&
+        address.road != null &&
+        address.road!.isNotEmpty &&
+        address.city!.isNotEmpty &&
+        address.country!.isNotEmpty;
+  }
+
   @override
   List<Object?> get props =>
       [address, familyName, givenName, tel, email, onm, id];
