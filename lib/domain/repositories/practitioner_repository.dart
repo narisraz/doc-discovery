@@ -5,4 +5,6 @@ import 'package:docdiscovery/domain/entities/practitioner.dart';
 abstract class PractitionerRepository {
   Future<Either<Failure, PractitionerEntity>> savePractitioner(
       PractitionerEntity practitioner);
+
+  Future<Either<Failure, PractitionerEntity>> getById(String practitionerId);
 }

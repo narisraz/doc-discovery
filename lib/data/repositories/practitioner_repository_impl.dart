@@ -24,4 +24,10 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
         .then((value) =>
             Right(value.data()!.toPractitionerEntity().copyWith(id: value.id)));
   }
+
+  @override
+  getById(String practitionerId) {
+    // TODO: implement getById
+    throw UnimplementedError();
+  }
 }

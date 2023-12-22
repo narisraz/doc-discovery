@@ -75,6 +75,25 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>> getById(
+          String? practitionerId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getById,
+          [practitionerId],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #getById,
+            [practitionerId],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
 }
 
 /// A class which mocks [SavePractitionerUseCase].
