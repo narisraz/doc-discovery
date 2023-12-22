@@ -24,6 +24,13 @@ void main() {
       tel: "555-555-5555",
       email: "U1TbJ@example.com");
 
+  const invalidPractitioner = PractitionerEntity(
+      address: AddressEntity(road: "B 55"),
+      familyName: "",
+      givenName: "John",
+      tel: "555-555-5555",
+      email: "U1TbJ@example.com");
+
   test('should use the repository to save the practitioner', () async {
     // arrange
     when(mockPractitionerRepository.savePractitioner(practitioner))
@@ -35,5 +42,13 @@ void main() {
     // assert
     expect(result.isRight(), true);
     expect(result, const Right(practitioner));
+  });
+
+  test('should not save if practitioner is invalid', () async {
+    // act
+    final result = await savePractitionerUseCase.execute(invalidPractitioner);
+
+    // assert
+    expect(result.isLeft(), true);
   });
 }

@@ -12,3 +12,7 @@ abstract class Failure extends Equatable {
 class NotImplementedFailure extends Failure {
   const NotImplementedFailure() : super("Not implemented");
 }
+
+class ObjectNotValidFailure extends Failure {
+  const ObjectNotValidFailure() : super("Object not valid");
+}

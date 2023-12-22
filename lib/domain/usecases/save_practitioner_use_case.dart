@@ -12,6 +12,9 @@ class SavePractitionerUseCase {
 
   Future<Either<Failure, PractitionerEntity>> execute(
       PractitionerEntity practitioner) {
+    if (!practitioner.isValid()) {
+      return Future.value(const Left(ObjectNotValidFailure()));
+    }
     return practitionerRepository.savePractitioner(practitioner);
   }
 }
