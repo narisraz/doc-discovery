@@ -21,21 +21,15 @@ class PractitionerEntity extends Equatable {
 
   PractitionerEntity copyWith({
     String? id,
-    AddressEntity? address,
-    String? familyName,
-    String? givenName,
-    String? tel,
-    String? email,
-    String? onm,
   }) {
     return PractitionerEntity(
-      address: address ?? this.address,
-      familyName: familyName ?? this.familyName,
-      givenName: givenName ?? this.givenName,
-      tel: tel ?? this.tel,
+      address: address,
+      familyName: familyName,
+      givenName: givenName,
+      tel: tel,
       id: id ?? this.id,
-      email: email ?? this.email,
-      onm: onm ?? this.onm,
+      email: email,
+      onm: onm,
     );
   }
 

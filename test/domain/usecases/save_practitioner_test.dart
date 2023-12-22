@@ -33,6 +33,7 @@ void main() {
     final result = await savePractitionerUseCase.execute(practitioner);
 
     // assert
+    expect(result.isRight(), true);
     expect(result, const Right(practitioner));
   });
 }

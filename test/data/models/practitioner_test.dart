@@ -64,4 +64,34 @@ void main() {
           onm: 'onm',
         ));
   });
+
+  test('should copy values', () {
+    const practitioner = PractitionerModel(
+      address: AddressModel(road: "B 55"),
+      familyName: "Smith",
+      givenName: "John",
+      tel: "555-555-5555",
+      email: "U1TbJ@example.com",
+      onm: 'onm',
+      id: 'id',
+    );
+    final now = DateTime.now();
+
+    expect(
+        practitioner.copyWith(
+          createdAt: now,
+          modifiedAt: now,
+        ),
+        PractitionerModel(
+          address: const AddressModel(road: "B 55"),
+          familyName: "Smith",
+          givenName: "John",
+          tel: "555-555-5555",
+          email: "U1TbJ@example.com",
+          id: 'id',
+          onm: 'onm',
+          createdAt: now,
+          modifiedAt: now,
+        ));
+  });
 }

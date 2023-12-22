@@ -87,24 +87,17 @@ class PractitionerModel extends Equatable {
   }
 
   PractitionerModel copyWith({
-    String? id,
-    AddressModel? address,
-    String? familyName,
-    String? givenName,
-    String? tel,
-    String? email,
-    String? onm,
     DateTime? createdAt,
     DateTime? modifiedAt,
   }) {
     return PractitionerModel(
-      address: address ?? this.address,
-      familyName: familyName ?? this.familyName,
-      givenName: givenName ?? this.givenName,
-      tel: tel ?? this.tel,
-      id: id ?? this.id,
-      email: email ?? this.email,
-      onm: onm ?? this.onm,
+      address: address,
+      familyName: familyName,
+      givenName: givenName,
+      tel: tel,
+      id: id,
+      email: email,
+      onm: onm,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
     );
