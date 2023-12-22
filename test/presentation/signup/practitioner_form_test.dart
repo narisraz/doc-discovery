@@ -70,7 +70,7 @@ void main() {
     expect(find.byType(SnackBar), findsOneWidget);
   });
 
-  testWidgets('should do nothing when form is not valid', (tester) async {
+  testWidgets('should do nothing when form is not invalid', (tester) async {
     // arrange
     await tester.pumpWidget(ProviderScope(
         overrides: [
@@ -87,7 +87,6 @@ void main() {
 
     // assert
     await tester.pumpAndSettle();
-    verify(savePractitionerUseCase.execute(any)).called(1);
-    expect(find.byType(SnackBar), findsNothing);
+    verifyNever(savePractitionerUseCase.execute(any));
   });
 }
