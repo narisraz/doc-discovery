@@ -19,14 +19,14 @@ void main() {
       tel: '555-555-5555',
       email: 'U1TbJ@example.com',
       address: AddressEntity(road: "B 55", city: "London", country: "UK"));
-  final practitionerRepository = MockPractitionerRepository();
+  final savePractitionerUseCase = MockSavePractitionerUseCase();
 
   testWidgets('should render practitioner form', (tester) async {
     // arrange
     await tester.pumpWidget(ProviderScope(
         overrides: [
-          practitionerRepositoryProvider
-              .overrideWithValue(practitionerRepository)
+          savePractitionerUseCaseProvider
+              .overrideWithValue(savePractitionerUseCase)
         ],
         child: const MaterialApp(
             home: Material(child: Scaffold(body: PractitionerForm())))));
@@ -40,12 +40,12 @@ void main() {
     // arrange
     await tester.pumpWidget(ProviderScope(
         overrides: [
-          practitionerRepositoryProvider
-              .overrideWithValue(practitionerRepository)
+          savePractitionerUseCaseProvider
+              .overrideWithValue(savePractitionerUseCase)
         ],
         child: const MaterialApp(
             home: Material(child: Scaffold(body: PractitionerForm())))));
-    when(practitionerRepository.savePractitioner(any))
+    when(savePractitionerUseCase.execute(any))
         .thenAnswer((_) => Future.value(const Right(practitioner)));
 
     // act
@@ -66,7 +66,7 @@ void main() {
 
     // assert
     await tester.pumpAndSettle();
-    verify(practitionerRepository.savePractitioner(any)).called(1);
+    verify(savePractitionerUseCase.execute(any)).called(1);
     expect(find.byType(SnackBar), findsOneWidget);
   });
 
@@ -74,12 +74,12 @@ void main() {
     // arrange
     await tester.pumpWidget(ProviderScope(
         overrides: [
-          practitionerRepositoryProvider
-              .overrideWithValue(practitionerRepository)
+          savePractitionerUseCaseProvider
+              .overrideWithValue(savePractitionerUseCase)
         ],
         child: const MaterialApp(
             home: Material(child: Scaffold(body: PractitionerForm())))));
-    when(practitionerRepository.savePractitioner(any))
+    when(savePractitionerUseCase.execute(any))
         .thenAnswer((_) => Future.value(const Left(ObjectNotValidFailure())));
 
     // act
@@ -87,7 +87,7 @@ void main() {
 
     // assert
     await tester.pumpAndSettle();
-    verify(practitionerRepository.savePractitioner(any)).called(1);
+    verify(savePractitionerUseCase.execute(any)).called(1);
     expect(find.byType(SnackBar), findsNothing);
   });
 }

@@ -10,6 +10,8 @@ import 'package:docdiscovery/core/error/failure.dart' as _i5;
 import 'package:docdiscovery/domain/entities/practitioner.dart' as _i6;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i3;
+import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
+    as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -27,6 +29,17 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
   _FakeEither_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakePractitionerRepository_1 extends _i1.SmartFake
+    implements _i3.PractitionerRepository {
+  _FakePractitionerRepository_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -58,6 +71,44 @@ class MockPractitionerRepository extends _i1.Mock
           this,
           Invocation.method(
             #savePractitioner,
+            [practitioner],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
+}
+
+/// A class which mocks [SavePractitionerUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSavePractitionerUseCase extends _i1.Mock
+    implements _i7.SavePractitionerUseCase {
+  MockSavePractitionerUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+        Invocation.getter(#practitionerRepository),
+        returnValue: _FakePractitionerRepository_1(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+      ) as _i3.PractitionerRepository);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>> execute(
+          _i6.PractitionerEntity? practitioner) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [practitioner],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
             [practitioner],
           ),
         )),

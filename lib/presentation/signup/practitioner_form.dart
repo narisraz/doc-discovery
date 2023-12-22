@@ -27,37 +27,44 @@ class PractitionerForm extends ConsumerWidget {
         ),
         TextFormField(
           key: const Key('given_name'),
+          controller: givenNameController,
           decoration: const InputDecoration(hintText: 'Prénom'),
         ),
         TextFormField(
           key: const Key('onm'),
+          controller: onmController,
           decoration: const InputDecoration(hintText: 'ONM'),
         ),
         TextFormField(
           key: const Key('tel'),
+          controller: telController,
           decoration: const InputDecoration(hintText: 'Téléphone'),
         ),
         TextFormField(
           key: const Key('email'),
+          controller: emailController,
           decoration: const InputDecoration(hintText: 'Adresse mail'),
         ),
         TextFormField(
           key: const Key('road'),
+          controller: roadController,
           decoration: const InputDecoration(hintText: 'Adresse'),
         ),
         TextFormField(
           key: const Key('city'),
-          decoration: const InputDecoration(hintText: 'Commune'),
+          controller: cityController,
+          decoration: const InputDecoration(hintText: 'District'),
         ),
         TextFormField(
           key: const Key('country'),
+          controller: countryController,
           decoration: const InputDecoration(hintText: 'Région'),
         ),
         ElevatedButton(
           onPressed: () {
             ref
-                .read(practitionerRepositoryProvider)
-                .savePractitioner(PractitionerEntity(
+                .read(savePractitionerUseCaseProvider)
+                .execute(PractitionerEntity(
                     familyName: familyNameController.value.text,
                     givenName: givenNameController.value.text,
                     onm: onmController.value.text,
@@ -72,6 +79,9 @@ class PractitionerForm extends ConsumerWidget {
               if (value.isRight()) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(const SnackBar(content: Text("Saved")));
+              } else {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text("Invalide")));
               }
             });
           },
