@@ -10,6 +10,8 @@ import 'package:docdiscovery/core/error/failure.dart' as _i5;
 import 'package:docdiscovery/domain/entities/practitioner.dart' as _i6;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i3;
+import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
+    as _i8;
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
     as _i7;
 import 'package:mockito/mockito.dart' as _i1;
@@ -53,10 +55,6 @@ class _FakePractitionerRepository_1 extends _i1.SmartFake
 /// See the documentation for Mockito's code generation for more information.
 class MockPractitionerRepository extends _i1.Mock
     implements _i3.PractitionerRepository {
-  MockPractitionerRepository() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>> savePractitioner(
           _i6.PractitionerEntity? practitioner) =>
@@ -66,6 +64,15 @@ class MockPractitionerRepository extends _i1.Mock
           [practitioner],
         ),
         returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #savePractitioner,
+            [practitioner],
+          ),
+        )),
+        returnValueForMissingStub:
             _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
                 _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
           this,
@@ -93,6 +100,15 @@ class MockPractitionerRepository extends _i1.Mock
             [practitionerId],
           ),
         )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #getById,
+            [practitionerId],
+          ),
+        )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
 }
 
@@ -101,14 +117,14 @@ class MockPractitionerRepository extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockSavePractitionerUseCase extends _i1.Mock
     implements _i7.SavePractitionerUseCase {
-  MockSavePractitionerUseCase() {
-    _i1.throwOnMissingStub(this);
-  }
-
   @override
   _i3.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
         returnValue: _FakePractitionerRepository_1(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+        returnValueForMissingStub: _FakePractitionerRepository_1(
           this,
           Invocation.getter(#practitionerRepository),
         ),
@@ -129,6 +145,62 @@ class MockSavePractitionerUseCase extends _i1.Mock
           Invocation.method(
             #execute,
             [practitioner],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [practitioner],
+          ),
+        )),
+      ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
+}
+
+/// A class which mocks [GetPractitionerInfoUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetPractitionerInfoUseCase extends _i1.Mock
+    implements _i8.GetPractitionerInfoUseCase {
+  @override
+  _i3.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+        Invocation.getter(#practitionerRepository),
+        returnValue: _FakePractitionerRepository_1(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+        returnValueForMissingStub: _FakePractitionerRepository_1(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+      ) as _i3.PractitionerRepository);
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>> execute(
+          String? practitionerId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [practitionerId],
+        ),
+        returnValue:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [practitionerId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>.value(
+                _FakeEither_0<_i5.Failure, _i6.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [practitionerId],
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
