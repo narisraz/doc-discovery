@@ -17,6 +17,7 @@ import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
     as _i9;
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
     as _i11;
+import 'package:flutter/src/widgets/navigator.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i8;
 
@@ -448,4 +449,99 @@ class MockSearchPractitionerUseCase extends _i1.Mock
             _i5.Future<List<_i7.PractitionerEntity>>.value(
                 <_i7.PractitionerEntity>[]),
       ) as _i5.Future<List<_i7.PractitionerEntity>>);
+}
+
+/// A class which mocks [NavigatorObserver].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
+  @override
+  void didPush(
+    _i12.Route<dynamic>? route,
+    _i12.Route<dynamic>? previousRoute,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didPush,
+          [
+            route,
+            previousRoute,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void didPop(
+    _i12.Route<dynamic>? route,
+    _i12.Route<dynamic>? previousRoute,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didPop,
+          [
+            route,
+            previousRoute,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void didRemove(
+    _i12.Route<dynamic>? route,
+    _i12.Route<dynamic>? previousRoute,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didRemove,
+          [
+            route,
+            previousRoute,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void didReplace({
+    _i12.Route<dynamic>? newRoute,
+    _i12.Route<dynamic>? oldRoute,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didReplace,
+          [],
+          {
+            #newRoute: newRoute,
+            #oldRoute: oldRoute,
+          },
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void didStartUserGesture(
+    _i12.Route<dynamic>? route,
+    _i12.Route<dynamic>? previousRoute,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #didStartUserGesture,
+          [
+            route,
+            previousRoute,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void didStopUserGesture() => super.noSuchMethod(
+        Invocation.method(
+          #didStopUserGesture,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
 }

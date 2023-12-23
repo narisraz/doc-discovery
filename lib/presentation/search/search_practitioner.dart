@@ -1,5 +1,6 @@
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
+import 'package:docdiscovery/presentation/search/search_result_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -55,12 +56,7 @@ class SearchPractitionerState extends ConsumerState<SearchPractitioner> {
               return SingleChildScrollView(
                 child: Column(
                   children: practitioners
-                      .map((e) => Column(
-                            children: [
-                              Text("${e.givenName} ${e.familyName}"),
-                              Text("${e.address.city} - ${e.address.country}"),
-                            ],
-                          ))
+                      .map((e) => SearchResultItem(practitionerEntity: e))
                       .toList(),
                 ),
               );

@@ -3,6 +3,7 @@ import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
+import 'package:flutter/material.dart';
 import 'package:mockito/annotations.dart';
 
 @GenerateNiceMocks([
@@ -11,5 +12,6 @@ import 'package:mockito/annotations.dart';
   MockSpec<SavePractitionerUseCase>(),
   MockSpec<GetPractitionerInfoUseCase>(),
   MockSpec<SearchPractitionerUseCase>(),
+  MockSpec<NavigatorObserver>(),
 ])
 void main() {}

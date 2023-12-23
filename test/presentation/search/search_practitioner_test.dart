@@ -2,6 +2,7 @@ import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:docdiscovery/presentation/search/search_practitioner.dart';
+import 'package:docdiscovery/presentation/search/search_result_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -42,7 +43,6 @@ void main() {
 
     // assert
     verify(mockSearchPractitionerUseCase.execute(any)).called(1);
-    expect(find.text("John Smith"), findsOneWidget);
-    expect(find.text("London - UK"), findsOneWidget);
+    expect(find.byType(SearchResultItem), findsOneWidget);
   });
 }
