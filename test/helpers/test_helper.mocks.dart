@@ -5,18 +5,20 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:algolia/algolia.dart' as _i4;
+import 'package:algolia/algolia.dart' as _i3;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:docdiscovery/core/error/failure.dart' as _i6;
 import 'package:docdiscovery/domain/entities/practitioner.dart' as _i7;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
-    as _i3;
+    as _i4;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
-    as _i9;
+    as _i10;
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
-    as _i8;
+    as _i9;
+import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
+    as _i11;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i10;
+import 'package:mockito/src/dummies.dart' as _i8;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -41,9 +43,8 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
-class _FakePractitionerRepository_1 extends _i1.SmartFake
-    implements _i3.PractitionerRepository {
-  _FakePractitionerRepository_1(
+class _FakeAlgolia_1 extends _i1.SmartFake implements _i3.Algolia {
+  _FakeAlgolia_1(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -52,8 +53,9 @@ class _FakePractitionerRepository_1 extends _i1.SmartFake
         );
 }
 
-class _FakeAlgolia_2 extends _i1.SmartFake implements _i4.Algolia {
-  _FakeAlgolia_2(
+class _FakeAlgoliaMultiIndexesReference_2 extends _i1.SmartFake
+    implements _i3.AlgoliaMultiIndexesReference {
+  _FakeAlgoliaMultiIndexesReference_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -62,9 +64,9 @@ class _FakeAlgolia_2 extends _i1.SmartFake implements _i4.Algolia {
         );
 }
 
-class _FakeAlgoliaMultiIndexesReference_3 extends _i1.SmartFake
-    implements _i4.AlgoliaMultiIndexesReference {
-  _FakeAlgoliaMultiIndexesReference_3(
+class _FakeAlgoliaIndexReference_3 extends _i1.SmartFake
+    implements _i3.AlgoliaIndexReference {
+  _FakeAlgoliaIndexReference_3(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -73,9 +75,9 @@ class _FakeAlgoliaMultiIndexesReference_3 extends _i1.SmartFake
         );
 }
 
-class _FakeAlgoliaIndexReference_4 extends _i1.SmartFake
-    implements _i4.AlgoliaIndexReference {
-  _FakeAlgoliaIndexReference_4(
+class _FakeAlgoliaIndexesSnapshot_4 extends _i1.SmartFake
+    implements _i3.AlgoliaIndexesSnapshot {
+  _FakeAlgoliaIndexesSnapshot_4(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -84,9 +86,9 @@ class _FakeAlgoliaIndexReference_4 extends _i1.SmartFake
         );
 }
 
-class _FakeAlgoliaIndexesSnapshot_5 extends _i1.SmartFake
-    implements _i4.AlgoliaIndexesSnapshot {
-  _FakeAlgoliaIndexesSnapshot_5(
+class _FakePractitionerRepository_5 extends _i1.SmartFake
+    implements _i4.PractitionerRepository {
+  _FakePractitionerRepository_5(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -99,7 +101,7 @@ class _FakeAlgoliaIndexesSnapshot_5 extends _i1.SmartFake
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPractitionerRepository extends _i1.Mock
-    implements _i3.PractitionerRepository {
+    implements _i4.PractitionerRepository {
   @override
   _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> savePractitioner(
           _i7.PractitionerEntity? practitioner) =>
@@ -171,23 +173,173 @@ class MockPractitionerRepository extends _i1.Mock
       ) as _i5.Future<List<_i7.PractitionerEntity>>);
 }
 
+/// A class which mocks [Algolia].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAlgolia extends _i1.Mock implements _i3.Algolia {
+  @override
+  String get applicationId => (super.noSuchMethod(
+        Invocation.getter(#applicationId),
+        returnValue: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#applicationId),
+        ),
+        returnValueForMissingStub: _i8.dummyValue<String>(
+          this,
+          Invocation.getter(#applicationId),
+        ),
+      ) as String);
+
+  @override
+  Map<String, String> get extraHeaders => (super.noSuchMethod(
+        Invocation.getter(#extraHeaders),
+        returnValue: <String, String>{},
+        returnValueForMissingStub: <String, String>{},
+      ) as Map<String, String>);
+
+  @override
+  List<String> get extraUserAgents => (super.noSuchMethod(
+        Invocation.getter(#extraUserAgents),
+        returnValue: <String>[],
+        returnValueForMissingStub: <String>[],
+      ) as List<String>);
+
+  @override
+  _i3.Algolia get instance => (super.noSuchMethod(
+        Invocation.getter(#instance),
+        returnValue: _FakeAlgolia_1(
+          this,
+          Invocation.getter(#instance),
+        ),
+        returnValueForMissingStub: _FakeAlgolia_1(
+          this,
+          Invocation.getter(#instance),
+        ),
+      ) as _i3.Algolia);
+
+  @override
+  _i3.AlgoliaMultiIndexesReference get multipleQueries => (super.noSuchMethod(
+        Invocation.getter(#multipleQueries),
+        returnValue: _FakeAlgoliaMultiIndexesReference_2(
+          this,
+          Invocation.getter(#multipleQueries),
+        ),
+        returnValueForMissingStub: _FakeAlgoliaMultiIndexesReference_2(
+          this,
+          Invocation.getter(#multipleQueries),
+        ),
+      ) as _i3.AlgoliaMultiIndexesReference);
+
+  @override
+  _i3.Algolia setHeader(
+    String? key,
+    String? value,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setHeader,
+          [
+            key,
+            value,
+          ],
+        ),
+        returnValue: _FakeAlgolia_1(
+          this,
+          Invocation.method(
+            #setHeader,
+            [
+              key,
+              value,
+            ],
+          ),
+        ),
+        returnValueForMissingStub: _FakeAlgolia_1(
+          this,
+          Invocation.method(
+            #setHeader,
+            [
+              key,
+              value,
+            ],
+          ),
+        ),
+      ) as _i3.Algolia);
+
+  @override
+  _i3.AlgoliaIndexReference index(String? index) => (super.noSuchMethod(
+        Invocation.method(
+          #index,
+          [index],
+        ),
+        returnValue: _FakeAlgoliaIndexReference_3(
+          this,
+          Invocation.method(
+            #index,
+            [index],
+          ),
+        ),
+        returnValueForMissingStub: _FakeAlgoliaIndexReference_3(
+          this,
+          Invocation.method(
+            #index,
+            [index],
+          ),
+        ),
+      ) as _i3.AlgoliaIndexReference);
+
+  @override
+  _i5.Future<_i3.AlgoliaIndexesSnapshot> getIndices() => (super.noSuchMethod(
+        Invocation.method(
+          #getIndices,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.AlgoliaIndexesSnapshot>.value(
+            _FakeAlgoliaIndexesSnapshot_4(
+          this,
+          Invocation.method(
+            #getIndices,
+            [],
+          ),
+        )),
+        returnValueForMissingStub: _i5.Future<_i3.AlgoliaIndexesSnapshot>.value(
+            _FakeAlgoliaIndexesSnapshot_4(
+          this,
+          Invocation.method(
+            #getIndices,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.AlgoliaIndexesSnapshot>);
+
+  @override
+  _i5.Future<void> pushEvents(List<_i3.AlgoliaEvent>? events) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pushEvents,
+          [events],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+}
+
 /// A class which mocks [SavePractitionerUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSavePractitionerUseCase extends _i1.Mock
-    implements _i8.SavePractitionerUseCase {
+    implements _i9.SavePractitionerUseCase {
   @override
-  _i3.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+  _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
-        returnValue: _FakePractitionerRepository_1(
+        returnValue: _FakePractitionerRepository_5(
           this,
           Invocation.getter(#practitionerRepository),
         ),
-        returnValueForMissingStub: _FakePractitionerRepository_1(
+        returnValueForMissingStub: _FakePractitionerRepository_5(
           this,
           Invocation.getter(#practitionerRepository),
         ),
-      ) as _i3.PractitionerRepository);
+      ) as _i4.PractitionerRepository);
 
   @override
   _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> execute(
@@ -222,19 +374,19 @@ class MockSavePractitionerUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetPractitionerInfoUseCase extends _i1.Mock
-    implements _i9.GetPractitionerInfoUseCase {
+    implements _i10.GetPractitionerInfoUseCase {
   @override
-  _i3.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+  _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
-        returnValue: _FakePractitionerRepository_1(
+        returnValue: _FakePractitionerRepository_5(
           this,
           Invocation.getter(#practitionerRepository),
         ),
-        returnValueForMissingStub: _FakePractitionerRepository_1(
+        returnValueForMissingStub: _FakePractitionerRepository_5(
           this,
           Invocation.getter(#practitionerRepository),
         ),
-      ) as _i3.PractitionerRepository);
+      ) as _i4.PractitionerRepository);
 
   @override
   _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> execute(
@@ -265,152 +417,35 @@ class MockGetPractitionerInfoUseCase extends _i1.Mock
       ) as _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>);
 }
 
-/// A class which mocks [Algolia].
+/// A class which mocks [SearchPractitionerUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAlgolia extends _i1.Mock implements _i4.Algolia {
+class MockSearchPractitionerUseCase extends _i1.Mock
+    implements _i11.SearchPractitionerUseCase {
   @override
-  String get applicationId => (super.noSuchMethod(
-        Invocation.getter(#applicationId),
-        returnValue: _i10.dummyValue<String>(
+  _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+        Invocation.getter(#practitionerRepository),
+        returnValue: _FakePractitionerRepository_5(
           this,
-          Invocation.getter(#applicationId),
+          Invocation.getter(#practitionerRepository),
         ),
-        returnValueForMissingStub: _i10.dummyValue<String>(
+        returnValueForMissingStub: _FakePractitionerRepository_5(
           this,
-          Invocation.getter(#applicationId),
+          Invocation.getter(#practitionerRepository),
         ),
-      ) as String);
+      ) as _i4.PractitionerRepository);
 
   @override
-  Map<String, String> get extraHeaders => (super.noSuchMethod(
-        Invocation.getter(#extraHeaders),
-        returnValue: <String, String>{},
-        returnValueForMissingStub: <String, String>{},
-      ) as Map<String, String>);
-
-  @override
-  List<String> get extraUserAgents => (super.noSuchMethod(
-        Invocation.getter(#extraUserAgents),
-        returnValue: <String>[],
-        returnValueForMissingStub: <String>[],
-      ) as List<String>);
-
-  @override
-  _i4.Algolia get instance => (super.noSuchMethod(
-        Invocation.getter(#instance),
-        returnValue: _FakeAlgolia_2(
-          this,
-          Invocation.getter(#instance),
-        ),
-        returnValueForMissingStub: _FakeAlgolia_2(
-          this,
-          Invocation.getter(#instance),
-        ),
-      ) as _i4.Algolia);
-
-  @override
-  _i4.AlgoliaMultiIndexesReference get multipleQueries => (super.noSuchMethod(
-        Invocation.getter(#multipleQueries),
-        returnValue: _FakeAlgoliaMultiIndexesReference_3(
-          this,
-          Invocation.getter(#multipleQueries),
-        ),
-        returnValueForMissingStub: _FakeAlgoliaMultiIndexesReference_3(
-          this,
-          Invocation.getter(#multipleQueries),
-        ),
-      ) as _i4.AlgoliaMultiIndexesReference);
-
-  @override
-  _i4.Algolia setHeader(
-    String? key,
-    String? value,
-  ) =>
+  _i5.Future<List<_i7.PractitionerEntity>> execute(String? query) =>
       (super.noSuchMethod(
         Invocation.method(
-          #setHeader,
-          [
-            key,
-            value,
-          ],
+          #execute,
+          [query],
         ),
-        returnValue: _FakeAlgolia_2(
-          this,
-          Invocation.method(
-            #setHeader,
-            [
-              key,
-              value,
-            ],
-          ),
-        ),
-        returnValueForMissingStub: _FakeAlgolia_2(
-          this,
-          Invocation.method(
-            #setHeader,
-            [
-              key,
-              value,
-            ],
-          ),
-        ),
-      ) as _i4.Algolia);
-
-  @override
-  _i4.AlgoliaIndexReference index(String? index) => (super.noSuchMethod(
-        Invocation.method(
-          #index,
-          [index],
-        ),
-        returnValue: _FakeAlgoliaIndexReference_4(
-          this,
-          Invocation.method(
-            #index,
-            [index],
-          ),
-        ),
-        returnValueForMissingStub: _FakeAlgoliaIndexReference_4(
-          this,
-          Invocation.method(
-            #index,
-            [index],
-          ),
-        ),
-      ) as _i4.AlgoliaIndexReference);
-
-  @override
-  _i5.Future<_i4.AlgoliaIndexesSnapshot> getIndices() => (super.noSuchMethod(
-        Invocation.method(
-          #getIndices,
-          [],
-        ),
-        returnValue: _i5.Future<_i4.AlgoliaIndexesSnapshot>.value(
-            _FakeAlgoliaIndexesSnapshot_5(
-          this,
-          Invocation.method(
-            #getIndices,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i5.Future<_i4.AlgoliaIndexesSnapshot>.value(
-            _FakeAlgoliaIndexesSnapshot_5(
-          this,
-          Invocation.method(
-            #getIndices,
-            [],
-          ),
-        )),
-      ) as _i5.Future<_i4.AlgoliaIndexesSnapshot>);
-
-  @override
-  _i5.Future<void> pushEvents(List<_i4.AlgoliaEvent>? events) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #pushEvents,
-          [events],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<List<_i7.PractitionerEntity>>.value(
+            <_i7.PractitionerEntity>[]),
+        returnValueForMissingStub:
+            _i5.Future<List<_i7.PractitionerEntity>>.value(
+                <_i7.PractitionerEntity>[]),
+      ) as _i5.Future<List<_i7.PractitionerEntity>>);
 }

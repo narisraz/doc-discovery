@@ -41,7 +41,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
   Future<List<PractitionerEntity>> search(String query) {
     final result = algolia.index(AlgoliaIncides.practitionerIndex).query(query);
     return result.getObjects().then((value) => value.hits
-        .map((e) => PractitionerModel.fromJson(e.data).toPractitionerEntity())
+        .map((e) => PractitionerModel.fromJson(e.data)
+            .toPractitionerEntity()
+            .copyWith(id: e.objectID))
         .toList());
   }
 }

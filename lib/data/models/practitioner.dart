@@ -52,8 +52,12 @@ class PractitionerModel extends Equatable {
       email: value['email'],
       onm: value['onm'],
       id: value['id'],
-      createdAt: value['createdAt']?.toDate(),
-      modifiedAt: value['modifiedAt']?.toDate(),
+      createdAt: value['createdAt'] != null
+          ? DateTime.fromMicrosecondsSinceEpoch(value['createdAt'])
+          : null,
+      modifiedAt: value['modifiedAt'] != null
+          ? DateTime.fromMicrosecondsSinceEpoch(value['modifiedAt'])
+          : null,
     );
   }
 

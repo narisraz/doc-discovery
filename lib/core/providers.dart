@@ -4,6 +4,7 @@ import 'package:docdiscovery/data/repositories/practitioner_repository_impl.dart
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
+import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'providers.g.dart';
@@ -27,4 +28,10 @@ SavePractitionerUseCase savePractitionerUseCase(
 GetPractitionerInfoUseCase getPractitionerInfoUseCase(
         GetPractitionerInfoUseCaseRef ref) =>
     GetPractitionerInfoUseCase(
+        practitionerRepository: ref.read(practitionerRepositoryProvider));
+
+@riverpod
+SearchPractitionerUseCase searchPractitionerUseCase(
+        SearchPractitionerUseCaseRef ref) =>
+    SearchPractitionerUseCase(
         practitionerRepository: ref.read(practitionerRepositoryProvider));

@@ -1,4 +1,4 @@
-import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
+import 'package:docdiscovery/presentation/search/search_practitioner.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(body: PractitionerForm()),
+      home: const Scaffold(body: SearchPractitioner()),
     );
   }
 }

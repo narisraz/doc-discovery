@@ -60,5 +60,23 @@ final getPractitionerInfoUseCaseProvider =
 
 typedef GetPractitionerInfoUseCaseRef
     = AutoDisposeProviderRef<GetPractitionerInfoUseCase>;
+String _$searchPractitionerUseCaseHash() =>
+    r'69ab5b45e086de015d6cbb0a035d8e3e3ddfe05f';
+
+/// See also [searchPractitionerUseCase].
+@ProviderFor(searchPractitionerUseCase)
+final searchPractitionerUseCaseProvider =
+    AutoDisposeProvider<SearchPractitionerUseCase>.internal(
+  searchPractitionerUseCase,
+  name: r'searchPractitionerUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$searchPractitionerUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SearchPractitionerUseCaseRef
+    = AutoDisposeProviderRef<SearchPractitionerUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

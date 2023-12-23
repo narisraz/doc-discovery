@@ -39,8 +39,12 @@ class AddressModel extends Equatable {
       city: value['city'],
       country: value['country'],
       postcode: value['postcode'],
-      createdAt: value['createdAt']?.toDate(),
-      modifiedAt: value['modifiedAt']?.toDate(),
+      createdAt: value['createdAt'] != null
+          ? DateTime.fromMicrosecondsSinceEpoch(value['createdAt'])
+          : null,
+      modifiedAt: value['modifiedAt'] != null
+          ? DateTime.fromMicrosecondsSinceEpoch(value['modifiedAt'])
+          : null,
     );
   }
 
