@@ -43,7 +43,7 @@ class PractitionerModel extends Equatable {
     return map;
   }
 
-  static fromJson(Map<String, dynamic> value) {
+  static PractitionerModel fromJson(Map<String, dynamic> value) {
     return PractitionerModel(
       address: AddressModel.fromJson(value['address']),
       familyName: value['familyName'],

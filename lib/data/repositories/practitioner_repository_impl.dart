@@ -1,6 +1,8 @@
+import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/error/failure.dart';
+import 'package:docdiscovery/data/data_sources/algolia/algolia_indices.dart';
 import 'package:docdiscovery/data/data_sources/firebase_firestore/firestore_collections.dart';
 import 'package:docdiscovery/data/models/practitioner.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
@@ -8,8 +10,9 @@ import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 
 class PractitionerRepositoryImpl implements PractitionerRepository {
   late FirebaseFirestore firestore;
+  late Algolia algolia;
 
-  PractitionerRepositoryImpl(this.firestore);
+  PractitionerRepositoryImpl(this.firestore, this.algolia);
 
   @override
   Future<Either<Failure, PractitionerEntity>> savePractitioner(
@@ -36,7 +39,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
 
   @override
   Future<List<PractitionerEntity>> search(String query) {
-    // TODO: implement search
-    throw UnimplementedError();
+    final result = algolia.index(AlgoliaIncides.practitionerIndex).query(query);
+    return result.getObjects().then((value) => value.hits
+        .map((e) => PractitionerModel.fromJson(e.data).toPractitionerEntity())
+        .toList());
   }
 }

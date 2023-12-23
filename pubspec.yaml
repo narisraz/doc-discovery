@@ -44,6 +44,7 @@ dependencies:
   cloud_firestore: ^4.13.6
   copy_with_extension: ^5.0.4
   firebase_core_platform_interface: ^5.0.0
+  algolia: ^1.1.2
 
 dev_dependencies:
   flutter_test:

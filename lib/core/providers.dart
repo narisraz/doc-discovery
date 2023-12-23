@@ -1,3 +1,4 @@
+import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docdiscovery/data/repositories/practitioner_repository_impl.dart';
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
@@ -7,12 +8,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'providers.g.dart';
 
-@riverpod
-FirebaseFirestore firestore(FirestoreRef ref) => FirebaseFirestore.instance;
+Algolia algolia = const Algolia.init(
+  applicationId: '8YZ48XJ0HG',
+  apiKey: 'e77655febba41c13440d5898bcfec7b7',
+);
 
 @riverpod
 PractitionerRepository practitionerRepository(PractitionerRepositoryRef ref) =>
-    PractitionerRepositoryImpl(ref.read(firestoreProvider));
+    PractitionerRepositoryImpl(FirebaseFirestore.instance, algolia.instance);
 
 @riverpod
 SavePractitionerUseCase savePractitionerUseCase(

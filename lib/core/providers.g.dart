@@ -6,22 +6,8 @@ part of 'providers.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$firestoreHash() => r'57116d7f1e2dda861cf1362ca8fe50edc7a149b3';
-
-/// See also [firestore].
-@ProviderFor(firestore)
-final firestoreProvider = AutoDisposeProvider<FirebaseFirestore>.internal(
-  firestore,
-  name: r'firestoreProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$firestoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef FirestoreRef = AutoDisposeProviderRef<FirebaseFirestore>;
 String _$practitionerRepositoryHash() =>
-    r'86a21d8603fe51759d2f12040e3aa2aaab5acb94';
+    r'c2c4a3608b5215fdecd0e4410194eb51a35b615e';
 
 /// See also [practitionerRepository].
 @ProviderFor(practitionerRepository)
