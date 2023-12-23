@@ -33,4 +33,10 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
         .then((value) =>
             Right(value.data()!.toPractitionerEntity().copyWith(id: value.id)));
   }
+
+  @override
+  Future<List<PractitionerEntity>> search(String query) {
+    // TODO: implement search
+    throw UnimplementedError();
+  }
 }

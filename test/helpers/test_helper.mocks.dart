@@ -110,6 +110,20 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i2.Either<_i5.Failure, _i6.PractitionerEntity>>);
+
+  @override
+  _i4.Future<List<_i6.PractitionerEntity>> search(String? query) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #search,
+          [query],
+        ),
+        returnValue: _i4.Future<List<_i6.PractitionerEntity>>.value(
+            <_i6.PractitionerEntity>[]),
+        returnValueForMissingStub:
+            _i4.Future<List<_i6.PractitionerEntity>>.value(
+                <_i6.PractitionerEntity>[]),
+      ) as _i4.Future<List<_i6.PractitionerEntity>>);
 }
 
 /// A class which mocks [SavePractitionerUseCase].

@@ -7,4 +7,6 @@ abstract class PractitionerRepository {
       PractitionerEntity practitioner);
 
   Future<Either<Failure, PractitionerEntity>> getById(String practitionerId);
+
+  Future<List<PractitionerEntity>> search(String query);
 }
