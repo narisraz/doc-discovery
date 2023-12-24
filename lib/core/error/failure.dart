@@ -16,3 +16,7 @@ class NotImplementedFailure extends Failure {
 class ObjectNotValidFailure extends Failure {
   const ObjectNotValidFailure() : super("Object not valid");
 }
+
+class UploadFailedFailure extends Failure {
+  const UploadFailedFailure() : super("Upload failed");
+}

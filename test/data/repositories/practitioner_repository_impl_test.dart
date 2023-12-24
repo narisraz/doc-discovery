@@ -13,6 +13,7 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late Algolia algolia;
   late FakeFirebaseFirestore firestore;
+  late MockFirebaseStorage storage;
   late PractitionerRepositoryImpl practitionerRepository;
 
   const practitioner = PractitionerEntity(
@@ -25,11 +26,13 @@ void main() {
   setUp(() async {
     firestore = FakeFirebaseFirestore();
     algolia = MockAlgolia();
-    practitionerRepository = PractitionerRepositoryImpl(firestore, algolia);
+    storage = MockFirebaseStorage();
+    practitionerRepository =
+        PractitionerRepositoryImpl(firestore, algolia, storage);
   });
 
   test('should implement PractitionerRepository', () {
-    expect(PractitionerRepositoryImpl(firestore, algolia),
+    expect(PractitionerRepositoryImpl(firestore, algolia, storage),
         isA<PractitionerRepository>());
   });
 

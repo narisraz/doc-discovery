@@ -9,12 +9,14 @@ import 'package:docdiscovery/data/data_sources/firebase_firestore/firestore_coll
 import 'package:docdiscovery/data/models/practitioner.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class PractitionerRepositoryImpl implements PractitionerRepository {
+  late FirebaseStorage storage;
   late FirebaseFirestore firestore;
   late Algolia algolia;
 
-  PractitionerRepositoryImpl(this.firestore, this.algolia);
+  PractitionerRepositoryImpl(this.firestore, this.algolia, this.storage);
 
   @override
   Future<Either<Failure, PractitionerEntity>> savePractitioner(
@@ -52,6 +54,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
   @override
   Future<Either<Failure, Uint8List>> uploadPractitionerProfile(
       String practitionerId, Uint8List profile) {
-    throw UnimplementedError();
+    return storage
+        .ref('practitioners/profile/$practitionerId')
+        .putData(profile)
+        .then((snapshot) => Right(profile));
   }
 }

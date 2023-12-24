@@ -3,26 +3,28 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
-import 'dart:typed_data' as _i8;
+import 'dart:async' as _i7;
+import 'dart:typed_data' as _i10;
 
 import 'package:algolia/algolia.dart' as _i3;
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:docdiscovery/core/error/failure.dart' as _i6;
-import 'package:docdiscovery/domain/entities/practitioner.dart' as _i7;
+import 'package:docdiscovery/core/error/failure.dart' as _i8;
+import 'package:docdiscovery/domain/entities/practitioner.dart' as _i9;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i4;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
-    as _i11;
+    as _i13;
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
-    as _i10;
-import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
     as _i12;
-import 'package:file_picker/src/file_picker.dart' as _i14;
-import 'package:file_picker/src/file_picker_result.dart' as _i15;
-import 'package:flutter/src/widgets/navigator.dart' as _i13;
+import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
+    as _i14;
+import 'package:file_picker/src/file_picker.dart' as _i16;
+import 'package:file_picker/src/file_picker_result.dart' as _i17;
+import 'package:firebase_core/firebase_core.dart' as _i5;
+import 'package:firebase_storage/firebase_storage.dart' as _i6;
+import 'package:flutter/src/widgets/navigator.dart' as _i15;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
+import 'package:mockito/src/dummies.dart' as _i11;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -101,22 +103,52 @@ class _FakePractitionerRepository_5 extends _i1.SmartFake
         );
 }
 
+class _FakeFirebaseApp_6 extends _i1.SmartFake implements _i5.FirebaseApp {
+  _FakeFirebaseApp_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeDuration_7 extends _i1.SmartFake implements Duration {
+  _FakeDuration_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeReference_8 extends _i1.SmartFake implements _i6.Reference {
+  _FakeReference_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [PractitionerRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPractitionerRepository extends _i1.Mock
     implements _i4.PractitionerRepository {
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> savePractitioner(
-          _i7.PractitionerEntity? practitioner) =>
+  _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>> savePractitioner(
+          _i9.PractitionerEntity? practitioner) =>
       (super.noSuchMethod(
         Invocation.method(
           #savePractitioner,
           [practitioner],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #savePractitioner,
@@ -124,18 +156,18 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #savePractitioner,
             [practitioner],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>);
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> getById(
+  _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>> getById(
           String? practitionerId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -143,8 +175,8 @@ class MockPractitionerRepository extends _i1.Mock
           [practitionerId],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #getById,
@@ -152,34 +184,34 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #getById,
             [practitionerId],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>);
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>);
 
   @override
-  _i5.Future<List<_i7.PractitionerEntity>> search(String? query) =>
+  _i7.Future<List<_i9.PractitionerEntity>> search(String? query) =>
       (super.noSuchMethod(
         Invocation.method(
           #search,
           [query],
         ),
-        returnValue: _i5.Future<List<_i7.PractitionerEntity>>.value(
-            <_i7.PractitionerEntity>[]),
+        returnValue: _i7.Future<List<_i9.PractitionerEntity>>.value(
+            <_i9.PractitionerEntity>[]),
         returnValueForMissingStub:
-            _i5.Future<List<_i7.PractitionerEntity>>.value(
-                <_i7.PractitionerEntity>[]),
-      ) as _i5.Future<List<_i7.PractitionerEntity>>);
+            _i7.Future<List<_i9.PractitionerEntity>>.value(
+                <_i9.PractitionerEntity>[]),
+      ) as _i7.Future<List<_i9.PractitionerEntity>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>> uploadPractitionerProfile(
+  _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>> uploadPractitionerProfile(
     String? practitionerId,
-    _i8.Uint8List? profile,
+    _i10.Uint8List? profile,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -189,8 +221,8 @@ class MockPractitionerRepository extends _i1.Mock
             profile,
           ],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>.value(
-            _FakeEither_0<_i6.Failure, _i8.Uint8List>(
+        returnValue: _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>.value(
+            _FakeEither_0<_i8.Failure, _i10.Uint8List>(
           this,
           Invocation.method(
             #uploadPractitionerProfile,
@@ -201,8 +233,8 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>.value(
-                _FakeEither_0<_i6.Failure, _i8.Uint8List>(
+            _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>.value(
+                _FakeEither_0<_i8.Failure, _i10.Uint8List>(
           this,
           Invocation.method(
             #uploadPractitionerProfile,
@@ -212,7 +244,7 @@ class MockPractitionerRepository extends _i1.Mock
             ],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>);
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>);
 }
 
 /// A class which mocks [Algolia].
@@ -222,11 +254,11 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
   @override
   String get applicationId => (super.noSuchMethod(
         Invocation.getter(#applicationId),
-        returnValue: _i9.dummyValue<String>(
+        returnValue: _i11.dummyValue<String>(
           this,
           Invocation.getter(#applicationId),
         ),
-        returnValueForMissingStub: _i9.dummyValue<String>(
+        returnValueForMissingStub: _i11.dummyValue<String>(
           this,
           Invocation.getter(#applicationId),
         ),
@@ -330,12 +362,12 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
       ) as _i3.AlgoliaIndexReference);
 
   @override
-  _i5.Future<_i3.AlgoliaIndexesSnapshot> getIndices() => (super.noSuchMethod(
+  _i7.Future<_i3.AlgoliaIndexesSnapshot> getIndices() => (super.noSuchMethod(
         Invocation.method(
           #getIndices,
           [],
         ),
-        returnValue: _i5.Future<_i3.AlgoliaIndexesSnapshot>.value(
+        returnValue: _i7.Future<_i3.AlgoliaIndexesSnapshot>.value(
             _FakeAlgoliaIndexesSnapshot_4(
           this,
           Invocation.method(
@@ -343,7 +375,7 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
             [],
           ),
         )),
-        returnValueForMissingStub: _i5.Future<_i3.AlgoliaIndexesSnapshot>.value(
+        returnValueForMissingStub: _i7.Future<_i3.AlgoliaIndexesSnapshot>.value(
             _FakeAlgoliaIndexesSnapshot_4(
           this,
           Invocation.method(
@@ -351,25 +383,25 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
             [],
           ),
         )),
-      ) as _i5.Future<_i3.AlgoliaIndexesSnapshot>);
+      ) as _i7.Future<_i3.AlgoliaIndexesSnapshot>);
 
   @override
-  _i5.Future<void> pushEvents(List<_i3.AlgoliaEvent>? events) =>
+  _i7.Future<void> pushEvents(List<_i3.AlgoliaEvent>? events) =>
       (super.noSuchMethod(
         Invocation.method(
           #pushEvents,
           [events],
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }
 
 /// A class which mocks [SavePractitionerUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSavePractitionerUseCase extends _i1.Mock
-    implements _i10.SavePractitionerUseCase {
+    implements _i12.SavePractitionerUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -384,16 +416,16 @@ class MockSavePractitionerUseCase extends _i1.Mock
       ) as _i4.PractitionerRepository);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> execute(
-          _i7.PractitionerEntity? practitioner) =>
+  _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>> execute(
+          _i9.PractitionerEntity? practitioner) =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [practitioner],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #execute,
@@ -401,22 +433,22 @@ class MockSavePractitionerUseCase extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #execute,
             [practitioner],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>);
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>);
 }
 
 /// A class which mocks [GetPractitionerInfoUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetPractitionerInfoUseCase extends _i1.Mock
-    implements _i11.GetPractitionerInfoUseCase {
+    implements _i13.GetPractitionerInfoUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -431,7 +463,7 @@ class MockGetPractitionerInfoUseCase extends _i1.Mock
       ) as _i4.PractitionerRepository);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>> execute(
+  _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>> execute(
           String? practitionerId) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -439,8 +471,8 @@ class MockGetPractitionerInfoUseCase extends _i1.Mock
           [practitionerId],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #execute,
@@ -448,22 +480,22 @@ class MockGetPractitionerInfoUseCase extends _i1.Mock
           ),
         )),
         returnValueForMissingStub:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>.value(
-                _FakeEither_0<_i6.Failure, _i7.PractitionerEntity>(
+            _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>.value(
+                _FakeEither_0<_i8.Failure, _i9.PractitionerEntity>(
           this,
           Invocation.method(
             #execute,
             [practitionerId],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.PractitionerEntity>>);
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i9.PractitionerEntity>>);
 }
 
 /// A class which mocks [SearchPractitionerUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSearchPractitionerUseCase extends _i1.Mock
-    implements _i12.SearchPractitionerUseCase {
+    implements _i14.SearchPractitionerUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -478,28 +510,28 @@ class MockSearchPractitionerUseCase extends _i1.Mock
       ) as _i4.PractitionerRepository);
 
   @override
-  _i5.Future<List<_i7.PractitionerEntity>> execute(String? query) =>
+  _i7.Future<List<_i9.PractitionerEntity>> execute(String? query) =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [query],
         ),
-        returnValue: _i5.Future<List<_i7.PractitionerEntity>>.value(
-            <_i7.PractitionerEntity>[]),
+        returnValue: _i7.Future<List<_i9.PractitionerEntity>>.value(
+            <_i9.PractitionerEntity>[]),
         returnValueForMissingStub:
-            _i5.Future<List<_i7.PractitionerEntity>>.value(
-                <_i7.PractitionerEntity>[]),
-      ) as _i5.Future<List<_i7.PractitionerEntity>>);
+            _i7.Future<List<_i9.PractitionerEntity>>.value(
+                <_i9.PractitionerEntity>[]),
+      ) as _i7.Future<List<_i9.PractitionerEntity>>);
 }
 
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i15.NavigatorObserver {
   @override
   void didPush(
-    _i13.Route<dynamic>? route,
-    _i13.Route<dynamic>? previousRoute,
+    _i15.Route<dynamic>? route,
+    _i15.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -514,8 +546,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
 
   @override
   void didPop(
-    _i13.Route<dynamic>? route,
-    _i13.Route<dynamic>? previousRoute,
+    _i15.Route<dynamic>? route,
+    _i15.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -530,8 +562,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
 
   @override
   void didRemove(
-    _i13.Route<dynamic>? route,
-    _i13.Route<dynamic>? previousRoute,
+    _i15.Route<dynamic>? route,
+    _i15.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -546,8 +578,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
 
   @override
   void didReplace({
-    _i13.Route<dynamic>? newRoute,
-    _i13.Route<dynamic>? oldRoute,
+    _i15.Route<dynamic>? newRoute,
+    _i15.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -563,8 +595,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
 
   @override
   void didStartUserGesture(
-    _i13.Route<dynamic>? route,
-    _i13.Route<dynamic>? previousRoute,
+    _i15.Route<dynamic>? route,
+    _i15.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -590,14 +622,14 @@ class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
 /// A class which mocks [FilePicker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockFilePicker extends _i1.Mock implements _i14.FilePicker {
+class MockFilePicker extends _i1.Mock implements _i16.FilePicker {
   @override
-  _i5.Future<_i15.FilePickerResult?> pickFiles({
+  _i7.Future<_i17.FilePickerResult?> pickFiles({
     String? dialogTitle,
     String? initialDirectory,
-    _i14.FileType? type = _i14.FileType.any,
+    _i16.FileType? type = _i16.FileType.any,
     List<String>? allowedExtensions,
-    dynamic Function(_i14.FilePickerStatus)? onFileLoading,
+    dynamic Function(_i16.FilePickerStatus)? onFileLoading,
     bool? allowCompression = true,
     bool? allowMultiple = false,
     bool? withData = false,
@@ -623,22 +655,22 @@ class MockFilePicker extends _i1.Mock implements _i14.FilePicker {
             #readSequential: readSequential,
           },
         ),
-        returnValue: _i5.Future<_i15.FilePickerResult?>.value(),
-        returnValueForMissingStub: _i5.Future<_i15.FilePickerResult?>.value(),
-      ) as _i5.Future<_i15.FilePickerResult?>);
+        returnValue: _i7.Future<_i17.FilePickerResult?>.value(),
+        returnValueForMissingStub: _i7.Future<_i17.FilePickerResult?>.value(),
+      ) as _i7.Future<_i17.FilePickerResult?>);
 
   @override
-  _i5.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
+  _i7.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
         Invocation.method(
           #clearTemporaryFiles,
           [],
         ),
-        returnValue: _i5.Future<bool?>.value(),
-        returnValueForMissingStub: _i5.Future<bool?>.value(),
-      ) as _i5.Future<bool?>);
+        returnValue: _i7.Future<bool?>.value(),
+        returnValueForMissingStub: _i7.Future<bool?>.value(),
+      ) as _i7.Future<bool?>);
 
   @override
-  _i5.Future<String?> getDirectoryPath({
+  _i7.Future<String?> getDirectoryPath({
     String? dialogTitle,
     bool? lockParentWindow = false,
     String? initialDirectory,
@@ -653,16 +685,16 @@ class MockFilePicker extends _i1.Mock implements _i14.FilePicker {
             #initialDirectory: initialDirectory,
           },
         ),
-        returnValue: _i5.Future<String?>.value(),
-        returnValueForMissingStub: _i5.Future<String?>.value(),
-      ) as _i5.Future<String?>);
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
 
   @override
-  _i5.Future<String?> saveFile({
+  _i7.Future<String?> saveFile({
     String? dialogTitle,
     String? fileName,
     String? initialDirectory,
-    _i14.FileType? type = _i14.FileType.any,
+    _i16.FileType? type = _i16.FileType.any,
     List<String>? allowedExtensions,
     bool? lockParentWindow = false,
   }) =>
@@ -679,7 +711,208 @@ class MockFilePicker extends _i1.Mock implements _i14.FilePicker {
             #lockParentWindow: lockParentWindow,
           },
         ),
-        returnValue: _i5.Future<String?>.value(),
-        returnValueForMissingStub: _i5.Future<String?>.value(),
-      ) as _i5.Future<String?>);
+        returnValue: _i7.Future<String?>.value(),
+        returnValueForMissingStub: _i7.Future<String?>.value(),
+      ) as _i7.Future<String?>);
+}
+
+/// A class which mocks [FirebaseStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFirebaseStorage extends _i1.Mock implements _i6.FirebaseStorage {
+  @override
+  _i5.FirebaseApp get app => (super.noSuchMethod(
+        Invocation.getter(#app),
+        returnValue: _FakeFirebaseApp_6(
+          this,
+          Invocation.getter(#app),
+        ),
+        returnValueForMissingStub: _FakeFirebaseApp_6(
+          this,
+          Invocation.getter(#app),
+        ),
+      ) as _i5.FirebaseApp);
+
+  @override
+  set app(_i5.FirebaseApp? _app) => super.noSuchMethod(
+        Invocation.setter(
+          #app,
+          _app,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  String get bucket => (super.noSuchMethod(
+        Invocation.getter(#bucket),
+        returnValue: _i11.dummyValue<String>(
+          this,
+          Invocation.getter(#bucket),
+        ),
+        returnValueForMissingStub: _i11.dummyValue<String>(
+          this,
+          Invocation.getter(#bucket),
+        ),
+      ) as String);
+
+  @override
+  set bucket(String? _bucket) => super.noSuchMethod(
+        Invocation.setter(
+          #bucket,
+          _bucket,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  Duration get maxOperationRetryTime => (super.noSuchMethod(
+        Invocation.getter(#maxOperationRetryTime),
+        returnValue: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxOperationRetryTime),
+        ),
+        returnValueForMissingStub: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxOperationRetryTime),
+        ),
+      ) as Duration);
+
+  @override
+  Duration get maxUploadRetryTime => (super.noSuchMethod(
+        Invocation.getter(#maxUploadRetryTime),
+        returnValue: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxUploadRetryTime),
+        ),
+        returnValueForMissingStub: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxUploadRetryTime),
+        ),
+      ) as Duration);
+
+  @override
+  Duration get maxDownloadRetryTime => (super.noSuchMethod(
+        Invocation.getter(#maxDownloadRetryTime),
+        returnValue: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxDownloadRetryTime),
+        ),
+        returnValueForMissingStub: _FakeDuration_7(
+          this,
+          Invocation.getter(#maxDownloadRetryTime),
+        ),
+      ) as Duration);
+
+  @override
+  Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
+        Invocation.getter(#pluginConstants),
+        returnValue: <dynamic, dynamic>{},
+        returnValueForMissingStub: <dynamic, dynamic>{},
+      ) as Map<dynamic, dynamic>);
+
+  @override
+  _i6.Reference ref([String? path]) => (super.noSuchMethod(
+        Invocation.method(
+          #ref,
+          [path],
+        ),
+        returnValue: _FakeReference_8(
+          this,
+          Invocation.method(
+            #ref,
+            [path],
+          ),
+        ),
+        returnValueForMissingStub: _FakeReference_8(
+          this,
+          Invocation.method(
+            #ref,
+            [path],
+          ),
+        ),
+      ) as _i6.Reference);
+
+  @override
+  _i6.Reference refFromURL(String? url) => (super.noSuchMethod(
+        Invocation.method(
+          #refFromURL,
+          [url],
+        ),
+        returnValue: _FakeReference_8(
+          this,
+          Invocation.method(
+            #refFromURL,
+            [url],
+          ),
+        ),
+        returnValueForMissingStub: _FakeReference_8(
+          this,
+          Invocation.method(
+            #refFromURL,
+            [url],
+          ),
+        ),
+      ) as _i6.Reference);
+
+  @override
+  void setMaxOperationRetryTime(Duration? time) => super.noSuchMethod(
+        Invocation.method(
+          #setMaxOperationRetryTime,
+          [time],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setMaxUploadRetryTime(Duration? time) => super.noSuchMethod(
+        Invocation.method(
+          #setMaxUploadRetryTime,
+          [time],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void setMaxDownloadRetryTime(Duration? time) => super.noSuchMethod(
+        Invocation.method(
+          #setMaxDownloadRetryTime,
+          [time],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i7.Future<void> useEmulator({
+    required String? host,
+    required int? port,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #useEmulator,
+          [],
+          {
+            #host: host,
+            #port: port,
+          },
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
+
+  @override
+  _i7.Future<void> useStorageEmulator(
+    String? host,
+    int? port,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #useStorageEmulator,
+          [
+            host,
+            port,
+          ],
+        ),
+        returnValue: _i7.Future<void>.value(),
+        returnValueForMissingStub: _i7.Future<void>.value(),
+      ) as _i7.Future<void>);
 }

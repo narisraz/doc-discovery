@@ -5,6 +5,7 @@ import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'providers.g.dart';
@@ -16,7 +17,8 @@ Algolia algolia = const Algolia.init(
 
 @riverpod
 PractitionerRepository practitionerRepository(PractitionerRepositoryRef ref) =>
-    PractitionerRepositoryImpl(FirebaseFirestore.instance, algolia.instance);
+    PractitionerRepositoryImpl(
+        FirebaseFirestore.instance, algolia.instance, FirebaseStorage.instance);
 
 @riverpod
 SavePractitionerUseCase savePractitionerUseCase(
