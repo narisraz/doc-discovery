@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:algolia/algolia.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
@@ -45,5 +47,11 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
             .toPractitionerEntity()
             .copyWith(id: e.objectID))
         .toList());
+  }
+
+  @override
+  Future<Either<Failure, Uint8List>> uploadPractitionerProfile(
+      String practitionerId, Uint8List profile) {
+    throw UnimplementedError();
   }
 }

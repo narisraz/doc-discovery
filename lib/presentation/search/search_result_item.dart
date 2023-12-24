@@ -14,12 +14,10 @@ class SearchResultItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
+      key: const Key('content'),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
-          fit: BoxFit.fitHeight,
-        ),
+        child: Image.asset("assets/images/default-profile.jpg"),
       ),
       title: Text(
           "${practitionerEntity.givenName} ${practitionerEntity.familyName}"),

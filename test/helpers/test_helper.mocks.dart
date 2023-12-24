@@ -4,6 +4,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
+import 'dart:typed_data' as _i8;
 
 import 'package:algolia/algolia.dart' as _i3;
 import 'package:dartz/dartz.dart' as _i2;
@@ -12,14 +13,16 @@ import 'package:docdiscovery/domain/entities/practitioner.dart' as _i7;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i4;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
-    as _i10;
-import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
-    as _i9;
-import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
     as _i11;
-import 'package:flutter/src/widgets/navigator.dart' as _i12;
+import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
+    as _i10;
+import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
+    as _i12;
+import 'package:file_picker/src/file_picker.dart' as _i14;
+import 'package:file_picker/src/file_picker_result.dart' as _i15;
+import 'package:flutter/src/widgets/navigator.dart' as _i13;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i8;
+import 'package:mockito/src/dummies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -172,6 +175,44 @@ class MockPractitionerRepository extends _i1.Mock
             _i5.Future<List<_i7.PractitionerEntity>>.value(
                 <_i7.PractitionerEntity>[]),
       ) as _i5.Future<List<_i7.PractitionerEntity>>);
+
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>> uploadPractitionerProfile(
+    String? practitionerId,
+    _i8.Uint8List? profile,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #uploadPractitionerProfile,
+          [
+            practitionerId,
+            profile,
+          ],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>.value(
+            _FakeEither_0<_i6.Failure, _i8.Uint8List>(
+          this,
+          Invocation.method(
+            #uploadPractitionerProfile,
+            [
+              practitionerId,
+              profile,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>.value(
+                _FakeEither_0<_i6.Failure, _i8.Uint8List>(
+          this,
+          Invocation.method(
+            #uploadPractitionerProfile,
+            [
+              practitionerId,
+              profile,
+            ],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i8.Uint8List>>);
 }
 
 /// A class which mocks [Algolia].
@@ -181,11 +222,11 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
   @override
   String get applicationId => (super.noSuchMethod(
         Invocation.getter(#applicationId),
-        returnValue: _i8.dummyValue<String>(
+        returnValue: _i9.dummyValue<String>(
           this,
           Invocation.getter(#applicationId),
         ),
-        returnValueForMissingStub: _i8.dummyValue<String>(
+        returnValueForMissingStub: _i9.dummyValue<String>(
           this,
           Invocation.getter(#applicationId),
         ),
@@ -328,7 +369,7 @@ class MockAlgolia extends _i1.Mock implements _i3.Algolia {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSavePractitionerUseCase extends _i1.Mock
-    implements _i9.SavePractitionerUseCase {
+    implements _i10.SavePractitionerUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -375,7 +416,7 @@ class MockSavePractitionerUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetPractitionerInfoUseCase extends _i1.Mock
-    implements _i10.GetPractitionerInfoUseCase {
+    implements _i11.GetPractitionerInfoUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -422,7 +463,7 @@ class MockGetPractitionerInfoUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSearchPractitionerUseCase extends _i1.Mock
-    implements _i11.SearchPractitionerUseCase {
+    implements _i12.SearchPractitionerUseCase {
   @override
   _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
         Invocation.getter(#practitionerRepository),
@@ -454,11 +495,11 @@ class MockSearchPractitionerUseCase extends _i1.Mock
 /// A class which mocks [NavigatorObserver].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
+class MockNavigatorObserver extends _i1.Mock implements _i13.NavigatorObserver {
   @override
   void didPush(
-    _i12.Route<dynamic>? route,
-    _i12.Route<dynamic>? previousRoute,
+    _i13.Route<dynamic>? route,
+    _i13.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -473,8 +514,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
 
   @override
   void didPop(
-    _i12.Route<dynamic>? route,
-    _i12.Route<dynamic>? previousRoute,
+    _i13.Route<dynamic>? route,
+    _i13.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -489,8 +530,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
 
   @override
   void didRemove(
-    _i12.Route<dynamic>? route,
-    _i12.Route<dynamic>? previousRoute,
+    _i13.Route<dynamic>? route,
+    _i13.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -505,8 +546,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
 
   @override
   void didReplace({
-    _i12.Route<dynamic>? newRoute,
-    _i12.Route<dynamic>? oldRoute,
+    _i13.Route<dynamic>? newRoute,
+    _i13.Route<dynamic>? oldRoute,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -522,8 +563,8 @@ class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
 
   @override
   void didStartUserGesture(
-    _i12.Route<dynamic>? route,
-    _i12.Route<dynamic>? previousRoute,
+    _i13.Route<dynamic>? route,
+    _i13.Route<dynamic>? previousRoute,
   ) =>
       super.noSuchMethod(
         Invocation.method(
@@ -544,4 +585,101 @@ class MockNavigatorObserver extends _i1.Mock implements _i12.NavigatorObserver {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [FilePicker].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFilePicker extends _i1.Mock implements _i14.FilePicker {
+  @override
+  _i5.Future<_i15.FilePickerResult?> pickFiles({
+    String? dialogTitle,
+    String? initialDirectory,
+    _i14.FileType? type = _i14.FileType.any,
+    List<String>? allowedExtensions,
+    dynamic Function(_i14.FilePickerStatus)? onFileLoading,
+    bool? allowCompression = true,
+    bool? allowMultiple = false,
+    bool? withData = false,
+    bool? withReadStream = false,
+    bool? lockParentWindow = false,
+    bool? readSequential = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #pickFiles,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #onFileLoading: onFileLoading,
+            #allowCompression: allowCompression,
+            #allowMultiple: allowMultiple,
+            #withData: withData,
+            #withReadStream: withReadStream,
+            #lockParentWindow: lockParentWindow,
+            #readSequential: readSequential,
+          },
+        ),
+        returnValue: _i5.Future<_i15.FilePickerResult?>.value(),
+        returnValueForMissingStub: _i5.Future<_i15.FilePickerResult?>.value(),
+      ) as _i5.Future<_i15.FilePickerResult?>);
+
+  @override
+  _i5.Future<bool?> clearTemporaryFiles() => (super.noSuchMethod(
+        Invocation.method(
+          #clearTemporaryFiles,
+          [],
+        ),
+        returnValue: _i5.Future<bool?>.value(),
+        returnValueForMissingStub: _i5.Future<bool?>.value(),
+      ) as _i5.Future<bool?>);
+
+  @override
+  _i5.Future<String?> getDirectoryPath({
+    String? dialogTitle,
+    bool? lockParentWindow = false,
+    String? initialDirectory,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getDirectoryPath,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #lockParentWindow: lockParentWindow,
+            #initialDirectory: initialDirectory,
+          },
+        ),
+        returnValue: _i5.Future<String?>.value(),
+        returnValueForMissingStub: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
+
+  @override
+  _i5.Future<String?> saveFile({
+    String? dialogTitle,
+    String? fileName,
+    String? initialDirectory,
+    _i14.FileType? type = _i14.FileType.any,
+    List<String>? allowedExtensions,
+    bool? lockParentWindow = false,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #saveFile,
+          [],
+          {
+            #dialogTitle: dialogTitle,
+            #fileName: fileName,
+            #initialDirectory: initialDirectory,
+            #type: type,
+            #allowedExtensions: allowedExtensions,
+            #lockParentWindow: lockParentWindow,
+          },
+        ),
+        returnValue: _i5.Future<String?>.value(),
+        returnValueForMissingStub: _i5.Future<String?>.value(),
+      ) as _i5.Future<String?>);
 }

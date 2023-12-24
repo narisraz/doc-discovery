@@ -1,20 +1,33 @@
+import 'dart:typed_data';
+
 import 'package:docdiscovery/core/providers.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PractitionerProfile extends ConsumerWidget {
+class PractitionerProfile extends ConsumerStatefulWidget {
   final String practitionerId;
 
   const PractitionerProfile({super.key, required this.practitionerId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final futurPractioner =
-        ref.read(getPractitionerInfoUseCaseProvider).execute(practitionerId);
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return PractitionerProfileState();
+  }
+}
+
+class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
+  late Uint8List profilePicture = Uint8List(0);
+
+  @override
+  Widget build(BuildContext context) {
+    final futurePractitioner = ref
+        .read(getPractitionerInfoUseCaseProvider)
+        .execute(widget.practitionerId);
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(
-            future: futurPractioner,
+            future: futurePractitioner,
             builder: ((context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return snapshot.data!.fold(
@@ -23,14 +36,31 @@ class PractitionerProfile extends ConsumerWidget {
                           fit: StackFit.loose,
                           children: [
                             Positioned(
+                                top: 0,
+                                child: SizedBox(
+                                  height: 500,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: profilePicture.isNotEmpty
+                                      ? Image.memory(profilePicture)
+                                      : Image.asset(
+                                          "assets/images/default-profile.jpg"),
+                                )),
+                            Positioned(
+                              key: const Key('upload-profile'),
                               top: 0,
-                              child: SizedBox(
-                                height: 500,
-                                width: MediaQuery.of(context).size.width,
-                                child: Image.network(
-                                  "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
-                                  fit: BoxFit.fitHeight,
-                                ),
+                              right: 0,
+                              child: IconButton(
+                                onPressed: () async {
+                                  final result =
+                                      await FilePicker.platform.pickFiles();
+                                  if (result != null) {
+                                    final file = result.files.first.bytes!;
+                                    setState(() {
+                                      profilePicture = file;
+                                    });
+                                  }
+                                },
+                                icon: const Icon(Icons.photo_camera),
                               ),
                             ),
                             Positioned(
@@ -46,6 +76,12 @@ class PractitionerProfile extends ConsumerWidget {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.surface,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.grey.shade600,
+                                        blurRadius: 10,
+                                        spreadRadius: 1),
+                                  ],
                                   borderRadius: const BorderRadius.only(
                                       topLeft: Radius.circular(24),
                                       topRight: Radius.circular(24)),
