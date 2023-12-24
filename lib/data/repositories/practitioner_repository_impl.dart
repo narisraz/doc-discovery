@@ -59,4 +59,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
         .putData(profile)
         .then((snapshot) => Right(profile));
   }
+
+  @override
+  Future<Either<Failure, Uint8List>> getProfile(String practitionerId) {
+    throw UnimplementedError();
+  }
 }

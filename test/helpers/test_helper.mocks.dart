@@ -245,6 +245,33 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
       ) as _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>);
+
+  @override
+  _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>> getProfile(
+          String? practitionerId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProfile,
+          [practitionerId],
+        ),
+        returnValue: _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>.value(
+            _FakeEither_0<_i8.Failure, _i10.Uint8List>(
+          this,
+          Invocation.method(
+            #getProfile,
+            [practitionerId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>.value(
+                _FakeEither_0<_i8.Failure, _i10.Uint8List>(
+          this,
+          Invocation.method(
+            #getProfile,
+            [practitionerId],
+          ),
+        )),
+      ) as _i7.Future<_i2.Either<_i8.Failure, _i10.Uint8List>>);
 }
 
 /// A class which mocks [Algolia].

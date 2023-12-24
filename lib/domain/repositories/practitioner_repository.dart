@@ -14,4 +14,6 @@ abstract class PractitionerRepository {
 
   Future<Either<Failure, Uint8List>> uploadPractitionerProfile(
       String practitionerId, Uint8List profile);
+
+  Future<Either<Failure, Uint8List>> getProfile(String practitionerId);
 }
