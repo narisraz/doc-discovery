@@ -13,19 +13,21 @@ class SearchResultItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return InkWell(
-      key: const Key('content'),
+    return ListTile(
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.network(
+          "https://img.freepik.com/free-photo/woman-doctor-wearing-lab-coat-with-stethoscope-isolated_1303-29791.jpg",
+          fit: BoxFit.fitHeight,
+        ),
+      ),
+      title: Text(
+          "${practitionerEntity.givenName} ${practitionerEntity.familyName}"),
+      subtitle: Text(
+          "${practitionerEntity.address.city} - ${practitionerEntity.address.country}"),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>
               PractitionerProfile(practitionerId: practitionerEntity.id!))),
-      child: Column(
-        children: [
-          Text(
-              "${practitionerEntity.givenName} ${practitionerEntity.familyName}"),
-          Text(
-              "${practitionerEntity.address.city} - ${practitionerEntity.address.country}"),
-        ],
-      ),
     );
   }
 }

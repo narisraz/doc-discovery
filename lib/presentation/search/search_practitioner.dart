@@ -30,39 +30,68 @@ class SearchPractitionerState extends ConsumerState<SearchPractitioner> {
 
     return SingleChildScrollView(
       child: Column(children: [
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: TextFormField(
-                  controller: searchController,
-                  key: const Key('search-input'),
-                  decoration: const InputDecoration(
-                    hintText: 'Rechercher',
-                  )),
-            ),
-            ElevatedButton(
-              onPressed: search,
-              key: const Key('search-button'),
-              child: const Text('Rechercher'),
-            )
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  text: "Trouver",
+                  style: const TextStyle(fontSize: 20),
+                  children: [
+                    TextSpan(
+                        text: " un professionnel de sante",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary)),
+                    const TextSpan(
+                        text: " en toute simplicité",
+                        style: TextStyle(fontSize: 20))
+                  ])),
         ),
-        FutureBuilder(
-          future: results,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              final List<PractitionerEntity> practitioners = snapshot.data!;
-              return SingleChildScrollView(
-                child: Column(
-                  children: practitioners
-                      .map((e) => SearchResultItem(practitionerEntity: e))
-                      .toList(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: searchController,
+                  onEditingComplete: search,
+                  key: const Key('search-input'),
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      hintText: 'Rechercher un nom, lieu, tel,...',
+                      suffixIcon: IconButton(
+                          key: const Key('search-button'),
+                          onPressed: search,
+                          icon: const Icon(
+                            Icons.search,
+                          ))),
                 ),
-              );
-            }
-            return const CircularProgressIndicator();
-          },
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: FutureBuilder(
+            future: results,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final List<PractitionerEntity> practitioners = snapshot.data!;
+                return SingleChildScrollView(
+                  child: Column(
+                    children: practitioners
+                        .map((e) => SearchResultItem(practitionerEntity: e))
+                        .toList(),
+                  ),
+                );
+              }
+              return const CircularProgressIndicator();
+            },
+          ),
         )
       ]),
     );

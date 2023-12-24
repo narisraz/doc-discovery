@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,7 +34,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(body: SearchPractitioner()),
+      home: Scaffold(
+          body: const SearchPractitioner(),
+          appBar: AppBar(
+            title: const Text("DocDiscovery"),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: FilledButton(
+                    onPressed: () {}, child: const Text("Passer PRO")),
+              )
+            ],
+          )),
     );
   }
 }
