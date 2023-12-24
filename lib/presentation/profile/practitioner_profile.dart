@@ -54,10 +54,14 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                   final result =
                                       await FilePicker.platform.pickFiles();
                                   if (result != null) {
-                                    final file = result.files.first.bytes!;
-                                    setState(() {
-                                      profilePicture = file;
-                                    });
+                                    final profile = result.files.first.bytes!;
+                                    ref
+                                        .read(
+                                            uploadPractitionerProfileUseCaseProvider)
+                                        .execute(practitioner.id!, profile)
+                                        .then((_) => setState(() {
+                                              profilePicture = profile;
+                                            }));
                                   }
                                 },
                                 icon: const Icon(Icons.photo_camera),

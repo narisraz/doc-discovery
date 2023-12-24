@@ -7,7 +7,7 @@ part of 'providers.dart';
 // **************************************************************************
 
 String _$practitionerRepositoryHash() =>
-    r'c2c4a3608b5215fdecd0e4410194eb51a35b615e';
+    r'af263275036fa6dbf2778cf57edbbf764d6bfac0';
 
 /// See also [practitionerRepository].
 @ProviderFor(practitionerRepository)
@@ -78,5 +78,23 @@ final searchPractitionerUseCaseProvider =
 
 typedef SearchPractitionerUseCaseRef
     = AutoDisposeProviderRef<SearchPractitionerUseCase>;
+String _$uploadPractitionerProfileUseCaseHash() =>
+    r'bbf76da8345c561cdd45a1739ac7e31e45f118f0';
+
+/// See also [uploadPractitionerProfileUseCase].
+@ProviderFor(uploadPractitionerProfileUseCase)
+final uploadPractitionerProfileUseCaseProvider =
+    AutoDisposeProvider<UploadPractitionerProfileUseCase>.internal(
+  uploadPractitionerProfileUseCase,
+  name: r'uploadPractitionerProfileUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$uploadPractitionerProfileUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UploadPractitionerProfileUseCaseRef
+    = AutoDisposeProviderRef<UploadPractitionerProfileUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
