@@ -9,7 +9,7 @@ class UploadPractitionerProfileUseCase {
 
   UploadPractitionerProfileUseCase({required this.practitionerRepository});
 
-  Future<Either<Failure, Uint8List>> execute(
+  Future<Either<Failure, String>> execute(
       String practitionerId, Uint8List profile) {
     return practitionerRepository.uploadPractitionerProfile(
         practitionerId, profile);

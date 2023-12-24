@@ -12,6 +12,7 @@ import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockGetPractitionerInfoUseCase getPractitionerInfoUseCase;
+  late MockGetPractitionerProfileUseCase getPractitionerProfileUseCase;
   const practitioner = PractitionerEntity(
       familyName: "Smith",
       givenName: "John",
@@ -21,6 +22,7 @@ void main() {
       address: AddressEntity(road: "B 55", city: "London", country: "UK"));
 
   setUp(() {
+    getPractitionerProfileUseCase = MockGetPractitionerProfileUseCase();
     getPractitionerInfoUseCase = MockGetPractitionerInfoUseCase();
   });
 
@@ -28,10 +30,14 @@ void main() {
     // arrange
     when(getPractitionerInfoUseCase.execute(any))
         .thenAnswer((_) => Future.value(const Right(practitioner)));
+    when(getPractitionerProfileUseCase.execute(any))
+        .thenAnswer((_) => Future.value(const Right("")));
     await tester.pumpWidget(ProviderScope(
         overrides: [
           getPractitionerInfoUseCaseProvider
-              .overrideWithValue(getPractitionerInfoUseCase)
+              .overrideWithValue(getPractitionerInfoUseCase),
+          getPractitionerProfileUseCaseProvider
+              .overrideWithValue(getPractitionerProfileUseCase)
         ],
         child: const MaterialApp(
             home: Material(
@@ -42,6 +48,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // assert
+    verify(getPractitionerProfileUseCase.execute(any)).called(1);
     verify(getPractitionerInfoUseCase.execute(any)).called(1);
     expect(find.text("${practitioner.givenName} ${practitioner.familyName}"),
         findsOneWidget);

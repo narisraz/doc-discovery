@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,7 +12,7 @@ void main() {
     final getPractitionerInfoUseCase = GetPractitionerProfileUseCase(
         practitionerRepository: practitionerRepository);
     when(practitionerRepository.getProfile(any))
-        .thenAnswer((_) => Future.value(Right(Uint8List(0))));
+        .thenAnswer((_) => Future.value(const Right("")));
 
     final result = await getPractitionerInfoUseCase.execute("practitionerId");
 

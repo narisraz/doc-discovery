@@ -96,5 +96,23 @@ final uploadPractitionerProfileUseCaseProvider =
 
 typedef UploadPractitionerProfileUseCaseRef
     = AutoDisposeProviderRef<UploadPractitionerProfileUseCase>;
+String _$getPractitionerProfileUseCaseHash() =>
+    r'457ef484104ab0fe71953300552dab48592ad817';
+
+/// See also [getPractitionerProfileUseCase].
+@ProviderFor(getPractitionerProfileUseCase)
+final getPractitionerProfileUseCaseProvider =
+    AutoDisposeProvider<GetPractitionerProfileUseCase>.internal(
+  getPractitionerProfileUseCase,
+  name: r'getPractitionerProfileUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPractitionerProfileUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetPractitionerProfileUseCaseRef
+    = AutoDisposeProviderRef<GetPractitionerProfileUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

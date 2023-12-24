@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:docdiscovery/core/providers.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +15,18 @@ class PractitionerProfile extends ConsumerStatefulWidget {
 }
 
 class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
-  late Uint8List profilePicture = Uint8List(0);
+  late String profilePicture = "";
+
+  @override
+  void initState() {
+    super.initState();
+    ref
+        .read(getPractitionerProfileUseCaseProvider)
+        .execute(widget.practitionerId)
+        .then((result) {
+      profilePicture = result.getOrElse(() => "");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                 return snapshot.data!.fold(
                     (_) => const Text("No data"),
                     ((practitioner) => Stack(
-                          fit: StackFit.loose,
+                          fit: StackFit.expand,
                           children: [
                             Positioned(
                                 top: 0,
@@ -41,7 +50,7 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                   height: 500,
                                   width: MediaQuery.of(context).size.width,
                                   child: profilePicture.isNotEmpty
-                                      ? Image.memory(profilePicture)
+                                      ? Image.network(profilePicture)
                                       : Image.asset(
                                           "assets/images/default-profile.jpg"),
                                 )),
@@ -59,8 +68,9 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                         .read(
                                             uploadPractitionerProfileUseCaseProvider)
                                         .execute(practitioner.id!, profile)
-                                        .then((_) => setState(() {
-                                              profilePicture = profile;
+                                        .then((value) => setState(() {
+                                              profilePicture =
+                                                  value.getOrElse(() => "");
                                             }));
                                   }
                                 },
@@ -76,8 +86,10 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                             ),
                             Positioned(
                               top: 475,
+                              bottom: 0,
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
+                                height: double.infinity,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
@@ -101,38 +113,47 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold)),
                                     ),
-                                    ListTile(
-                                      leading: const Icon(Icons.phone),
-                                      title: const Text("Téléphone"),
-                                      subtitle: Text(practitioner.tel),
-                                    ),
-                                    ListTile(
-                                      leading: const Icon(Icons.mail),
-                                      title: const Text("Adresse mail"),
-                                      subtitle: Text(practitioner.email ?? ""),
-                                    ),
-                                    ListTile(
-                                      leading:
-                                          const Icon(Icons.medical_information),
-                                      title: const Text("ONM"),
-                                      subtitle: Text(practitioner.onm ?? ""),
-                                    ),
-                                    ListTile(
-                                      leading: const Icon(Icons.location_on),
-                                      title: RichText(
-                                          text: TextSpan(children: [
-                                        TextSpan(
-                                          text: practitioner.address.road,
-                                        ),
-                                        const TextSpan(text: " - "),
-                                        TextSpan(
-                                          text: practitioner.address.city,
-                                        ),
-                                        const TextSpan(text: " - "),
-                                        TextSpan(
-                                          text: practitioner.address.city,
-                                        )
-                                      ])),
+                                    Expanded(
+                                      child: ListView(
+                                        children: [
+                                          ListTile(
+                                            leading: const Icon(Icons.phone),
+                                            title: const Text("Téléphone"),
+                                            subtitle: Text(practitioner.tel),
+                                          ),
+                                          ListTile(
+                                            leading: const Icon(Icons.mail),
+                                            title: const Text("Adresse mail"),
+                                            subtitle:
+                                                Text(practitioner.email ?? ""),
+                                          ),
+                                          ListTile(
+                                            leading: const Icon(
+                                                Icons.medical_information),
+                                            title: const Text("ONM"),
+                                            subtitle:
+                                                Text(practitioner.onm ?? ""),
+                                          ),
+                                          ListTile(
+                                            leading:
+                                                const Icon(Icons.location_on),
+                                            title: RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                text: practitioner.address.road,
+                                              ),
+                                              const TextSpan(text: " - "),
+                                              TextSpan(
+                                                text: practitioner.address.city,
+                                              ),
+                                              const TextSpan(text: " - "),
+                                              TextSpan(
+                                                text: practitioner.address.city,
+                                              )
+                                            ])),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

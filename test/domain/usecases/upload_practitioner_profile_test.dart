@@ -29,7 +29,7 @@ void main() {
   test('should use the repository to upload the practitioner', () async {
     // arrange
     when(practitionerRepository.uploadPractitionerProfile(any, any))
-        .thenAnswer((_) => Future.value(Right(Uint8List(0))));
+        .thenAnswer((_) => Future.value(const Right("")));
     when(savePractitionerUseCase.execute(practitioner))
         .thenAnswer((_) async => const Right(practitioner));
 

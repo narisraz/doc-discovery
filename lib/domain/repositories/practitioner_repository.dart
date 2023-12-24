@@ -12,8 +12,8 @@ abstract class PractitionerRepository {
 
   Future<List<PractitionerEntity>> search(String query);
 
-  Future<Either<Failure, Uint8List>> uploadPractitionerProfile(
+  Future<Either<Failure, String>> uploadPractitionerProfile(
       String practitionerId, Uint8List profile);
 
-  Future<Either<Failure, Uint8List>> getProfile(String practitionerId);
+  Future<Either<Failure, String>> getProfile(String practitionerId);
 }

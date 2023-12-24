@@ -20,3 +20,7 @@ class ObjectNotValidFailure extends Failure {
 class UploadFailedFailure extends Failure {
   const UploadFailedFailure() : super("Upload failed");
 }
+
+class FileNotFoundFailure extends Failure {
+  const FileNotFoundFailure() : super("File not found");
+}

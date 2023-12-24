@@ -52,19 +52,19 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
   }
 
   @override
-  Future<Either<Failure, Uint8List>> uploadPractitionerProfile(
+  Future<Either<Failure, String>> uploadPractitionerProfile(
       String practitionerId, Uint8List profile) {
     return storage
         .ref('practitioners/profile/$practitionerId')
         .putData(profile)
-        .then((snapshot) => Right(profile));
+        .then((_) => getProfile(practitionerId));
   }
 
   @override
-  Future<Either<Failure, Uint8List>> getProfile(String practitionerId) {
+  Future<Either<Failure, String>> getProfile(String practitionerId) {
     return storage
         .ref("practitioners/profile/$practitionerId")
-        .getData()
-        .then((value) => Right(value!));
+        .getDownloadURL()
+        .then((value) => Right(value));
   }
 }
