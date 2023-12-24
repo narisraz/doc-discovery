@@ -62,6 +62,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
 
   @override
   Future<Either<Failure, Uint8List>> getProfile(String practitionerId) {
-    throw UnimplementedError();
+    return storage
+        .ref("practitioners/profile/$practitionerId")
+        .getData()
+        .then((value) => Right(value!));
   }
 }
