@@ -41,55 +41,52 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
               if (snapshot.connectionState == ConnectionState.done) {
                 return snapshot.data!.fold(
                     (_) => const Text("No data"),
-                    ((practitioner) => Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Positioned(
+                    ((practitioner) => SingleChildScrollView(
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                  top: 0,
+                                  child: SizedBox(
+                                    height: 500,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: profilePicture.isNotEmpty
+                                        ? Image.network(profilePicture)
+                                        : Image.asset(
+                                            "assets/images/default-profile.jpg"),
+                                  )),
+                              Positioned(
+                                key: const Key('upload-profile'),
                                 top: 0,
-                                child: SizedBox(
-                                  height: 500,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: profilePicture.isNotEmpty
-                                      ? Image.network(profilePicture)
-                                      : Image.asset(
-                                          "assets/images/default-profile.jpg"),
-                                )),
-                            Positioned(
-                              key: const Key('upload-profile'),
-                              top: 0,
-                              right: 0,
-                              child: IconButton(
-                                onPressed: () async {
-                                  final result =
-                                      await FilePicker.platform.pickFiles();
-                                  if (result != null) {
-                                    final profile = result.files.first.bytes!;
-                                    ref
-                                        .read(
-                                            uploadPractitionerProfileUseCaseProvider)
-                                        .execute(practitioner.id!, profile)
-                                        .then((value) => setState(() {
-                                              profilePicture =
-                                                  value.getOrElse(() => "");
-                                            }));
-                                  }
-                                },
-                                icon: const Icon(Icons.photo_camera),
+                                right: 0,
+                                child: IconButton(
+                                  onPressed: () async {
+                                    final result =
+                                        await FilePicker.platform.pickFiles();
+                                    if (result != null) {
+                                      final profile = result.files.first.bytes!;
+                                      ref
+                                          .read(
+                                              uploadPractitionerProfileUseCaseProvider)
+                                          .execute(practitioner.id!, profile)
+                                          .then((value) => setState(() {
+                                                profilePicture =
+                                                    value.getOrElse(() => "");
+                                              }));
+                                    }
+                                  },
+                                  icon: const Icon(Icons.photo_camera),
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              child: IconButton(
-                                onPressed: () => Navigator.pop(context),
-                                icon: const Icon(Icons.arrow_back),
+                              Positioned(
+                                top: 0,
+                                child: IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: const Icon(Icons.arrow_back),
+                                ),
                               ),
-                            ),
-                            Positioned(
-                              top: 475,
-                              bottom: 0,
-                              child: Container(
+                              Container(
+                                margin: const EdgeInsets.only(top: 475),
                                 width: MediaQuery.of(context).size.width,
-                                height: double.infinity,
                                 decoration: BoxDecoration(
                                   color: Theme.of(context).colorScheme.surface,
                                   boxShadow: [
@@ -104,7 +101,6 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                 ),
                                 padding: const EdgeInsets.all(16),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Center(
                                       child: Text(
@@ -113,53 +109,51 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                                               fontSize: 28,
                                               fontWeight: FontWeight.bold)),
                                     ),
-                                    Expanded(
-                                      child: ListView(
-                                        children: [
-                                          ListTile(
-                                            leading: const Icon(Icons.phone),
-                                            title: const Text("Téléphone"),
-                                            subtitle: Text(practitioner.tel),
-                                          ),
-                                          ListTile(
-                                            leading: const Icon(Icons.mail),
-                                            title: const Text("Adresse mail"),
-                                            subtitle:
-                                                Text(practitioner.email ?? ""),
-                                          ),
-                                          ListTile(
-                                            leading: const Icon(
-                                                Icons.medical_information),
-                                            title: const Text("ONM"),
-                                            subtitle:
-                                                Text(practitioner.onm ?? ""),
-                                          ),
-                                          ListTile(
-                                            leading:
-                                                const Icon(Icons.location_on),
-                                            title: RichText(
-                                                text: TextSpan(children: [
-                                              TextSpan(
-                                                text: practitioner.address.road,
-                                              ),
-                                              const TextSpan(text: " - "),
-                                              TextSpan(
-                                                text: practitioner.address.city,
-                                              ),
-                                              const TextSpan(text: " - "),
-                                              TextSpan(
-                                                text: practitioner.address.city,
-                                              )
-                                            ])),
-                                          ),
-                                        ],
-                                      ),
+                                    Column(
+                                      children: [
+                                        ListTile(
+                                          leading: const Icon(Icons.phone),
+                                          title: const Text("Téléphone"),
+                                          subtitle: Text(practitioner.tel),
+                                        ),
+                                        ListTile(
+                                          leading: const Icon(Icons.mail),
+                                          title: const Text("Adresse mail"),
+                                          subtitle:
+                                              Text(practitioner.email ?? ""),
+                                        ),
+                                        ListTile(
+                                          leading: const Icon(
+                                              Icons.medical_information),
+                                          title: const Text("ONM"),
+                                          subtitle:
+                                              Text(practitioner.onm ?? ""),
+                                        ),
+                                        ListTile(
+                                          leading:
+                                              const Icon(Icons.location_on),
+                                          title: RichText(
+                                              text: TextSpan(children: [
+                                            TextSpan(
+                                              text: practitioner.address.road,
+                                            ),
+                                            const TextSpan(text: " - "),
+                                            TextSpan(
+                                              text: practitioner.address.city,
+                                            ),
+                                            const TextSpan(text: " - "),
+                                            TextSpan(
+                                              text: practitioner.address.city,
+                                            )
+                                          ])),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         )));
               }
               return const Center(child: CircularProgressIndicator());
