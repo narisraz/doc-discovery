@@ -25,7 +25,7 @@ class SearchResultItem extends ConsumerWidget {
           "${practitionerEntity.address.city} - ${practitionerEntity.address.country}"),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) =>
-              PractitionerProfile(practitionerId: practitionerEntity.id!))),
+              PractitionerProfile(practitioner: practitionerEntity))),
     );
   }
 }

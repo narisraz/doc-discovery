@@ -1,18 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:docdiscovery/presentation/profile/practitioner_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
-import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late MockGetPractitionerInfoUseCase getPractitionerInfoUseCase;
-  late MockGetPractitionerProfileUseCase getPractitionerProfileUseCase;
   const practitioner = PractitionerEntity(
       familyName: "Smith",
       givenName: "John",
@@ -21,35 +13,17 @@ void main() {
       email: 'U1TbJ@example.com',
       address: AddressEntity(road: "B 55", city: "London", country: "UK"));
 
-  setUp(() {
-    getPractitionerProfileUseCase = MockGetPractitionerProfileUseCase();
-    getPractitionerInfoUseCase = MockGetPractitionerInfoUseCase();
-  });
-
   testWidgets('shoud contain practitioner info', (tester) async {
     // arrange
-    when(getPractitionerInfoUseCase.execute(any))
-        .thenAnswer((_) => Future.value(const Right(practitioner)));
-    when(getPractitionerProfileUseCase.execute(any))
-        .thenAnswer((_) => Future.value(const Right("")));
-    await tester.pumpWidget(ProviderScope(
-        overrides: [
-          getPractitionerInfoUseCaseProvider
-              .overrideWithValue(getPractitionerInfoUseCase),
-          getPractitionerProfileUseCaseProvider
-              .overrideWithValue(getPractitionerProfileUseCase)
-        ],
-        child: const MaterialApp(
-            home: Material(
-                child: Scaffold(
-                    body: PractitionerProfile(practitionerId: "1"))))));
+    await tester.pumpWidget(const MaterialApp(
+        home: Material(
+            child: Scaffold(
+                body: PractitionerProfile(practitioner: practitioner)))));
 
     // act
     await tester.pumpAndSettle();
 
     // assert
-    verify(getPractitionerProfileUseCase.execute(any)).called(1);
-    verify(getPractitionerInfoUseCase.execute(any)).called(1);
     expect(find.text("${practitioner.givenName} ${practitioner.familyName}"),
         findsOneWidget);
     expect(find.text(practitioner.tel), findsOneWidget);

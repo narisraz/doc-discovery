@@ -9,6 +9,7 @@ class PractitionerEntity extends Equatable {
   final String? id;
   final String? email;
   final String? onm;
+  final String? profilePicture;
 
   const PractitionerEntity(
       {required this.address,
@@ -17,20 +18,21 @@ class PractitionerEntity extends Equatable {
       required this.tel,
       this.id,
       this.email,
-      this.onm});
+      this.onm,
+      this.profilePicture});
 
   PractitionerEntity copyWith({
     String? id,
   }) {
     return PractitionerEntity(
-      address: address,
-      familyName: familyName,
-      givenName: givenName,
-      tel: tel,
-      id: id ?? this.id,
-      email: email,
-      onm: onm,
-    );
+        address: address,
+        familyName: familyName,
+        givenName: givenName,
+        tel: tel,
+        id: id ?? this.id,
+        email: email,
+        onm: onm,
+        profilePicture: profilePicture);
   }
 
   isValid() {
