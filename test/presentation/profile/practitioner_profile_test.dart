@@ -15,10 +15,13 @@ void main() {
 
   testWidgets('shoud contain practitioner info', (tester) async {
     // arrange
-    await tester.pumpWidget(const MaterialApp(
+    await tester.pumpWidget(MaterialApp(
         home: Material(
             child: Scaffold(
-                body: PractitionerProfile(practitioner: practitioner)))));
+                body: PractitionerProfile(
+      practitioner: practitioner,
+      onUpdateProfilePicture: (_) {},
+    )))));
 
     // act
     await tester.pumpAndSettle();

@@ -3,7 +3,7 @@ import 'package:docdiscovery/presentation/profile/practitioner_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SearchResultItem extends ConsumerWidget {
+class SearchResultItem extends ConsumerStatefulWidget {
   final PractitionerEntity practitionerEntity;
 
   const SearchResultItem({
@@ -12,25 +12,51 @@ class SearchResultItem extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return SearchResultItemState();
+  }
+}
+
+class SearchResultItemState extends ConsumerState<SearchResultItem> {
+  late String profilePicture = "assets/images/default-profile.jpg";
+  late PractitionerEntity newPractitionerEntity;
+
+  @override
+  void initState() {
+    super.initState();
+    newPractitionerEntity = widget.practitionerEntity;
+    if (widget.practitionerEntity.profilePicture != null) {
+      profilePicture = widget.practitionerEntity.profilePicture!;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
       key: const Key('content'),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Hero(
           tag: 'profile-picture',
-          child: practitionerEntity.profilePicture != null
-              ? Image.network(practitionerEntity.profilePicture!)
-              : Image.asset("assets/images/default-profile.jpg"),
+          child: profilePicture.startsWith("assets")
+              ? Image.asset(profilePicture)
+              : Image.network(profilePicture),
         ),
       ),
       title: Text(
-          "${practitionerEntity.givenName} ${practitionerEntity.familyName}"),
+          "${widget.practitionerEntity.givenName} ${widget.practitionerEntity.familyName}"),
       subtitle: Text(
-          "${practitionerEntity.address.city} - ${practitionerEntity.address.country}"),
+          "${widget.practitionerEntity.address.city} - ${widget.practitionerEntity.address.country}"),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) =>
-              PractitionerProfile(practitioner: practitionerEntity))),
+          builder: (context) => PractitionerProfile(
+              practitioner: newPractitionerEntity,
+              onUpdateProfilePicture: (picture) {
+                setState(() {
+                  profilePicture = picture;
+                  newPractitionerEntity =
+                      newPractitionerEntity.copyWith(profilePicture: picture);
+                });
+              }))),
     );
   }
 }

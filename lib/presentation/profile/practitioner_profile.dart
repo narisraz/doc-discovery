@@ -6,8 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PractitionerProfile extends ConsumerStatefulWidget {
   final PractitionerEntity practitioner;
+  final Function(String) onUpdateProfilePicture;
 
-  const PractitionerProfile({super.key, required this.practitioner});
+  const PractitionerProfile(
+      {super.key,
+      required this.practitioner,
+      required this.onUpdateProfilePicture});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
@@ -17,6 +21,7 @@ class PractitionerProfile extends ConsumerStatefulWidget {
 
 class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
   late String profilePicture = "";
+  late bool isUploadingPictureProfile = false;
 
   @override
   void initState() {
@@ -42,12 +47,19 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                 onPressed: () async {
                   final result = await FilePicker.platform.pickFiles();
                   if (result != null) {
+                    setState(() {
+                      isUploadingPictureProfile = true;
+                    });
                     final profile = result.files.first.bytes!;
                     ref
                         .read(uploadPractitionerProfileUseCaseProvider)
                         .execute(widget.practitioner.id!, profile)
                         .then((value) => setState(() {
                               profilePicture = value.getOrElse(() => "");
+                              widget.onUpdateProfilePicture(profilePicture);
+                            }))
+                        .whenComplete(() => setState(() {
+                              isUploadingPictureProfile = false;
                             }));
                   }
                 },
@@ -59,9 +71,11 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: 'profile-picture',
-                child: profilePicture.isNotEmpty
-                    ? Image.network(profilePicture)
-                    : Image.asset("assets/images/default-profile.jpg"),
+                child: isUploadingPictureProfile
+                    ? const Center(child: CircularProgressIndicator())
+                    : profilePicture.isNotEmpty
+                        ? Image.network(profilePicture)
+                        : Image.asset("assets/images/default-profile.jpg"),
               ),
               centerTitle: true,
               titlePadding: EdgeInsets.zero,
