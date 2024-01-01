@@ -23,6 +23,7 @@ class PractitionerEntity extends Equatable {
 
   PractitionerEntity copyWith({
     String? id,
+    String? profilePicture,
   }) {
     return PractitionerEntity(
         address: address,
@@ -32,7 +33,7 @@ class PractitionerEntity extends Equatable {
         id: id ?? this.id,
         email: email,
         onm: onm,
-        profilePicture: profilePicture);
+        profilePicture: profilePicture ?? this.profilePicture);
   }
 
   isValid() {
@@ -47,5 +48,5 @@ class PractitionerEntity extends Equatable {
 
   @override
   List<Object?> get props =>
-      [address, familyName, givenName, tel, email, onm, id];
+      [address, familyName, givenName, tel, email, onm, id, profilePicture];
 }

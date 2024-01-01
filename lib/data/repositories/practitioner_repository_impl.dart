@@ -57,7 +57,9 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
     return storage
         .ref('practitioners/profile/$practitionerId')
         .putData(profile)
-        .then((_) => getProfile(practitionerId));
+        .then((_) => getProfile(practitionerId))
+        .then((value) => updatePractitionerProfilePicture(
+            practitionerId, value.getOrElse(() => "")));
   }
 
   @override
@@ -66,5 +68,14 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
         .ref("practitioners/profile/$practitionerId")
         .getDownloadURL()
         .then((value) => Right(value));
+  }
+
+  @override
+  Future<Either<Failure, String>> updatePractitionerProfilePicture(
+      String practitionerId, String profilePictureUrl) {
+    return FirestoreCollections.getPractitionerCollection(firestore)
+        .doc(practitionerId)
+        .update({'profilePicture': profilePictureUrl}).then(
+            (_) => Right(profilePictureUrl));
   }
 }

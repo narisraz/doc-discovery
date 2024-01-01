@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:algolia/algolia.dart';
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/error/failure.dart';
@@ -8,12 +10,13 @@ import 'package:docdiscovery/data/repositories/practitioner_repository_impl.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 
+import '../../helpers/fake_firebase_storage.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late Algolia algolia;
   late FakeFirebaseFirestore firestore;
-  late MockFirebaseStorage storage;
+  late FakeFirebaseStorage storage;
   late PractitionerRepositoryImpl practitionerRepository;
 
   const practitioner = PractitionerEntity(
@@ -26,7 +29,7 @@ void main() {
   setUp(() async {
     firestore = FakeFirebaseFirestore();
     algolia = MockAlgolia();
-    storage = MockFirebaseStorage();
+    storage = FakeFirebaseStorage();
     practitionerRepository =
         PractitionerRepositoryImpl(firestore, algolia, storage);
   });
@@ -61,5 +64,20 @@ void main() {
     final expectedPractitioner =
         (result as Right<Failure, PractitionerEntity>).value;
     expect(expectedPractitioner.id, id);
+  });
+
+  test(
+      'should upload profile picture to firebase storage and save generated url to practitioner model',
+      () async {
+    final saved = await practitionerRepository.savePractitioner(practitioner);
+    final id = (saved as Right<Failure, PractitionerEntity>).value.id;
+
+    final result = await practitionerRepository.uploadPractitionerProfile(
+        id!, Uint8List(1));
+
+    expect(result.isRight(), true);
+    expect(result, const Right("url"));
+    final found = await practitionerRepository.getById(id);
+    expect(found, Right(practitioner.copyWith(profilePicture: "url", id: id)));
   });
 }

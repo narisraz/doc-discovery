@@ -5,7 +5,6 @@ import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.d
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/annotations.dart';
 
@@ -17,7 +16,6 @@ import 'package:mockito/annotations.dart';
   MockSpec<SearchPractitionerUseCase>(),
   MockSpec<NavigatorObserver>(),
   MockSpec<FilePicker>(),
-  MockSpec<FirebaseStorage>(),
   MockSpec<GetPractitionerProfileUseCase>(),
 ])
 void main() {}

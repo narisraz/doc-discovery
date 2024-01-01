@@ -10,6 +10,7 @@ class PractitionerModel extends Equatable {
   final String? id;
   final String? email;
   final String? onm;
+  final String? profilePicture;
 
   final DateTime? createdAt;
   final DateTime? modifiedAt;
@@ -22,6 +23,7 @@ class PractitionerModel extends Equatable {
     this.id,
     this.email,
     this.onm,
+    this.profilePicture,
     this.createdAt,
     this.modifiedAt,
   });
@@ -35,6 +37,7 @@ class PractitionerModel extends Equatable {
       'email': email,
       'onm': onm,
       'id': id,
+      'profilePicture': profilePicture,
       'createdAt': createdAt,
       'modifiedAt': modifiedAt,
     };
@@ -52,12 +55,13 @@ class PractitionerModel extends Equatable {
       email: value['email'],
       onm: value['onm'],
       id: value['id'],
+      profilePicture: value['profilePicture'],
     );
   }
 
   @override
   List<Object?> get props =>
-      [address, familyName, givenName, tel, email, onm, id];
+      [address, familyName, givenName, tel, email, onm, id, profilePicture];
 
   static PractitionerModel fromPractitionerEntity(
       PractitionerEntity practitioner) {
@@ -69,6 +73,7 @@ class PractitionerModel extends Equatable {
       email: practitioner.email,
       onm: practitioner.onm,
       id: practitioner.id,
+      profilePicture: practitioner.profilePicture,
     );
   }
 
@@ -81,6 +86,7 @@ class PractitionerModel extends Equatable {
       email: email,
       onm: onm,
       id: id,
+      profilePicture: profilePicture,
     );
   }
 
@@ -98,6 +104,7 @@ class PractitionerModel extends Equatable {
       onm: onm,
       createdAt: createdAt ?? this.createdAt,
       modifiedAt: modifiedAt ?? this.modifiedAt,
+      profilePicture: profilePicture,
     );
   }
 }
