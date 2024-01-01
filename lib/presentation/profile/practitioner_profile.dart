@@ -36,9 +36,12 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
               child: SizedBox(
                 height: 500,
                 width: MediaQuery.of(context).size.width,
-                child: profilePicture.isNotEmpty
-                    ? Image.network(profilePicture)
-                    : Image.asset("assets/images/default-profile.jpg"),
+                child: Hero(
+                  tag: 'profile-picture',
+                  child: profilePicture.isNotEmpty
+                      ? Image.network(profilePicture)
+                      : Image.asset("assets/images/default-profile.jpg"),
+                ),
               )),
           Positioned(
             key: const Key('upload-profile'),

@@ -17,7 +17,12 @@ class SearchResultItem extends ConsumerWidget {
       key: const Key('content'),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.asset("assets/images/default-profile.jpg"),
+        child: Hero(
+          tag: 'profile-picture',
+          child: practitionerEntity.profilePicture != null
+              ? Image.network(practitionerEntity.profilePicture!)
+              : Image.asset("assets/images/default-profile.jpg"),
+        ),
       ),
       title: Text(
           "${practitionerEntity.givenName} ${practitionerEntity.familyName}"),
