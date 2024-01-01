@@ -33,106 +33,124 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            leading: IconButton.outlined(
-              color: Theme.of(context).colorScheme.primary,
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            actions: [
-              IconButton.outlined(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              leading: IconButton.outlined(
                 color: Theme.of(context).colorScheme.primary,
-                onPressed: () async {
-                  final result = await FilePicker.platform.pickFiles();
-                  if (result != null) {
-                    setState(() {
-                      isUploadingPictureProfile = true;
-                    });
-                    final profile = result.files.first.bytes!;
-                    ref
-                        .read(uploadPractitionerProfileUseCaseProvider)
-                        .execute(widget.practitioner.id!, profile)
-                        .then((value) => setState(() {
-                              profilePicture = value.getOrElse(() => "");
-                              widget.onUpdateProfilePicture(profilePicture);
-                            }))
-                        .whenComplete(() => setState(() {
-                              isUploadingPictureProfile = false;
-                            }));
-                  }
-                },
-                icon: const Icon(
-                  Icons.photo_camera,
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              actions: [
+                IconButton.outlined(
+                  color: Theme.of(context).colorScheme.primary,
+                  onPressed: () async {
+                    final result = await FilePicker.platform.pickFiles();
+                    if (result != null) {
+                      setState(() {
+                        isUploadingPictureProfile = true;
+                      });
+                      final profile = result.files.first.bytes!;
+                      ref
+                          .read(uploadPractitionerProfileUseCaseProvider)
+                          .execute(widget.practitioner.id!, profile)
+                          .then((value) => setState(() {
+                                profilePicture = value.getOrElse(() => "");
+                                widget.onUpdateProfilePicture(profilePicture);
+                              }))
+                          .whenComplete(() => setState(() {
+                                isUploadingPictureProfile = false;
+                              }));
+                    }
+                  },
+                  icon: const Icon(
+                    Icons.photo_camera,
+                  ),
+                ),
+              ],
+              flexibleSpace: FlexibleSpaceBar(
+                background: Hero(
+                  tag: 'profile-picture',
+                  child: isUploadingPictureProfile
+                      ? const Center(child: CircularProgressIndicator())
+                      : profilePicture.isNotEmpty
+                          ? Image.network(
+                              profilePicture,
+                              fit: BoxFit.fitHeight,
+                            )
+                          : Image.asset("assets/images/default-profile.jpg"),
+                ),
+                centerTitle: true,
+                titlePadding: EdgeInsets.zero,
+                title: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary
+                          .withOpacity(0.5),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "${widget.practitioner.givenName} ${widget.practitioner.familyName}",
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ],
-            flexibleSpace: FlexibleSpaceBar(
-              background: Hero(
-                tag: 'profile-picture',
-                child: isUploadingPictureProfile
-                    ? const Center(child: CircularProgressIndicator())
-                    : profilePicture.isNotEmpty
-                        ? Image.network(profilePicture)
-                        : Image.asset("assets/images/default-profile.jpg"),
+              pinned: true,
+              expandedHeight: 400,
+            ),
+            SliverList(
+                delegate: SliverChildListDelegate([
+              ListTile(
+                leading: const Icon(Icons.phone),
+                title: const Text("Téléphone"),
+                subtitle: Text(widget.practitioner.tel),
               ),
-              centerTitle: true,
-              titlePadding: EdgeInsets.zero,
-              title: Container(
-                decoration: BoxDecoration(
-                  backgroundBlendMode: BlendMode.darken,
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                        "${widget.practitioner.givenName} ${widget.practitioner.familyName}")
-                  ],
+              ListTile(
+                leading: const Icon(Icons.mail),
+                title: const Text("Adresse mail"),
+                subtitle: Text(widget.practitioner.email ?? ""),
+              ),
+              ListTile(
+                leading: const Icon(Icons.medical_information),
+                title: const Text("ONM"),
+                subtitle: Text(widget.practitioner.onm ?? ""),
+              ),
+              ListTile(
+                leading: const Icon(Icons.location_on),
+                title: const Text("Adresse"),
+                subtitle: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: widget.practitioner.address.road,
+                      ),
+                      const TextSpan(text: " - "),
+                      TextSpan(
+                        text: widget.practitioner.address.city,
+                      ),
+                      const TextSpan(text: " - "),
+                      TextSpan(
+                        text: widget.practitioner.address.city,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            pinned: true,
-            expandedHeight: 400,
-          ),
-          SliverList(
-              delegate: SliverChildListDelegate([
-            ListTile(
-              leading: const Icon(Icons.phone),
-              title: const Text("Téléphone"),
-              subtitle: Text(widget.practitioner.tel),
-            ),
-            ListTile(
-              leading: const Icon(Icons.mail),
-              title: const Text("Adresse mail"),
-              subtitle: Text(widget.practitioner.email ?? ""),
-            ),
-            ListTile(
-              leading: const Icon(Icons.medical_information),
-              title: const Text("ONM"),
-              subtitle: Text(widget.practitioner.onm ?? ""),
-            ),
-            ListTile(
-              leading: const Icon(Icons.location_on),
-              title: RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                  text: widget.practitioner.address.road,
-                ),
-                const TextSpan(text: " - "),
-                TextSpan(
-                  text: widget.practitioner.address.city,
-                ),
-                const TextSpan(text: " - "),
-                TextSpan(
-                  text: widget.practitioner.address.city,
-                )
-              ])),
-            ),
-          ]))
-        ],
-      )),
+            ]))
+          ],
+        ),
+      ),
     );
   }
 }

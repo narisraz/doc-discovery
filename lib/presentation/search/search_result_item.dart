@@ -44,19 +44,24 @@ class SearchResultItemState extends ConsumerState<SearchResultItem> {
         ),
       ),
       title: Text(
-          "${widget.practitionerEntity.givenName} ${widget.practitionerEntity.familyName}"),
+        "${widget.practitionerEntity.givenName} ${widget.practitionerEntity.familyName}",
+      ),
       subtitle: Text(
           "${widget.practitionerEntity.address.city} - ${widget.practitionerEntity.address.country}"),
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
           builder: (context) => PractitionerProfile(
-              practitioner: newPractitionerEntity,
-              onUpdateProfilePicture: (picture) {
-                setState(() {
-                  profilePicture = picture;
-                  newPractitionerEntity =
-                      newPractitionerEntity.copyWith(profilePicture: picture);
-                });
-              }))),
+            practitioner: newPractitionerEntity,
+            onUpdateProfilePicture: (picture) {
+              setState(() {
+                profilePicture = picture;
+                newPractitionerEntity =
+                    newPractitionerEntity.copyWith(profilePicture: picture);
+              });
+            },
+          ),
+        ),
+      ),
     );
   }
 }
