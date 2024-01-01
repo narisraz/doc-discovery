@@ -27,113 +27,98 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: SingleChildScrollView(
-      child: Stack(
-        children: [
-          Positioned(
-              top: 0,
-              child: SizedBox(
-                height: 500,
-                width: MediaQuery.of(context).size.width,
-                child: Hero(
-                  tag: 'profile-picture',
-                  child: profilePicture.isNotEmpty
-                      ? Image.network(profilePicture)
-                      : Image.asset("assets/images/default-profile.jpg"),
-                ),
-              )),
-          Positioned(
-            key: const Key('upload-profile'),
-            top: 0,
-            right: 0,
-            child: IconButton(
-              onPressed: () async {
-                final result = await FilePicker.platform.pickFiles();
-                if (result != null) {
-                  final profile = result.files.first.bytes!;
-                  ref
-                      .read(uploadPractitionerProfileUseCaseProvider)
-                      .execute(widget.practitioner.id!, profile)
-                      .then((value) => setState(() {
-                            profilePicture = value.getOrElse(() => "");
-                          }));
-                }
-              },
-              icon: const Icon(Icons.photo_camera),
-            ),
-          ),
-          Positioned(
-            top: 0,
-            child: IconButton(
-              onPressed: () => Navigator.pop(context),
+      body: SafeArea(
+          child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            leading: IconButton.outlined(
+              color: Theme.of(context).colorScheme.primary,
               icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 475),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.shade600,
-                    blurRadius: 10,
-                    spreadRadius: 1),
-              ],
-              borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(24), topRight: Radius.circular(24)),
-            ),
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Center(
-                  child: Text(
-                      "${widget.practitioner.givenName} ${widget.practitioner.familyName}",
-                      style: const TextStyle(
-                          fontSize: 28, fontWeight: FontWeight.bold)),
+            actions: [
+              IconButton.outlined(
+                color: Theme.of(context).colorScheme.primary,
+                onPressed: () async {
+                  final result = await FilePicker.platform.pickFiles();
+                  if (result != null) {
+                    final profile = result.files.first.bytes!;
+                    ref
+                        .read(uploadPractitionerProfileUseCaseProvider)
+                        .execute(widget.practitioner.id!, profile)
+                        .then((value) => setState(() {
+                              profilePicture = value.getOrElse(() => "");
+                            }));
+                  }
+                },
+                icon: const Icon(
+                  Icons.photo_camera,
                 ),
-                Column(
+              ),
+            ],
+            flexibleSpace: FlexibleSpaceBar(
+              background: Hero(
+                tag: 'profile-picture',
+                child: profilePicture.isNotEmpty
+                    ? Image.network(profilePicture)
+                    : Image.asset("assets/images/default-profile.jpg"),
+              ),
+              centerTitle: true,
+              titlePadding: EdgeInsets.zero,
+              title: Container(
+                decoration: BoxDecoration(
+                  backgroundBlendMode: BlendMode.darken,
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ListTile(
-                      leading: const Icon(Icons.phone),
-                      title: const Text("Téléphone"),
-                      subtitle: Text(widget.practitioner.tel),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.mail),
-                      title: const Text("Adresse mail"),
-                      subtitle: Text(widget.practitioner.email ?? ""),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.medical_information),
-                      title: const Text("ONM"),
-                      subtitle: Text(widget.practitioner.onm ?? ""),
-                    ),
-                    ListTile(
-                      leading: const Icon(Icons.location_on),
-                      title: RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                          text: widget.practitioner.address.road,
-                        ),
-                        const TextSpan(text: " - "),
-                        TextSpan(
-                          text: widget.practitioner.address.city,
-                        ),
-                        const TextSpan(text: " - "),
-                        TextSpan(
-                          text: widget.practitioner.address.city,
-                        )
-                      ])),
-                    ),
+                    Text(
+                        "${widget.practitioner.givenName} ${widget.practitioner.familyName}")
                   ],
                 ),
-              ],
+              ),
             ),
+            pinned: true,
+            expandedHeight: 400,
           ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            ListTile(
+              leading: const Icon(Icons.phone),
+              title: const Text("Téléphone"),
+              subtitle: Text(widget.practitioner.tel),
+            ),
+            ListTile(
+              leading: const Icon(Icons.mail),
+              title: const Text("Adresse mail"),
+              subtitle: Text(widget.practitioner.email ?? ""),
+            ),
+            ListTile(
+              leading: const Icon(Icons.medical_information),
+              title: const Text("ONM"),
+              subtitle: Text(widget.practitioner.onm ?? ""),
+            ),
+            ListTile(
+              leading: const Icon(Icons.location_on),
+              title: RichText(
+                  text: TextSpan(children: [
+                TextSpan(
+                  text: widget.practitioner.address.road,
+                ),
+                const TextSpan(text: " - "),
+                TextSpan(
+                  text: widget.practitioner.address.city,
+                ),
+                const TextSpan(text: " - "),
+                TextSpan(
+                  text: widget.practitioner.address.city,
+                )
+              ])),
+            ),
+          ]))
         ],
-      ),
-    )));
+      )),
+    );
   }
 }
