@@ -33,21 +33,26 @@ class SearchPractitionerState extends ConsumerState<SearchPractitioner> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: "Trouver",
-                  style: const TextStyle(fontSize: 20),
-                  children: [
-                    TextSpan(
-                        text: " un professionnel de sante",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary)),
-                    const TextSpan(
-                        text: " en toute simplicité",
-                        style: TextStyle(fontSize: 20))
-                  ])),
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              text: "Trouver",
+              style: const TextStyle(fontSize: 20),
+              children: [
+                TextSpan(
+                  text: " un professionnel de sante",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                const TextSpan(
+                  text: " en toute simplicité",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
+            ),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -60,15 +65,17 @@ class SearchPractitionerState extends ConsumerState<SearchPractitioner> {
                   onEditingComplete: search,
                   key: const Key('search-input'),
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      hintText: 'Rechercher un nom, lieu, tel,...',
-                      suffixIcon: IconButton(
-                          key: const Key('search-button'),
-                          onPressed: search,
-                          icon: const Icon(
-                            Icons.search,
-                          ))),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    hintText: 'Rechercher un nom, lieu, tel,...',
+                    suffixIcon: IconButton(
+                      key: const Key('search-button'),
+                      onPressed: search,
+                      icon: const Icon(
+                        Icons.search,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],

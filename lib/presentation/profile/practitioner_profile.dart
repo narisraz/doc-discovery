@@ -70,13 +70,13 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
               ],
               flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
-                  tag: 'profile-picture',
+                  tag: 'profile-picture-${widget.practitioner.id}',
                   child: isUploadingPictureProfile
                       ? const Center(child: CircularProgressIndicator())
                       : profilePicture.isNotEmpty
                           ? Image.network(
                               profilePicture,
-                              fit: BoxFit.fitHeight,
+                              fit: BoxFit.cover,
                             )
                           : Image.asset("assets/images/default-profile.jpg"),
                 ),

@@ -37,7 +37,7 @@ class SearchResultItemState extends ConsumerState<SearchResultItem> {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Hero(
-          tag: 'profile-picture',
+          tag: 'profile-picture-${widget.practitionerEntity.id}',
           child: profilePicture.startsWith("assets")
               ? Image.asset(profilePicture)
               : Image.network(profilePicture),

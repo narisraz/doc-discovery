@@ -1,6 +1,7 @@
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
+import 'package:docdiscovery/presentation/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,8 +38,9 @@ class PractitionerForm extends ConsumerWidget {
                 )))
             .then((value) {
           if (value.isRight()) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Saved")));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return const Home();
+            }));
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text("Invalide")));
@@ -47,100 +49,119 @@ class PractitionerForm extends ConsumerWidget {
       }
     }
 
-    return Form(
-      key: globalKey,
-      child: Column(
-        children: [
-          TextFormField(
-            controller: familyNameController,
-            key: const Key('family_name'),
-            decoration: const InputDecoration(hintText: 'Nom'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton.outlined(
+          color: Theme.of(context).colorScheme.primary,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Form(
+              key: globalKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: familyNameController,
+                    key: const Key('family_name'),
+                    decoration: const InputDecoration(hintText: 'Nom'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('given_name'),
+                    controller: givenNameController,
+                    decoration: const InputDecoration(hintText: 'Prénom'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('onm'),
+                    controller: onmController,
+                    decoration: const InputDecoration(hintText: 'ONM'),
+                  ),
+                  TextFormField(
+                    key: const Key('tel'),
+                    controller: telController,
+                    decoration: const InputDecoration(hintText: 'Téléphone'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('email'),
+                    controller: emailController,
+                    decoration: const InputDecoration(hintText: 'Adresse mail'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('road'),
+                    controller: roadController,
+                    decoration: const InputDecoration(hintText: 'Adresse'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('city'),
+                    controller: cityController,
+                    decoration: const InputDecoration(hintText: 'District'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  TextFormField(
+                    key: const Key('country'),
+                    controller: countryController,
+                    decoration: const InputDecoration(hintText: 'Région'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Champ obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        onSave();
+                      },
+                      key: const Key('submit_button'),
+                      child: const Text('Enregistrer'),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
-          TextFormField(
-            key: const Key('given_name'),
-            controller: givenNameController,
-            decoration: const InputDecoration(hintText: 'Prénom'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            key: const Key('onm'),
-            controller: onmController,
-            decoration: const InputDecoration(hintText: 'ONM'),
-          ),
-          TextFormField(
-            key: const Key('tel'),
-            controller: telController,
-            decoration: const InputDecoration(hintText: 'Téléphone'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            key: const Key('email'),
-            controller: emailController,
-            decoration: const InputDecoration(hintText: 'Adresse mail'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            key: const Key('road'),
-            controller: roadController,
-            decoration: const InputDecoration(hintText: 'Adresse'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            key: const Key('city'),
-            controller: cityController,
-            decoration: const InputDecoration(hintText: 'District'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            key: const Key('country'),
-            controller: countryController,
-            decoration: const InputDecoration(hintText: 'Région'),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Champ obligatoire';
-              }
-              return null;
-            },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              onSave();
-            },
-            key: const Key('submit_button'),
-            child: const Text('Enregistrer'),
-          )
-        ],
+        ),
       ),
     );
   }
