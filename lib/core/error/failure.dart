@@ -24,3 +24,7 @@ class UploadFailedFailure extends Failure {
 class FileNotFoundFailure extends Failure {
   const FileNotFoundFailure() : super("File not found");
 }
+
+class MailFormatFailure extends Failure {
+  const MailFormatFailure() : super("Mail format not valid");
+}

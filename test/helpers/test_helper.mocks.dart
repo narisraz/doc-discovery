@@ -9,7 +9,9 @@ import 'dart:typed_data' as _i8;
 import 'package:algolia/algolia.dart' as _i3;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:docdiscovery/core/error/failure.dart' as _i6;
+import 'package:docdiscovery/core/utils.dart' as _i18;
 import 'package:docdiscovery/domain/entities/practitioner.dart' as _i7;
+import 'package:docdiscovery/domain/repositories/auth_repository.dart' as _i17;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i4;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
@@ -794,4 +796,62 @@ class MockGetPractitionerProfileUseCase extends _i1.Mock
           ),
         )),
       ) as _i5.Future<_i2.Either<_i6.Failure, String>>);
+}
+
+/// A class which mocks [AuthRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthRepository extends _i1.Mock implements _i17.AuthRepository {
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, bool>> signUp(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUp,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, bool>>.value(
+            _FakeEither_0<_i6.Failure, bool>(
+          this,
+          Invocation.method(
+            #signUp,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i5.Future<_i2.Either<_i6.Failure, bool>>.value(
+                _FakeEither_0<_i6.Failure, bool>(
+          this,
+          Invocation.method(
+            #signUp,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, bool>>);
+}
+
+/// A class which mocks [MailUtil].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMailUtil extends _i1.Mock implements _i18.MailUtil {
+  @override
+  bool isValid(String? email) => (super.noSuchMethod(
+        Invocation.method(
+          #isValid,
+          [email],
+        ),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
 }
