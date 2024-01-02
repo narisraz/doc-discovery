@@ -24,6 +24,21 @@ final practitionerRepositoryProvider =
 
 typedef PractitionerRepositoryRef
     = AutoDisposeProviderRef<PractitionerRepository>;
+String _$authRepositoryHash() => r'b964cf417a2bbb3e341508d974775c92e685a1d1';
+
+/// See also [authRepository].
+@ProviderFor(authRepository)
+final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
+  authRepository,
+  name: r'authRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
 String _$savePractitionerUseCaseHash() =>
     r'8beb226ef43214260d4e5df9eae6cdbd9dd57639';
 
@@ -114,5 +129,21 @@ final getPractitionerProfileUseCaseProvider =
 
 typedef GetPractitionerProfileUseCaseRef
     = AutoDisposeProviderRef<GetPractitionerProfileUseCase>;
+String _$signUpUserUseCaseHash() => r'6cdea9bcb88156863ef2f15a0d76b8d9f68160bf';
+
+/// See also [signUpUserUseCase].
+@ProviderFor(signUpUserUseCase)
+final signUpUserUseCaseProvider =
+    AutoDisposeProvider<SignUpUserUseCase>.internal(
+  signUpUserUseCase,
+  name: r'signUpUserUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$signUpUserUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SignUpUserUseCaseRef = AutoDisposeProviderRef<SignUpUserUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
