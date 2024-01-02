@@ -149,7 +149,7 @@ class PractitionerForm extends ConsumerWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: ElevatedButton(
+                    child: FilledButton(
                       onPressed: () {
                         onSave();
                       },
