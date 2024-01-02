@@ -1,11 +1,9 @@
 import 'package:docdiscovery/presentation/home.dart';
-import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
-class SignInPage extends ConsumerWidget {
-  const SignInPage({super.key});
+class SignUp extends ConsumerWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,29 +26,25 @@ class SignInPage extends ConsumerWidget {
               decoration: const InputDecoration(hintText: "Mot de passe"),
               obscureText: true,
             ),
+            TextFormField(
+              key: const Key("confirm-password"),
+              decoration:
+                  const InputDecoration(hintText: "Confirmer mot de passe"),
+              obscureText: true,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  OutlinedButton(
-                    key: const Key("signup"),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const SignUp()),
-                      );
-                    },
-                    child: const Text("Créer compte"),
-                  ),
-                  const Gap(8),
                   FilledButton(
-                    key: const Key("signin-button"),
+                    key: const Key("signup"),
                     onPressed: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => const Home()),
                       );
                     },
-                    child: const Text("Se connecter"),
+                    child: const Text("Créer compte"),
                   ),
                 ],
               ),
