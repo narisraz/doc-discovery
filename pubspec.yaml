@@ -50,6 +50,8 @@ dependencies:
   firebase_auth: ^4.15.3
   gap: ^3.0.1
   flutter_animate: ^4.3.0
+  random_avatar: ^0.0.8
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
