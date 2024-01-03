@@ -24,6 +24,12 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<Either<Failure, UserEntity>> getByAuthId(String authId) {
-    throw UnimplementedError();
+    return FirestoreCollections.getUserCollection(firestore)
+        .where('authId', isEqualTo: authId)
+        .get()
+        .then((value) => Right(value.docs.first
+            .data()
+            .toUserEntity()
+            .copyWith(id: value.docs.first.id)));
   }
 }
