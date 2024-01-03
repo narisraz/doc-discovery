@@ -34,20 +34,16 @@ class SearchResultItemState extends ConsumerState<SearchResultItem> {
   Widget build(BuildContext context) {
     return ListTile(
       key: const Key('content'),
-      leading: SizedBox(
-        width: 50,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
-          child: Hero(
-            tag: 'profile-picture-${widget.practitionerEntity.id}',
-            child: profilePicture.startsWith("assets")
-                ? Image.asset(
-                    profilePicture,
-                    fit: BoxFit.cover,
-                  )
-                : Image.network(profilePicture),
-          ),
-        ),
+      leading: Hero(
+        tag: 'profile-picture-${widget.practitionerEntity.id}',
+        child: profilePicture.startsWith("assets")
+            ? CircleAvatar(
+                child: Image.asset(
+                  profilePicture,
+                  fit: BoxFit.cover,
+                ),
+              )
+            : CircleAvatar(backgroundImage: NetworkImage(profilePicture)),
       ),
       title: Text(
         "${widget.practitionerEntity.givenName} ${widget.practitionerEntity.familyName}",

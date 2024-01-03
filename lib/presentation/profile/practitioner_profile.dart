@@ -2,6 +2,7 @@ import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PractitionerProfile extends ConsumerStatefulWidget {
@@ -36,6 +37,7 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              toolbarHeight: 50,
               leading: IconButton.outlined(
                 color: Theme.of(context).colorScheme.primary,
                 icon: const Icon(Icons.arrow_back),
@@ -110,44 +112,52 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
               expandedHeight: 400,
             ),
             SliverList(
-                delegate: SliverChildListDelegate([
-              ListTile(
-                leading: const Icon(Icons.phone),
-                title: const Text("Téléphone"),
-                subtitle: Text(widget.practitioner.tel),
-              ),
-              ListTile(
-                leading: const Icon(Icons.mail),
-                title: const Text("Adresse mail"),
-                subtitle: Text(widget.practitioner.email ?? ""),
-              ),
-              ListTile(
-                leading: const Icon(Icons.medical_information),
-                title: const Text("ONM"),
-                subtitle: Text(widget.practitioner.onm ?? ""),
-              ),
-              ListTile(
-                leading: const Icon(Icons.location_on),
-                title: const Text("Adresse"),
-                subtitle: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: widget.practitioner.address.road,
-                      ),
-                      const TextSpan(text: " - "),
-                      TextSpan(
-                        text: widget.practitioner.address.city,
-                      ),
-                      const TextSpan(text: " - "),
-                      TextSpan(
-                        text: widget.practitioner.address.city,
-                      )
-                    ],
+              delegate: SliverChildListDelegate(
+                [
+                  ListTile(
+                    leading: const Icon(Icons.phone),
+                    title: const Text("Téléphone"),
+                    subtitle: Text(widget.practitioner.tel),
                   ),
-                ),
+                  ListTile(
+                    leading: const Icon(Icons.mail),
+                    title: const Text("Adresse mail"),
+                    subtitle: Text(widget.practitioner.email ?? ""),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.medical_information),
+                    title: const Text("ONM"),
+                    subtitle: Text(widget.practitioner.onm ?? ""),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.location_on),
+                    title: const Text("Adresse"),
+                    subtitle: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: widget.practitioner.address.road,
+                          ),
+                          const TextSpan(text: " - "),
+                          TextSpan(
+                            text: widget.practitioner.address.city,
+                          ),
+                          const TextSpan(text: " - "),
+                          TextSpan(
+                            text: widget.practitioner.address.city,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ].animate(interval: 250.milliseconds).slideX(
+                      begin: 1,
+                      curve: Curves.easeIn,
+                      delay: 250.milliseconds,
+                      end: 0,
+                    ),
               ),
-            ]))
+            )
           ],
         ),
       ),
