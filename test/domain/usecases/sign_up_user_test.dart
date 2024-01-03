@@ -40,7 +40,7 @@ void main() {
     when(userRepository.saveUserInfo(any))
         .thenAnswer((_) => Future.value(Right(UserEntity(
               email: request.email,
-              id: "id",
+              authId: "id",
               givenName: request.givenName,
               familyName: request.familyName,
               picture: request.picture,

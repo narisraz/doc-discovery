@@ -875,6 +875,44 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, String>> signIn(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signIn,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, String>>.value(
+            _FakeEither_0<_i9.Failure, String>(
+          this,
+          Invocation.method(
+            #signIn,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, String>>.value(
+                _FakeEither_0<_i9.Failure, String>(
+          this,
+          Invocation.method(
+            #signIn,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
 }
 
 /// A class which mocks [MailUtil].
@@ -990,6 +1028,33 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           Invocation.method(
             #saveUserInfo,
             [user],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> getByAuthId(
+          String? authId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getByAuthId,
+          [authId],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+          this,
+          Invocation.method(
+            #getByAuthId,
+            [authId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+          this,
+          Invocation.method(
+            #getByAuthId,
+            [authId],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);

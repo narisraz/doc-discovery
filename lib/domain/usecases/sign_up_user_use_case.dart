@@ -39,7 +39,8 @@ class SignUpUserUseCase {
               picture: request.picture,
               givenName: request.givenName,
               familyName: request.familyName,
-              email: request.email)),
+              email: request.email,
+              authId: value.getOrElse(() => ""))),
         );
   }
 }

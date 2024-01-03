@@ -14,4 +14,10 @@ class AuthRepositoryImpl implements AuthRepository {
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) => Right(value.user!.uid));
   }
+
+  @override
+  Future<Either<Failure, String>> signIn(String email, String password) {
+    // TODO: implement signIn
+    throw UnimplementedError();
+  }
 }

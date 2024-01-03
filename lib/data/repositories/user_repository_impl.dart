@@ -21,4 +21,9 @@ class UserRepositoryImpl extends UserRepository {
         .then((value) =>
             Right(value.data()!.toUserEntity().copyWith(id: value.id)));
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> getByAuthId(String authId) {
+    throw UnimplementedError();
+  }
 }

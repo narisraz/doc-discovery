@@ -43,7 +43,7 @@ class UserModel extends Equatable {
       givenName: user.givenName,
       familyName: user.familyName,
       email: user.email,
-      id: user.id,
+      id: user.authId,
       picture: user.picture,
     );
   }
@@ -53,7 +53,7 @@ class UserModel extends Equatable {
       givenName: givenName,
       familyName: familyName,
       email: email,
-      id: id,
+      authId: id,
       picture: picture,
     );
   }
