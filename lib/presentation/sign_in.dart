@@ -17,6 +17,20 @@ class SignInPage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primary,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          centerTitle: true,
+          title: Text(
+            "Connexion",
+            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+          ),
         ),
         body: Container(
           padding: const EdgeInsets.all(16.0),
@@ -31,11 +45,6 @@ class SignInPage extends ConsumerWidget {
                 child: Wrap(
                   children: [
                     const Center(child: Icon(Icons.lock_outline, size: 90)),
-                    const Center(
-                        child: Text(
-                      "Connexion",
-                      style: TextStyle(fontSize: 42),
-                    )),
                     Form(
                       key: formKey,
                       child: Column(children: [
