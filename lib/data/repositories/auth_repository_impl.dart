@@ -9,9 +9,9 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl({required this.auth});
 
   @override
-  Future<Either<Failure, bool>> signUp(String email, String password) {
+  Future<Either<Failure, String>> signUp(String email, String password) {
     return auth
         .createUserWithEmailAndPassword(email: email, password: password)
-        .then((value) => const Right(true));
+        .then((value) => Right(value.user!.uid));
   }
 }

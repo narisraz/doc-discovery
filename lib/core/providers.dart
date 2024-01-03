@@ -3,8 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:docdiscovery/core/utils.dart';
 import 'package:docdiscovery/data/repositories/auth_repository_impl.dart';
 import 'package:docdiscovery/data/repositories/practitioner_repository_impl.dart';
+import 'package:docdiscovery/data/repositories/user_repository_impl.dart';
 import 'package:docdiscovery/domain/repositories/auth_repository.dart';
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
+import 'package:docdiscovery/domain/repositories/user_repository.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
@@ -30,6 +32,10 @@ PractitionerRepository practitionerRepository(PractitionerRepositoryRef ref) =>
 @riverpod
 AuthRepository authRepository(ProviderRef ref) =>
     AuthRepositoryImpl(auth: FirebaseAuth.instance);
+
+@riverpod
+UserRepository userRepository(ProviderRef ref) =>
+    UserRepositoryImpl(firestore: FirebaseFirestore.instance);
 
 @riverpod
 SavePractitionerUseCase savePractitionerUseCase(
@@ -64,4 +70,6 @@ GetPractitionerProfileUseCase getPractitionerProfileUseCase(
 @riverpod
 SignUpUserUseCase signUpUserUseCase(SignUpUserUseCaseRef ref) =>
     SignUpUserUseCase(
-        authRepository: ref.read(authRepositoryProvider), mailUtil: MailUtil());
+        authRepository: ref.read(authRepositoryProvider),
+        mailUtil: MailUtil(),
+        userRepository: ref.read(userRepositoryProvider));

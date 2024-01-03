@@ -1,12 +1,28 @@
-import 'package:docdiscovery/presentation/home.dart';
+import 'package:docdiscovery/core/providers.dart';
+import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import '../helpers/test_helper.mocks.dart';
 
 void main() {
-  testWidgets('should save credentials to firebase auth', (tester) async {
-    await tester.pumpWidget(const MaterialApp(
-      home: SignUp(),
+  late MockSignUpUserUseCase signUpUserUseCase;
+
+  setUp(() {
+    signUpUserUseCase = MockSignUpUserUseCase();
+  });
+
+  testWidgets('should save credentials', (tester) async {
+    await tester.pumpWidget(ProviderScope(
+      overrides: [
+        signUpUserUseCaseProvider.overrideWithValue(signUpUserUseCase)
+      ],
+      child: const MaterialApp(
+        home: SignUp(),
+      ),
     ));
 
     await tester.enterText(find.byKey(const Key("email")), "mail@mail.com");
@@ -17,6 +33,7 @@ void main() {
     await tester.tap(find.byKey(const Key("signup")));
     await tester.pumpAndSettle();
 
-    expect(find.byType(Home), findsOneWidget);
+    verify(signUpUserUseCase.execute(argThat(isA<SignUpUserRequest>())))
+        .called(1);
   });
 }

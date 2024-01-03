@@ -52,6 +52,7 @@ dependencies:
   flutter_animate: ^4.3.0
   random_avatar: ^0.0.8
   flutter_svg: ^2.0.9
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:

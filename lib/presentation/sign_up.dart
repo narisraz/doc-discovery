@@ -1,3 +1,5 @@
+import 'package:docdiscovery/core/providers.dart';
+import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/presentation/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,6 +17,11 @@ class SignUp extends ConsumerStatefulWidget {
 
 class SignUpState extends ConsumerState<SignUp> {
   String picture = RandomAvatarString(DateTime.now().toIso8601String());
+  final familyNameController = TextEditingController();
+  final givenNameController = TextEditingController();
+  final emaiController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +49,38 @@ class SignUpState extends ConsumerState<SignUp> {
                 icon: const Icon(Icons.refresh),
               ),
               TextFormField(
+                key: const Key("family-name"),
+                decoration: const InputDecoration(hintText: "Nom"),
+                enableSuggestions: true,
+                keyboardType: TextInputType.emailAddress,
+                controller: familyNameController,
+              ),
+              TextFormField(
+                key: const Key("given-name"),
+                decoration: const InputDecoration(hintText: "Prénom"),
+                enableSuggestions: true,
+                keyboardType: TextInputType.emailAddress,
+                controller: givenNameController,
+              ),
+              TextFormField(
                 key: const Key("email"),
                 decoration: const InputDecoration(hintText: "Email"),
                 enableSuggestions: true,
                 keyboardType: TextInputType.emailAddress,
+                controller: emaiController,
               ),
               TextFormField(
                 key: const Key("password"),
                 decoration: const InputDecoration(hintText: "Mot de passe"),
                 obscureText: true,
+                controller: passwordController,
               ),
               TextFormField(
                 key: const Key("confirm-password"),
                 decoration:
                     const InputDecoration(hintText: "Confirmer mot de passe"),
                 obscureText: true,
+                controller: confirmPasswordController,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -66,9 +90,20 @@ class SignUpState extends ConsumerState<SignUp> {
                     FilledButton(
                       key: const Key("signup"),
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => const Home()),
-                        );
+                        ref
+                            .read(signUpUserUseCaseProvider)
+                            .execute(
+                              SignUpUserRequest(
+                                  email: emaiController.text,
+                                  password: passwordController.text,
+                                  familyName: familyNameController.text,
+                                  givenName: givenNameController.text,
+                                  picture: picture),
+                            )
+                            .then((value) => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()),
+                                ));
                       },
                       child: const Text("Créer compte"),
                     ),

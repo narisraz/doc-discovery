@@ -39,6 +39,21 @@ final authRepositoryProvider = AutoDisposeProvider<AuthRepository>.internal(
 );
 
 typedef AuthRepositoryRef = AutoDisposeProviderRef<AuthRepository>;
+String _$userRepositoryHash() => r'76f91de504cb5138a131b214c39f11be130ed071';
+
+/// See also [userRepository].
+@ProviderFor(userRepository)
+final userRepositoryProvider = AutoDisposeProvider<UserRepository>.internal(
+  userRepository,
+  name: r'userRepositoryProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$userRepositoryHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef UserRepositoryRef = AutoDisposeProviderRef<UserRepository>;
 String _$savePractitionerUseCaseHash() =>
     r'8beb226ef43214260d4e5df9eae6cdbd9dd57639';
 
@@ -129,7 +144,7 @@ final getPractitionerProfileUseCaseProvider =
 
 typedef GetPractitionerProfileUseCaseRef
     = AutoDisposeProviderRef<GetPractitionerProfileUseCase>;
-String _$signUpUserUseCaseHash() => r'6cdea9bcb88156863ef2f15a0d76b8d9f68160bf';
+String _$signUpUserUseCaseHash() => r'd0ae8cce8cee93a87bfa0358520c233e73cce709';
 
 /// See also [signUpUserUseCase].
 @ProviderFor(signUpUserUseCase)

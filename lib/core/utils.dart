@@ -1,5 +1,7 @@
+import 'package:email_validator/email_validator.dart';
+
 class MailUtil {
   bool isValid(String email) {
-    return false;
+    return EmailValidator.validate(email);
   }
 }
