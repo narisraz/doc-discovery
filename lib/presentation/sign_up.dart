@@ -37,7 +37,7 @@ class SignUpState extends ConsumerState<SignUp> {
           padding: const EdgeInsets.all(8.0),
           child: Form(
             key: formKey,
-            child: Column(children: [
+            child: ListView(children: [
               SvgPicture.string(picture),
               IconButton(
                 onPressed: () {

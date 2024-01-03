@@ -30,8 +30,9 @@ void main() {
     await tester.enterText(
         find.byKey(const Key("confirm-password")), "password");
 
-    await tester.tap(find.byKey(const Key("signup")));
+    await tester.ensureVisible(find.byKey(const Key("signup")));
     await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const Key("signup")));
 
     verify(signUpUserUseCase.execute(argThat(isA<SignUpUserRequest>())))
         .called(1);
