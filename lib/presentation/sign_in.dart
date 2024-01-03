@@ -1,3 +1,4 @@
+import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class SignInPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = GlobalKey<FormState>();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
 
     return Scaffold(
       body: Padding(
@@ -22,11 +25,13 @@ class SignInPage extends ConsumerWidget {
               decoration: const InputDecoration(hintText: "Email"),
               enableSuggestions: true,
               keyboardType: TextInputType.emailAddress,
+              controller: emailController,
             ),
             TextFormField(
               key: const Key("password"),
               decoration: const InputDecoration(hintText: "Mot de passe"),
               obscureText: true,
+              controller: passwordController,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
@@ -46,9 +51,14 @@ class SignInPage extends ConsumerWidget {
                   FilledButton(
                     key: const Key("signin-button"),
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
+                      ref
+                          .read(signInUserUseCaseProvider)
+                          .execute(
+                              emailController.text, passwordController.text)
+                          .then((value) => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const Home()),
+                              ));
                     },
                     child: const Text("Se connecter"),
                   ),

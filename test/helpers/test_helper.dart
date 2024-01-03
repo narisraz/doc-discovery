@@ -7,6 +7,7 @@ import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
+import 'package:docdiscovery/domain/usecases/sign_in_use_case.dart';
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -25,5 +26,6 @@ import 'package:mockito/annotations.dart';
   MockSpec<MailUtil>(),
   MockSpec<SignUpUserUseCase>(),
   MockSpec<UserRepository>(),
+  MockSpec<SignInUserUseCase>(),
 ])
 void main() {}

@@ -6,17 +6,17 @@ class UserModel extends Equatable {
   final String givenName;
   final String familyName;
   final String email;
-  final String? id;
+  final String? authId;
 
   const UserModel(
       {required this.picture,
       required this.givenName,
       required this.familyName,
       required this.email,
-      required this.id});
+      required this.authId});
 
   @override
-  List<Object?> get props => [givenName, familyName, email, id];
+  List<Object?> get props => [givenName, familyName, email, authId];
 
   static UserModel fromJson(Map<String, dynamic> map) {
     return UserModel(
@@ -24,7 +24,7 @@ class UserModel extends Equatable {
       givenName: map['givenName'],
       familyName: map['familyName'],
       email: map['email'],
-      id: map['id'],
+      authId: map['authId'],
     );
   }
 
@@ -34,7 +34,7 @@ class UserModel extends Equatable {
       'givenName': givenName,
       'familyName': familyName,
       'email': email,
-      'id': id,
+      'authId': authId,
     };
   }
 
@@ -43,7 +43,7 @@ class UserModel extends Equatable {
       givenName: user.givenName,
       familyName: user.familyName,
       email: user.email,
-      id: user.authId,
+      authId: user.authId,
       picture: user.picture,
     );
   }
@@ -53,7 +53,7 @@ class UserModel extends Equatable {
       givenName: givenName,
       familyName: familyName,
       email: email,
-      authId: id,
+      authId: authId,
       picture: picture,
     );
   }

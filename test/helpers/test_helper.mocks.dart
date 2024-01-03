@@ -24,6 +24,7 @@ import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart'
     as _i13;
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
     as _i15;
+import 'package:docdiscovery/domain/usecases/sign_in_use_case.dart' as _i22;
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart'
     as _i20;
 import 'package:file_picker/src/file_picker.dart' as _i17;
@@ -1055,6 +1056,75 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           Invocation.method(
             #getByAuthId,
             [authId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+}
+
+/// A class which mocks [SignInUserUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSignInUserUseCase extends _i1.Mock implements _i22.SignInUserUseCase {
+  @override
+  _i5.AuthRepository get authRepository => (super.noSuchMethod(
+        Invocation.getter(#authRepository),
+        returnValue: _FakeAuthRepository_6(
+          this,
+          Invocation.getter(#authRepository),
+        ),
+        returnValueForMissingStub: _FakeAuthRepository_6(
+          this,
+          Invocation.getter(#authRepository),
+        ),
+      ) as _i5.AuthRepository);
+
+  @override
+  _i6.UserRepository get userRepository => (super.noSuchMethod(
+        Invocation.getter(#userRepository),
+        returnValue: _FakeUserRepository_7(
+          this,
+          Invocation.getter(#userRepository),
+        ),
+        returnValueForMissingStub: _FakeUserRepository_7(
+          this,
+          Invocation.getter(#userRepository),
+        ),
+      ) as _i6.UserRepository);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> execute(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [
+              email,
+              password,
+            ],
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);

@@ -11,6 +11,7 @@ import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
 import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart';
+import 'package:docdiscovery/domain/usecases/sign_in_use_case.dart';
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/domain/usecases/upload_practitioner_profile_use_case.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -72,4 +73,10 @@ SignUpUserUseCase signUpUserUseCase(SignUpUserUseCaseRef ref) =>
     SignUpUserUseCase(
         authRepository: ref.read(authRepositoryProvider),
         mailUtil: MailUtil(),
+        userRepository: ref.read(userRepositoryProvider));
+
+@riverpod
+SignInUserUseCase signInUserUseCase(SignInUserUseCaseRef ref) =>
+    SignInUserUseCase(
+        authRepository: ref.read(authRepositoryProvider),
         userRepository: ref.read(userRepositoryProvider));

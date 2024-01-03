@@ -160,5 +160,21 @@ final signUpUserUseCaseProvider =
 );
 
 typedef SignUpUserUseCaseRef = AutoDisposeProviderRef<SignUpUserUseCase>;
+String _$signInUserUseCaseHash() => r'45b22ed23eb2cc8dc69bb2acc64deb85bf5bfe67';
+
+/// See also [signInUserUseCase].
+@ProviderFor(signInUserUseCase)
+final signInUserUseCaseProvider =
+    AutoDisposeProvider<SignInUserUseCase>.internal(
+  signInUserUseCase,
+  name: r'signInUserUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$signInUserUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef SignInUserUseCaseRef = AutoDisposeProviderRef<SignInUserUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
