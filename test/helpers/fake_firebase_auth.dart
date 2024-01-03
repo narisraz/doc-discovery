@@ -19,4 +19,12 @@ class FakeFirebaseAuth extends Fake implements FirebaseAuth {
   }) async {
     return Future.value(FakeUserCredential());
   }
+
+  @override
+  Future<UserCredential> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    return Future.value(FakeUserCredential());
+  }
 }

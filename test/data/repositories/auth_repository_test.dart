@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/data/repositories/auth_repository_impl.dart';
 import 'package:docdiscovery/domain/repositories/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -16,6 +17,12 @@ void main() {
   test('should create user with email and password', () async {
     final result = await authRepository.signUp("mail@mail.com", "password");
 
-    expect(result.isRight(), true);
+    expect(result, const Right("uid"));
+  });
+
+  test('should sign in to firebase auth', () async {
+    final result = await authRepository.signIn("mail@mail.com", "password");
+
+    expect(result, const Right("uid"));
   });
 }

@@ -17,7 +17,8 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, String>> signIn(String email, String password) {
-    // TODO: implement signIn
-    throw UnimplementedError();
+    return auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) => Right(value.user!.uid));
   }
 }
