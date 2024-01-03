@@ -2,7 +2,6 @@ import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PractitionerProfile extends ConsumerStatefulWidget {
@@ -84,27 +83,19 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                 ),
                 centerTitle: true,
                 titlePadding: EdgeInsets.zero,
-                title: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(16),
+                title: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  decoration: BoxDecoration(
+                    color:
+                        Theme.of(context).colorScheme.primary.withOpacity(0.5),
                   ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .primary
-                          .withOpacity(0.5),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "${widget.practitioner.givenName} ${widget.practitioner.familyName}",
-                        )
-                      ],
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${widget.practitioner.givenName} ${widget.practitioner.familyName}",
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -150,12 +141,7 @@ class PractitionerProfileState extends ConsumerState<PractitionerProfile> {
                       ),
                     ),
                   ),
-                ].animate(interval: 250.milliseconds).slideX(
-                      begin: 1,
-                      curve: Curves.easeIn,
-                      delay: 250.milliseconds,
-                      end: 0,
-                    ),
+                ],
               ),
             )
           ],
