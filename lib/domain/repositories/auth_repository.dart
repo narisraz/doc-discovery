@@ -5,4 +5,5 @@ abstract class AuthRepository {
   Future<Either<Failure, String>> signUp(String email, String password);
   Future<Either<Failure, String>> signIn(String email, String password);
   Stream<Either<Failure, String>> getConnectedUser();
+  String? getAuthId();
 }

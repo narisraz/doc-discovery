@@ -25,6 +25,7 @@ class PractitionerForm extends ConsumerWidget {
         ref
             .read(savePractitionerUseCaseProvider)
             .execute(PractitionerEntity(
+                authId: ref.read(getAuthIdUseCaseProvider).execute()!,
                 familyName: familyNameController.value.text,
                 givenName: givenNameController.value.text,
                 onm: onmController.value.text,

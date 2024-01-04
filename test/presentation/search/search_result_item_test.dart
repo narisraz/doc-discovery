@@ -15,6 +15,7 @@ void main() {
   late MockGetPractitionerInfoUseCase getPractitionerInfoUseCase;
   late MockNavigatorObserver navigatorObserver;
   const practitioner = PractitionerEntity(
+      authId: "authId",
       id: 'id',
       familyName: "Smith",
       givenName: "John",

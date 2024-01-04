@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: "Smith",
       givenName: "John",
       onm: 'onm',

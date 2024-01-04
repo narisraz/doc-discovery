@@ -3,6 +3,7 @@ import 'package:docdiscovery/domain/entities/practitioner.dart';
 import 'package:equatable/equatable.dart';
 
 class PractitionerModel extends Equatable {
+  final String authId;
   final AddressModel address;
   final String familyName;
   final String givenName;
@@ -16,6 +17,7 @@ class PractitionerModel extends Equatable {
   final DateTime? modifiedAt;
 
   const PractitionerModel({
+    required this.authId,
     required this.address,
     required this.familyName,
     required this.givenName,
@@ -30,6 +32,7 @@ class PractitionerModel extends Equatable {
 
   Map<String, dynamic> toJson() {
     final map = {
+      'authId': authId,
       'address': address.toJson(),
       'familyName': familyName,
       'givenName': givenName,
@@ -48,6 +51,7 @@ class PractitionerModel extends Equatable {
 
   static PractitionerModel fromJson(Map<String, dynamic> value) {
     return PractitionerModel(
+      authId: value['authId'],
       address: AddressModel.fromJson(value['address']),
       familyName: value['familyName'],
       givenName: value['givenName'],
@@ -66,6 +70,7 @@ class PractitionerModel extends Equatable {
   static PractitionerModel fromPractitionerEntity(
       PractitionerEntity practitioner) {
     return PractitionerModel(
+      authId: practitioner.authId,
       address: AddressModel.fromAddressEntity(practitioner.address),
       familyName: practitioner.familyName,
       givenName: practitioner.givenName,
@@ -79,6 +84,7 @@ class PractitionerModel extends Equatable {
 
   PractitionerEntity toPractitionerEntity() {
     return PractitionerEntity(
+      authId: authId,
       address: address.toAddressEntity(),
       familyName: familyName,
       givenName: givenName,
@@ -95,6 +101,7 @@ class PractitionerModel extends Equatable {
     DateTime? modifiedAt,
   }) {
     return PractitionerModel(
+      authId: authId,
       address: address,
       familyName: familyName,
       givenName: givenName,

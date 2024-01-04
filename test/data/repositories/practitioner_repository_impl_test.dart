@@ -20,6 +20,7 @@ void main() {
   late PractitionerRepositoryImpl practitionerRepository;
 
   const practitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55"),
       familyName: "Smith",
       givenName: "John",

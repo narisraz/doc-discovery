@@ -6,13 +6,15 @@ class PractitionerEntity extends Equatable {
   final String familyName;
   final String givenName;
   final String tel;
+  final String authId;
   final String? id;
   final String? email;
   final String? onm;
   final String? profilePicture;
 
   const PractitionerEntity(
-      {required this.address,
+      {required this.authId,
+      required this.address,
       required this.familyName,
       required this.givenName,
       required this.tel,
@@ -26,6 +28,7 @@ class PractitionerEntity extends Equatable {
     String? profilePicture,
   }) {
     return PractitionerEntity(
+        authId: authId,
         address: address,
         familyName: familyName,
         givenName: givenName,
@@ -47,6 +50,15 @@ class PractitionerEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props =>
-      [address, familyName, givenName, tel, email, onm, id, profilePicture];
+  List<Object?> get props => [
+        address,
+        familyName,
+        givenName,
+        tel,
+        email,
+        onm,
+        id,
+        profilePicture,
+        authId
+      ];
 }

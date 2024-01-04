@@ -13,6 +13,7 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late MockSearchPractitionerUseCase mockSearchPractitionerUseCase;
   const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: "Smith",
       givenName: "John",
       onm: 'onm',

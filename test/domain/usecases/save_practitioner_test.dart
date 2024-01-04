@@ -18,6 +18,7 @@ void main() {
   });
 
   const practitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55", city: "London", country: "UK"),
       familyName: "Smith",
       givenName: "John",
@@ -25,6 +26,7 @@ void main() {
       email: "U1TbJ@example.com");
 
   const invalidPractitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55"),
       familyName: "",
       givenName: "John",

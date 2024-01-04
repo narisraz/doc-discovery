@@ -31,4 +31,9 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(event.uid);
     });
   }
+
+  @override
+  String? getAuthId() {
+    return auth.currentUser?.uid;
+  }
 }

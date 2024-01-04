@@ -14,6 +14,7 @@ void main() {
   late MockSavePractitionerUseCase savePractitionerUseCase;
   final practitionerRepository = MockPractitionerRepository();
   const practitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55", city: "London", country: "UK"),
       familyName: "Smith",
       givenName: "John",

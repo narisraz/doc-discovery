@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('should copy values', () {
     const practitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55"),
       familyName: "Smith",
       givenName: "John",
@@ -18,6 +19,7 @@ void main() {
           id: 'id',
         ),
         const PractitionerEntity(
+          authId: "authId",
           address: AddressEntity(road: "B 55"),
           familyName: "Smith",
           givenName: "John",
@@ -30,6 +32,7 @@ void main() {
 
   test('should have family name', () {
     const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: '',
       givenName: 'John',
       tel: '555-555-5555',
@@ -41,6 +44,7 @@ void main() {
 
   test('should have given name', () {
     const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: 'Smith',
       givenName: '',
       tel: '555-555-5555',
@@ -52,6 +56,7 @@ void main() {
 
   test('should have tel', () {
     const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: 'Smith',
       givenName: 'John',
       tel: '',
@@ -63,6 +68,7 @@ void main() {
 
   test('should have address', () {
     const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: 'Smith',
       givenName: 'John',
       tel: '555-555-5555',

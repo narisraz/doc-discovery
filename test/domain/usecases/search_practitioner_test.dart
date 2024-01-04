@@ -10,6 +10,7 @@ void main() {
   late SearchPractitionerUseCase searchPractitionerUseCase;
   final practitionerRepository = MockPractitionerRepository();
   const mockPractitioner = PractitionerEntity(
+      authId: "authId",
       address: AddressEntity(road: "B 55", city: "London", country: "UK"),
       familyName: "Smith",
       givenName: "John",

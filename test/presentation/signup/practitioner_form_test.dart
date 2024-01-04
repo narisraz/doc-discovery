@@ -13,6 +13,7 @@ import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   const practitioner = PractitionerEntity(
+      authId: "authId",
       familyName: "Smith",
       givenName: "John",
       onm: 'onm',
@@ -20,6 +21,7 @@ void main() {
       email: 'U1TbJ@example.com',
       address: AddressEntity(road: "B 55", city: "London", country: "UK"));
   final savePractitionerUseCase = MockSavePractitionerUseCase();
+  final getAuthIdUseCase = MockGetAuthIdUseCase();
 
   testWidgets('should render practitioner form', (tester) async {
     // arrange
@@ -42,7 +44,8 @@ void main() {
       ProviderScope(
         overrides: [
           savePractitionerUseCaseProvider
-              .overrideWithValue(savePractitionerUseCase)
+              .overrideWithValue(savePractitionerUseCase),
+          getAuthIdUseCaseProvider.overrideWithValue(getAuthIdUseCase),
         ],
         child: const MaterialApp(
           home: Material(
@@ -55,6 +58,7 @@ void main() {
     );
     when(savePractitionerUseCase.execute(any))
         .thenAnswer((_) => Future.value(const Right(practitioner)));
+    when(getAuthIdUseCase.execute()).thenAnswer((_) => "authId");
 
     // act
     await tester.enterText(

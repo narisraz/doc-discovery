@@ -16,6 +16,7 @@ import 'package:docdiscovery/domain/repositories/auth_repository.dart' as _i5;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i4;
 import 'package:docdiscovery/domain/repositories/user_repository.dart' as _i6;
+import 'package:docdiscovery/domain/usecases/get_auth_id_use_case.dart' as _i24;
 import 'package:docdiscovery/domain/usecases/get_connected_user_use_case.dart'
     as _i23;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
@@ -1187,4 +1188,22 @@ class MockGetConnectedUserUseCase extends _i1.Mock
         returnValueForMissingStub:
             _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>>.empty(),
       ) as _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+}
+
+/// A class which mocks [GetAuthIdUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetAuthIdUseCase extends _i1.Mock implements _i24.GetAuthIdUseCase {
+  @override
+  _i5.AuthRepository get authRepository => (super.noSuchMethod(
+        Invocation.getter(#authRepository),
+        returnValue: _FakeAuthRepository_6(
+          this,
+          Invocation.getter(#authRepository),
+        ),
+        returnValueForMissingStub: _FakeAuthRepository_6(
+          this,
+          Invocation.getter(#authRepository),
+        ),
+      ) as _i5.AuthRepository);
 }
