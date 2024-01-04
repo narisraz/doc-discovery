@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/error/failure.dart';
-import 'package:docdiscovery/domain/entities/user.dart';
 import 'package:docdiscovery/domain/repositories/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -24,8 +23,10 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> getConnectedUser() {
-    // TODO: implement getConnectedUser
-    throw UnimplementedError();
+  Future<Either<Failure, String>> getConnectedUser() {
+    if (auth.currentUser == null) {
+      return Future.value(const Left(NoUserConnectedFailure()));
+    }
+    return Future.value(Right(auth.currentUser!.uid));
   }
 }

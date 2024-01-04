@@ -25,4 +25,10 @@ void main() {
 
     expect(result, const Right("uid"));
   });
+
+  test('should get connected user from firebase', () async {
+    final result = await authRepository.getConnectedUser();
+
+    expect(result, const Right("uid"));
+  });
 }

@@ -13,6 +13,11 @@ class FakeUserCredential extends Fake implements UserCredential {
 
 class FakeFirebaseAuth extends Fake implements FirebaseAuth {
   @override
+  User? get currentUser {
+    return FakeUser();
+  }
+
+  @override
   Future<UserCredential> createUserWithEmailAndPassword({
     required String email,
     required String password,

@@ -9,6 +9,7 @@ class GetConnectedUserUseCase {
   GetConnectedUserUseCase({required this.authRepository});
 
   Future<Either<Failure, UserEntity>> execute() {
-    return authRepository.getConnectedUser();
+    authRepository.getConnectedUser();
+    return Future.value(const Left(NoUserConnectedFailure()));
   }
 }

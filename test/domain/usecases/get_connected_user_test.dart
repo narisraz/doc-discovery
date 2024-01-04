@@ -16,13 +16,7 @@ void main() {
 
   test('should get connected user', () async {
     when(authRepository.getConnectedUser())
-        .thenAnswer((_) => Future.value(const Right(UserEntity(
-              email: "mail@mail.com",
-              authId: "authId",
-              givenName: "John",
-              familyName: "Smith",
-              picture: "svg",
-            ))));
+        .thenAnswer((_) => Future.value(const Right("uid")));
     final getConnectedUserUseCase =
         GetConnectedUserUseCase(authRepository: authRepository);
 
