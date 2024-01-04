@@ -1,5 +1,4 @@
 import 'package:docdiscovery/core/providers.dart';
-import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,11 +72,8 @@ class SignInPage extends ConsumerWidget {
                                     .read(signInUserUseCaseProvider)
                                     .execute(emailController.text,
                                         passwordController.text)
-                                    .then((value) => Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const Home()),
-                                        ));
+                                    .then(
+                                        (value) => Navigator.of(context).pop());
                               },
                               child: const Text("Se connecter"),
                             ),

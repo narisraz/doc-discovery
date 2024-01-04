@@ -3,7 +3,6 @@ import 'package:docdiscovery/core/error/failure.dart';
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
-import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,13 +38,21 @@ void main() {
 
   testWidgets('should save practitioner', (tester) async {
     // arrange
-    await tester.pumpWidget(ProviderScope(
+    await tester.pumpWidget(
+      ProviderScope(
         overrides: [
           savePractitionerUseCaseProvider
               .overrideWithValue(savePractitionerUseCase)
         ],
         child: const MaterialApp(
-            home: Material(child: Scaffold(body: PractitionerForm())))));
+          home: Material(
+            child: Scaffold(
+              body: PractitionerForm(),
+            ),
+          ),
+        ),
+      ),
+    );
     when(savePractitionerUseCase.execute(any))
         .thenAnswer((_) => Future.value(const Right(practitioner)));
 
@@ -68,9 +75,6 @@ void main() {
     // assert
     await tester.pumpAndSettle();
     verify(savePractitionerUseCase.execute(any)).called(1);
-
-    await tester.pumpAndSettle();
-    expect(find.byType(Home), findsOneWidget);
   });
 
   testWidgets('should do nothing when form is not invalid', (tester) async {

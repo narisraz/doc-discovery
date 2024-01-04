@@ -5,24 +5,19 @@ import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class Home extends ConsumerStatefulWidget {
+class Home extends ConsumerWidget {
   const Home({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomeState();
-}
-
-class _HomeState extends ConsumerState<Home> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final auth = ref.read(getConnectedUserUseCaseProvider).execute();
     return Scaffold(
         body: const SearchPractitioner(),
         appBar: AppBar(
           title: const Text("DocDiscovery"),
           actions: [
-            FutureBuilder(
-              future: auth,
+            StreamBuilder(
+              stream: auth,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   if (snapshot.data!.isRight()) {

@@ -32,4 +32,9 @@ class FakeFirebaseAuth extends Fake implements FirebaseAuth {
   }) async {
     return Future.value(FakeUserCredential());
   }
+
+  @override
+  Stream<User?> authStateChanges() {
+    return Stream.value(FakeUser());
+  }
 }

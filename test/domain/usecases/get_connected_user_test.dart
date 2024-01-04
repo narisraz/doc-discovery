@@ -18,7 +18,7 @@ void main() {
 
   test('should get connected user', () async {
     when(authRepository.getConnectedUser())
-        .thenAnswer((_) => Future.value(const Right("uid")));
+        .thenAnswer((_) => Stream.value(const Right("uid")));
     when(userRepository.getByAuthId(any))
         .thenAnswer((_) => Future.value(const Right(UserEntity(
               email: "mail@mail.com",
@@ -32,9 +32,10 @@ void main() {
       userRepository: userRepository,
     );
 
-    final result = await getConnectedUserUseCase.execute();
+    final result = await getConnectedUserUseCase.execute().first;
 
     verify(authRepository.getConnectedUser()).called(1);
+    expect(authRepository.getConnectedUser(), emitsAnyOf([const Right("uid")]));
     verify(userRepository.getByAuthId(argThat(equals("uid")))).called(1);
     expect(result, isA<Either<Failure, UserEntity>>());
   });

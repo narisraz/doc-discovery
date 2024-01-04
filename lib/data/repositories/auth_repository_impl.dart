@@ -23,10 +23,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> getConnectedUser() {
-    if (auth.currentUser == null) {
-      return Future.value(const Left(NoUserConnectedFailure()));
-    }
-    return Future.value(Right(auth.currentUser!.uid));
+  Stream<Either<Failure, String>> getConnectedUser() {
+    return auth.authStateChanges().map((event) {
+      if (event == null) {
+        return const Left(NoUserConnectedFailure());
+      }
+      return Right(event.uid);
+    });
   }
 }

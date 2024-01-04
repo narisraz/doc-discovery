@@ -1,7 +1,6 @@
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/address.dart';
 import 'package:docdiscovery/domain/entities/practitioner.dart';
-import 'package:docdiscovery/presentation/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,9 +37,7 @@ class PractitionerForm extends ConsumerWidget {
                 )))
             .then((value) {
           if (value.isRight()) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return const Home();
-            }));
+            Navigator.of(context).popUntil((route) => route.isFirst);
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(const SnackBar(content: Text("Invalide")));

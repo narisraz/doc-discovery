@@ -13,12 +13,13 @@ class GetConnectedUserUseCase {
     required this.userRepository,
   });
 
-  Future<Either<Failure, UserEntity>> execute() async {
-    final Either<Failure, String> auth =
-        await authRepository.getConnectedUser();
-    if (auth.isLeft()) {
-      return Future.value(const Left(NoUserConnectedFailure()));
-    }
-    return userRepository.getByAuthId(auth.getOrElse(() => ""));
+  Stream<Either<Failure, UserEntity>> execute() {
+    final auth = authRepository.getConnectedUser();
+    return auth.asyncMap((event) async {
+      if (event.isLeft()) {
+        return const Left(NoUserConnectedFailure());
+      }
+      return await userRepository.getByAuthId(event.getOrElse(() => ""));
+    });
   }
 }

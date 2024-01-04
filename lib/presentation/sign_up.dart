@@ -1,7 +1,6 @@
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/presentation/components/password_validator.dart';
-import 'package:docdiscovery/presentation/home.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -170,12 +169,9 @@ class SignUpState extends ConsumerState<SignUp> {
                                                   givenNameController.text,
                                               picture: picture),
                                         )
-                                        .then((value) =>
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const Home()),
-                                            ));
+                                        .then((value) => Navigator.of(context)
+                                            .popUntil(
+                                                (route) => route.isFirst));
                                   }
                                 },
                                 child: const Text("Créer compte"),

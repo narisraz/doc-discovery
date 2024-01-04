@@ -918,30 +918,16 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
       ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, String>> getConnectedUser() =>
+  _i8.Stream<_i2.Either<_i9.Failure, String>> getConnectedUser() =>
       (super.noSuchMethod(
         Invocation.method(
           #getConnectedUser,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, String>>.value(
-            _FakeEither_0<_i9.Failure, String>(
-          this,
-          Invocation.method(
-            #getConnectedUser,
-            [],
-          ),
-        )),
+        returnValue: _i8.Stream<_i2.Either<_i9.Failure, String>>.empty(),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, String>>.value(
-                _FakeEither_0<_i9.Failure, String>(
-          this,
-          Invocation.method(
-            #getConnectedUser,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
+            _i8.Stream<_i2.Either<_i9.Failure, String>>.empty(),
+      ) as _i8.Stream<_i2.Either<_i9.Failure, String>>);
 }
 
 /// A class which mocks [MailUtil].
@@ -1190,28 +1176,15 @@ class MockGetConnectedUserUseCase extends _i1.Mock
       ) as _i6.UserRepository);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> execute() =>
+  _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>> execute() =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
-          this,
-          Invocation.method(
-            #execute,
-            [],
-          ),
-        )),
+        returnValue:
+            _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>>.empty(),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
-          this,
-          Invocation.method(
-            #execute,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+            _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>>.empty(),
+      ) as _i8.Stream<_i2.Either<_i9.Failure, _i21.UserEntity>>);
 }

@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/entities/user.dart';
-import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_in.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +38,11 @@ void main() {
 
     await tester.tap(find.byKey(const Key("signin-button")));
 
-    await tester.pumpAndSettle();
+    await tester.pump();
 
     verify(signInUserUseCase.execute(
             argThat(equals("mail@mail.com")), argThat(equals("password"))))
         .called(1);
-    expect(find.byType(Home), findsOneWidget);
   });
 
   testWidgets('should go to signup page', (tester) async {

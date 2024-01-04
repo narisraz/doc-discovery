@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/error/failure.dart';
 import 'package:docdiscovery/core/providers.dart';
+import 'package:docdiscovery/domain/entities/user.dart';
 import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_in.dart';
 import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
@@ -18,17 +19,32 @@ void main() {
     getConnectedUseCase = MockGetConnectedUserUseCase();
   });
 
-  testWidgets('should go to signup page', (tester) async {
+  testWidgets('should go to pro signup page', (tester) async {
     // arrange
+    when(getConnectedUseCase.execute()).thenAnswer((_) => Stream.value(
+          const Right(UserEntity(
+            email: "mail@mail.com",
+            authId: "uid",
+            givenName: "John",
+            familyName: "Smith",
+            picture: "svg",
+          )),
+        ));
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Material(
-          child: Scaffold(body: Home()),
+      ProviderScope(
+        overrides: [
+          getConnectedUserUseCaseProvider.overrideWithValue(getConnectedUseCase)
+        ],
+        child: const MaterialApp(
+          home: Material(
+            child: Scaffold(body: Home()),
+          ),
         ),
       ),
     );
 
     // act
+    await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key("signup-practitioner-button")));
     await tester.pumpAndSettle();
 
@@ -38,10 +54,18 @@ void main() {
 
   testWidgets('should go to signin page', (tester) async {
     // arrange
+    when(getConnectedUseCase.execute()).thenAnswer((_) => Stream.value(
+          const Left(NoUserConnectedFailure()),
+        ));
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Material(
-          child: Scaffold(body: Home()),
+      ProviderScope(
+        overrides: [
+          getConnectedUserUseCaseProvider.overrideWithValue(getConnectedUseCase)
+        ],
+        child: const MaterialApp(
+          home: Material(
+            child: Scaffold(body: Home()),
+          ),
         ),
       ),
     );
@@ -56,7 +80,7 @@ void main() {
 
   testWidgets('should display pro button only if connected', (tester) async {
     // arrange
-    when(getConnectedUseCase.execute()).thenAnswer((_) => Future.value(
+    when(getConnectedUseCase.execute()).thenAnswer((_) => Stream.value(
           const Left(NoUserConnectedFailure()),
         ));
     await tester.pumpWidget(

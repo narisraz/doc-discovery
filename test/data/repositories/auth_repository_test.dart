@@ -27,7 +27,7 @@ void main() {
   });
 
   test('should get connected user from firebase', () async {
-    final result = await authRepository.getConnectedUser();
+    final result = await authRepository.getConnectedUser().first;
 
     expect(result, const Right("uid"));
   });
