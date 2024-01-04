@@ -28,3 +28,7 @@ class FileNotFoundFailure extends Failure {
 class MailFormatFailure extends Failure {
   const MailFormatFailure() : super("Mail format not valid");
 }
+
+class NoUserConnectedFailure extends Failure {
+  const NoUserConnectedFailure() : super("No user connected");
+}

@@ -2,6 +2,7 @@ import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_in.dart';
 import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -39,5 +40,22 @@ void main() {
 
     // assert
     expect(find.byType(SignInPage), findsOneWidget);
+  });
+
+  testWidgets('should display pro button only if connected', (tester) async {
+    // arrange
+    await tester.pumpWidget(
+      const ProviderScope(
+        overrides: [],
+        child: MaterialApp(
+          home: Material(
+            child: Scaffold(body: Home()),
+          ),
+        ),
+      ),
+    );
+
+    // assert
+    expect(find.byKey(const Key("signup-practitioner-button")), findsNothing);
   });
 }

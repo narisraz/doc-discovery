@@ -11,7 +11,7 @@ import 'package:dartz/dartz.dart' as _i2;
 import 'package:docdiscovery/core/error/failure.dart' as _i9;
 import 'package:docdiscovery/core/utils.dart' as _i7;
 import 'package:docdiscovery/domain/entities/practitioner.dart' as _i10;
-import 'package:docdiscovery/domain/entities/user.dart' as _i21;
+import 'package:docdiscovery/domain/entities/user.dart' as _i20;
 import 'package:docdiscovery/domain/repositories/auth_repository.dart' as _i5;
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart'
     as _i4;
@@ -26,7 +26,7 @@ import 'package:docdiscovery/domain/usecases/search_practitioner_use_case.dart'
     as _i15;
 import 'package:docdiscovery/domain/usecases/sign_in_use_case.dart' as _i22;
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart'
-    as _i20;
+    as _i21;
 import 'package:file_picker/src/file_picker.dart' as _i17;
 import 'package:file_picker/src/file_picker_result.dart' as _i18;
 import 'package:flutter/src/widgets/navigator.dart' as _i16;
@@ -914,6 +914,32 @@ class MockAuthRepository extends _i1.Mock implements _i5.AuthRepository {
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>> getConnectedUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getConnectedUser,
+          [],
+        ),
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i20.UserEntity>(
+          this,
+          Invocation.method(
+            #getConnectedUser,
+            [],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i20.UserEntity>(
+          this,
+          Invocation.method(
+            #getConnectedUser,
+            [],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>);
 }
 
 /// A class which mocks [MailUtil].
@@ -934,7 +960,7 @@ class MockMailUtil extends _i1.Mock implements _i7.MailUtil {
 /// A class which mocks [SignUpUserUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSignUpUserUseCase extends _i1.Mock implements _i20.SignUpUserUseCase {
+class MockSignUpUserUseCase extends _i1.Mock implements _i21.SignUpUserUseCase {
   @override
   _i5.AuthRepository get authRepository => (super.noSuchMethod(
         Invocation.getter(#authRepository),
@@ -975,15 +1001,15 @@ class MockSignUpUserUseCase extends _i1.Mock implements _i20.SignUpUserUseCase {
       ) as _i7.MailUtil);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> execute(
-          _i20.SignUpUserRequest? request) =>
+  _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>> execute(
+          _i21.SignUpUserRequest? request) =>
       (super.noSuchMethod(
         Invocation.method(
           #execute,
           [request],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #execute,
@@ -991,15 +1017,15 @@ class MockSignUpUserUseCase extends _i1.Mock implements _i20.SignUpUserUseCase {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+            _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #execute,
             [request],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>);
 }
 
 /// A class which mocks [UserRepository].
@@ -1007,15 +1033,15 @@ class MockSignUpUserUseCase extends _i1.Mock implements _i20.SignUpUserUseCase {
 /// See the documentation for Mockito's code generation for more information.
 class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> saveUserInfo(
-          _i21.UserEntity? user) =>
+  _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>> saveUserInfo(
+          _i20.UserEntity? user) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveUserInfo,
           [user],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #saveUserInfo,
@@ -1023,26 +1049,26 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+            _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #saveUserInfo,
             [user],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> getByAuthId(
+  _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>> getByAuthId(
           String? authId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getByAuthId,
           [authId],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #getByAuthId,
@@ -1050,15 +1076,15 @@ class MockUserRepository extends _i1.Mock implements _i6.UserRepository {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+            _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #getByAuthId,
             [authId],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>);
 }
 
 /// A class which mocks [SignInUserUseCase].
@@ -1092,7 +1118,7 @@ class MockSignInUserUseCase extends _i1.Mock implements _i22.SignInUserUseCase {
       ) as _i6.UserRepository);
 
   @override
-  _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>> execute(
+  _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>> execute(
     String? email,
     String? password,
   ) =>
@@ -1104,8 +1130,8 @@ class MockSignInUserUseCase extends _i1.Mock implements _i22.SignInUserUseCase {
             password,
           ],
         ),
-        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-            _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+        returnValue: _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+            _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #execute,
@@ -1116,8 +1142,8 @@ class MockSignInUserUseCase extends _i1.Mock implements _i22.SignInUserUseCase {
           ),
         )),
         returnValueForMissingStub:
-            _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>.value(
-                _FakeEither_0<_i9.Failure, _i21.UserEntity>(
+            _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i20.UserEntity>(
           this,
           Invocation.method(
             #execute,
@@ -1127,5 +1153,5 @@ class MockSignInUserUseCase extends _i1.Mock implements _i22.SignInUserUseCase {
             ],
           ),
         )),
-      ) as _i8.Future<_i2.Either<_i9.Failure, _i21.UserEntity>>);
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i20.UserEntity>>);
 }
