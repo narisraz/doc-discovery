@@ -25,10 +25,12 @@ void main() {
       ),
     ));
 
+    await tester.enterText(find.byKey(const Key("family-name")), "Doe");
+    await tester.enterText(find.byKey(const Key("given-name")), "John");
     await tester.enterText(find.byKey(const Key("email")), "mail@mail.com");
-    await tester.enterText(find.byKey(const Key("password")), "password");
+    await tester.enterText(find.byKey(const Key("password")), "Password.123");
     await tester.enterText(
-        find.byKey(const Key("confirm-password")), "password");
+        find.byKey(const Key("confirm-password")), "Password.123");
 
     await tester.ensureVisible(find.byKey(const Key("signup")));
     await tester.pumpAndSettle();

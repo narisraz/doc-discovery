@@ -1,6 +1,8 @@
 import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
+import 'package:docdiscovery/presentation/components/password_validator.dart';
 import 'package:docdiscovery/presentation/home.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,6 +27,7 @@ class SignUpState extends ConsumerState<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPasswordValid = false;
     final formKey = GlobalKey<FormState>();
 
     return SafeArea(
@@ -78,6 +81,12 @@ class SignUpState extends ConsumerState<SignUp> {
                             enableSuggestions: true,
                             keyboardType: TextInputType.emailAddress,
                             controller: familyNameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Champ obligatoire';
+                              }
+                              return null;
+                            },
                           ),
                           TextFormField(
                             key: const Key("given-name"),
@@ -86,6 +95,12 @@ class SignUpState extends ConsumerState<SignUp> {
                             enableSuggestions: true,
                             keyboardType: TextInputType.emailAddress,
                             controller: givenNameController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Champ obligatoire';
+                              }
+                              return null;
+                            },
                           ),
                           TextFormField(
                             key: const Key("email"),
@@ -94,6 +109,15 @@ class SignUpState extends ConsumerState<SignUp> {
                             enableSuggestions: true,
                             keyboardType: TextInputType.emailAddress,
                             controller: emaiController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Champ obligatoire';
+                              }
+                              if (!EmailValidator.validate(value)) {
+                                return 'Email invalide';
+                              }
+                              return null;
+                            },
                           ),
                           TextFormField(
                             key: const Key("password"),
@@ -102,21 +126,38 @@ class SignUpState extends ConsumerState<SignUp> {
                             obscureText: true,
                             controller: passwordController,
                           ),
+                          PasswordValidator(
+                            controller: passwordController,
+                            onChange: (isValid) {
+                              isPasswordValid = isValid;
+                            },
+                          ),
                           TextFormField(
                             key: const Key("confirm-password"),
                             decoration: const InputDecoration(
                                 hintText: "Confirmer mot de passe"),
                             obscureText: true,
                             controller: confirmPasswordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Champ obligatoire';
+                              }
+                              if (value != passwordController.text) {
+                                return 'Mot de passe incorrect';
+                              }
+                              return null;
+                            },
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FilledButton(
-                                  key: const Key("signup"),
-                                  onPressed: () {
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: FilledButton(
+                                key: const Key("signup"),
+                                onPressed: () {
+                                  if ((formKey.currentState?.validate() ??
+                                          false) &&
+                                      isPasswordValid) {
                                     ref
                                         .read(signUpUserUseCaseProvider)
                                         .execute(
@@ -135,10 +176,10 @@ class SignUpState extends ConsumerState<SignUp> {
                                                   builder: (context) =>
                                                       const Home()),
                                             ));
-                                  },
-                                  child: const Text("Créer compte"),
-                                ),
-                              ],
+                                  }
+                                },
+                                child: const Text("Créer compte"),
+                              ),
                             ),
                           )
                         ]),
