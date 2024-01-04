@@ -176,5 +176,23 @@ final signInUserUseCaseProvider =
 );
 
 typedef SignInUserUseCaseRef = AutoDisposeProviderRef<SignInUserUseCase>;
+String _$getConnectedUserUseCaseHash() =>
+    r'b35038e0fee8a5bd0c92bf24a54ece817b629392';
+
+/// See also [getConnectedUserUseCase].
+@ProviderFor(getConnectedUserUseCase)
+final getConnectedUserUseCaseProvider =
+    AutoDisposeProvider<GetConnectedUserUseCase>.internal(
+  getConnectedUserUseCase,
+  name: r'getConnectedUserUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getConnectedUserUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetConnectedUserUseCaseRef
+    = AutoDisposeProviderRef<GetConnectedUserUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

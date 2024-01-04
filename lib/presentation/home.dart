@@ -1,3 +1,4 @@
+import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/presentation/search/search_practitioner.dart';
 import 'package:docdiscovery/presentation/sign_in.dart';
 import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
@@ -9,21 +10,32 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final auth = ref.read(getConnectedUserUseCaseProvider).execute();
     return Scaffold(
         body: const SearchPractitioner(),
         appBar: AppBar(
           title: const Text("DocDiscovery"),
           actions: [
-            FilledButton(
-              key: const Key("signup-practitioner-button"),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const PractitionerForm(),
-                  ),
-                );
+            FutureBuilder(
+              future: auth,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data!.isRight()) {
+                    return FilledButton(
+                      key: const Key("signup-practitioner-button"),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PractitionerForm(),
+                          ),
+                        );
+                      },
+                      child: const Text("Passer PRO"),
+                    );
+                  }
+                }
+                return const SizedBox.shrink();
               },
-              child: const Text("Passer PRO"),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),

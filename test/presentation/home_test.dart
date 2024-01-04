@@ -1,11 +1,23 @@
+import 'package:dartz/dartz.dart';
+import 'package:docdiscovery/core/error/failure.dart';
+import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/presentation/home.dart';
 import 'package:docdiscovery/presentation/sign_in.dart';
 import 'package:docdiscovery/presentation/signup/practitioner_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+
+import '../helpers/test_helper.mocks.dart';
 
 void main() {
+  late MockGetConnectedUserUseCase getConnectedUseCase;
+
+  setUp(() {
+    getConnectedUseCase = MockGetConnectedUserUseCase();
+  });
+
   testWidgets('should go to signup page', (tester) async {
     // arrange
     await tester.pumpWidget(
@@ -44,10 +56,15 @@ void main() {
 
   testWidgets('should display pro button only if connected', (tester) async {
     // arrange
+    when(getConnectedUseCase.execute()).thenAnswer((_) => Future.value(
+          const Left(NoUserConnectedFailure()),
+        ));
     await tester.pumpWidget(
-      const ProviderScope(
-        overrides: [],
-        child: MaterialApp(
+      ProviderScope(
+        overrides: [
+          getConnectedUserUseCaseProvider.overrideWithValue(getConnectedUseCase)
+        ],
+        child: const MaterialApp(
           home: Material(
             child: Scaffold(body: Home()),
           ),

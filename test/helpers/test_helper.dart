@@ -3,6 +3,7 @@ import 'package:docdiscovery/core/utils.dart';
 import 'package:docdiscovery/domain/repositories/auth_repository.dart';
 import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 import 'package:docdiscovery/domain/repositories/user_repository.dart';
+import 'package:docdiscovery/domain/usecases/get_connected_user_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
@@ -27,5 +28,6 @@ import 'package:mockito/annotations.dart';
   MockSpec<SignUpUserUseCase>(),
   MockSpec<UserRepository>(),
   MockSpec<SignInUserUseCase>(),
+  MockSpec<GetConnectedUserUseCase>(),
 ])
 void main() {}
