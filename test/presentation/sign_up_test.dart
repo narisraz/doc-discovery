@@ -1,4 +1,6 @@
+import 'package:dartz/dartz.dart';
 import 'package:docdiscovery/core/providers.dart';
+import 'package:docdiscovery/domain/entities/user.dart';
 import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,14 @@ void main() {
   });
 
   testWidgets('should save credentials', (tester) async {
+    when(signUpUserUseCase.execute(any))
+        .thenAnswer((_) => Future.value(const Right(UserEntity(
+              picture: "picture",
+              givenName: "givenName",
+              familyName: "familyName",
+              email: "mail@mail.com",
+              authId: "authId",
+            ))));
     await tester.pumpWidget(ProviderScope(
       overrides: [
         signUpUserUseCaseProvider.overrideWithValue(signUpUserUseCase)
@@ -35,6 +45,7 @@ void main() {
     await tester.ensureVisible(find.byKey(const Key("signup")));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key("signup")));
+    await tester.pumpAndSettle();
 
     verify(signUpUserUseCase.execute(argThat(isA<SignUpUserRequest>())))
         .called(1);

@@ -1,6 +1,5 @@
-import 'package:docdiscovery/core/providers.dart';
-import 'package:docdiscovery/domain/usecases/sign_up_user_use_case.dart';
 import 'package:docdiscovery/presentation/components/password_validator.dart';
+import 'package:docdiscovery/presentation/components/signup/sign_up_button.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +25,7 @@ class SignUpState extends ConsumerState<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    bool isPasswordValid = false;
+    bool isPasswordValid = true;
     final formKey = GlobalKey<FormState>();
 
     return SafeArea(
@@ -151,30 +150,15 @@ class SignUpState extends ConsumerState<SignUp> {
                             padding: const EdgeInsets.symmetric(vertical: 8),
                             child: SizedBox(
                               width: double.infinity,
-                              child: FilledButton(
-                                key: const Key("signup"),
-                                onPressed: () {
-                                  if ((formKey.currentState?.validate() ??
-                                          false) &&
-                                      isPasswordValid) {
-                                    ref
-                                        .read(signUpUserUseCaseProvider)
-                                        .execute(
-                                          SignUpUserRequest(
-                                              email: emaiController.text,
-                                              password: passwordController.text,
-                                              familyName:
-                                                  familyNameController.text,
-                                              givenName:
-                                                  givenNameController.text,
-                                              picture: picture),
-                                        )
-                                        .then((value) => Navigator.of(context)
-                                            .popUntil(
-                                                (route) => route.isFirst));
-                                  }
-                                },
-                                child: const Text("Créer compte"),
+                              child: SignUpButton(
+                                formKey: formKey,
+                                isPasswordValid: isPasswordValid,
+                                ref: ref,
+                                emaiController: emaiController,
+                                passwordController: passwordController,
+                                familyNameController: familyNameController,
+                                givenNameController: givenNameController,
+                                picture: picture,
                               ),
                             ),
                           )

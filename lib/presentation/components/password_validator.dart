@@ -27,6 +27,7 @@ class PasswordValidator extends StatefulWidget {
 }
 
 class _PasswordValidatorState extends State<PasswordValidator> {
+  bool isPasswordValid = true;
   bool validLength = false;
   bool validSpecialCharacters = false;
   bool validUppercaseCharacters = false;
@@ -42,12 +43,13 @@ class _PasswordValidatorState extends State<PasswordValidator> {
       validNumericCharacters = RegExp(r'^(.*[0-9].*)$').hasMatch(value);
       validLowercaseCharacters = RegExp(r'^(.*[a-z].*)$').hasMatch(value);
       validUppercaseCharacters = RegExp(r'^(.*[A-Z].*)$').hasMatch(value);
+      isPasswordValid = validLength &&
+          validSpecialCharacters &&
+          validNumericCharacters &&
+          validUppercaseCharacters &&
+          validLowercaseCharacters;
     });
-    widget.onChange(validLength &&
-        validSpecialCharacters &&
-        validNumericCharacters &&
-        validUppercaseCharacters &&
-        validLowercaseCharacters);
+    widget.onChange(isPasswordValid);
   }
 
   @override
@@ -57,185 +59,195 @@ class _PasswordValidatorState extends State<PasswordValidator> {
 
     widget.controller.addListener(valueChanges);
 
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: AnimatedContainer(
-                  duration: 100.milliseconds,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: [
-                      validLength,
-                      validSpecialCharacters,
-                      validNumericCharacters,
-                      validUppercaseCharacters,
-                      validLowercaseCharacters
-                    ].where((element) => element == true).isNotEmpty
-                        ? validColor
-                        : invalidColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+    return (isPasswordValid)
+        ? const SizedBox.shrink()
+        : Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: AnimatedContainer(
+                        duration: 100.milliseconds,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: [
+                            validLength,
+                            validSpecialCharacters,
+                            validNumericCharacters,
+                            validUppercaseCharacters,
+                            validLowercaseCharacters
+                          ].where((element) => element == true).isNotEmpty
+                              ? validColor
+                              : invalidColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const Gap(4),
-              Expanded(
-                child: AnimatedContainer(
-                  duration: 100.milliseconds,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: [
-                              validLength,
-                              validSpecialCharacters,
-                              validNumericCharacters,
-                              validUppercaseCharacters,
-                              validLowercaseCharacters
-                            ].where((element) => element == true).length >=
-                            2
-                        ? validColor
-                        : invalidColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+                    const Gap(4),
+                    Expanded(
+                      child: AnimatedContainer(
+                        duration: 100.milliseconds,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: [
+                                    validLength,
+                                    validSpecialCharacters,
+                                    validNumericCharacters,
+                                    validUppercaseCharacters,
+                                    validLowercaseCharacters
+                                  ]
+                                      .where((element) => element == true)
+                                      .length >=
+                                  2
+                              ? validColor
+                              : invalidColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const Gap(4),
-              Expanded(
-                child: AnimatedContainer(
-                  duration: 100.milliseconds,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: [
-                              validLength,
-                              validSpecialCharacters,
-                              validNumericCharacters,
-                              validUppercaseCharacters,
-                              validLowercaseCharacters
-                            ].where((element) => element == true).length >=
-                            3
-                        ? validColor
-                        : invalidColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+                    const Gap(4),
+                    Expanded(
+                      child: AnimatedContainer(
+                        duration: 100.milliseconds,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: [
+                                    validLength,
+                                    validSpecialCharacters,
+                                    validNumericCharacters,
+                                    validUppercaseCharacters,
+                                    validLowercaseCharacters
+                                  ]
+                                      .where((element) => element == true)
+                                      .length >=
+                                  3
+                              ? validColor
+                              : invalidColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const Gap(4),
-              Expanded(
-                child: AnimatedContainer(
-                  duration: 100.milliseconds,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: [
-                              validLength,
-                              validSpecialCharacters,
-                              validNumericCharacters,
-                              validUppercaseCharacters,
-                              validLowercaseCharacters
-                            ].where((element) => element == true).length >=
-                            4
-                        ? validColor
-                        : invalidColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+                    const Gap(4),
+                    Expanded(
+                      child: AnimatedContainer(
+                        duration: 100.milliseconds,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: [
+                                    validLength,
+                                    validSpecialCharacters,
+                                    validNumericCharacters,
+                                    validUppercaseCharacters,
+                                    validLowercaseCharacters
+                                  ]
+                                      .where((element) => element == true)
+                                      .length >=
+                                  4
+                              ? validColor
+                              : invalidColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const Gap(4),
-              Expanded(
-                child: AnimatedContainer(
-                  duration: 100.milliseconds,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: [
-                              validLength,
-                              validSpecialCharacters,
-                              validNumericCharacters,
-                              validUppercaseCharacters,
-                              validLowercaseCharacters
-                            ].where((element) => element == true).length >=
-                            5
-                        ? validColor
-                        : invalidColor,
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(50),
+                    const Gap(4),
+                    Expanded(
+                      child: AnimatedContainer(
+                        duration: 100.milliseconds,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: [
+                                    validLength,
+                                    validSpecialCharacters,
+                                    validNumericCharacters,
+                                    validUppercaseCharacters,
+                                    validLowercaseCharacters
+                                  ]
+                                      .where((element) => element == true)
+                                      .length >=
+                                  5
+                              ? validColor
+                              : invalidColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          const Gap(4),
-          Row(children: [
-            Icon(
-              validLength ? Icons.check : Icons.close,
-              color: validLength ? validColor : invalidColor,
+                const Gap(4),
+                Row(children: [
+                  Icon(
+                    validLength ? Icons.check : Icons.close,
+                    color: validLength ? validColor : invalidColor,
+                  ),
+                  Text(
+                    "Au moin ${widget.minLength} caractères",
+                    style: TextStyle(
+                      color: validSpecialCharacters ? validColor : invalidColor,
+                    ),
+                  )
+                ]),
+                Row(children: [
+                  Icon(
+                    validSpecialCharacters ? Icons.check : Icons.close,
+                    color: validSpecialCharacters ? validColor : invalidColor,
+                  ),
+                  Text(
+                    "Au moin ${widget.minSpecialCharacters} caractères spéciaux",
+                    style: TextStyle(
+                      color: validSpecialCharacters ? validColor : invalidColor,
+                    ),
+                  )
+                ]),
+                Row(children: [
+                  Icon(
+                    validNumericCharacters ? Icons.check : Icons.close,
+                    color: validNumericCharacters ? validColor : invalidColor,
+                  ),
+                  Text(
+                    "Au moin ${widget.minNumericCharacters} caractères numériques",
+                    style: TextStyle(
+                      color: validSpecialCharacters ? validColor : invalidColor,
+                    ),
+                  )
+                ]),
+                Row(children: [
+                  Icon(
+                    validUppercaseCharacters ? Icons.check : Icons.close,
+                    color: validUppercaseCharacters ? validColor : invalidColor,
+                  ),
+                  Text(
+                    "Au moin ${widget.minUppercaseCharacters} lettres majuscules",
+                    style: TextStyle(
+                      color: validSpecialCharacters ? validColor : invalidColor,
+                    ),
+                  )
+                ]),
+                Row(children: [
+                  Icon(
+                    validLowercaseCharacters ? Icons.check : Icons.close,
+                    color: validLowercaseCharacters ? validColor : invalidColor,
+                  ),
+                  Text(
+                    "Au moin ${widget.minLowercaseCharacters} lettres minuscules",
+                    style: TextStyle(
+                      color: validSpecialCharacters ? validColor : invalidColor,
+                    ),
+                  )
+                ]),
+              ],
             ),
-            Text(
-              "Au moin ${widget.minLength} caractères",
-              style: TextStyle(
-                color: validSpecialCharacters ? validColor : invalidColor,
-              ),
-            )
-          ]),
-          Row(children: [
-            Icon(
-              validSpecialCharacters ? Icons.check : Icons.close,
-              color: validSpecialCharacters ? validColor : invalidColor,
-            ),
-            Text(
-              "Au moin ${widget.minSpecialCharacters} caractères spéciaux",
-              style: TextStyle(
-                color: validSpecialCharacters ? validColor : invalidColor,
-              ),
-            )
-          ]),
-          Row(children: [
-            Icon(
-              validNumericCharacters ? Icons.check : Icons.close,
-              color: validNumericCharacters ? validColor : invalidColor,
-            ),
-            Text(
-              "Au moin ${widget.minNumericCharacters} caractères numériques",
-              style: TextStyle(
-                color: validSpecialCharacters ? validColor : invalidColor,
-              ),
-            )
-          ]),
-          Row(children: [
-            Icon(
-              validUppercaseCharacters ? Icons.check : Icons.close,
-              color: validUppercaseCharacters ? validColor : invalidColor,
-            ),
-            Text(
-              "Au moin ${widget.minUppercaseCharacters} lettres majuscules",
-              style: TextStyle(
-                color: validSpecialCharacters ? validColor : invalidColor,
-              ),
-            )
-          ]),
-          Row(children: [
-            Icon(
-              validLowercaseCharacters ? Icons.check : Icons.close,
-              color: validLowercaseCharacters ? validColor : invalidColor,
-            ),
-            Text(
-              "Au moin ${widget.minLowercaseCharacters} lettres minuscules",
-              style: TextStyle(
-                color: validSpecialCharacters ? validColor : invalidColor,
-              ),
-            )
-          ]),
-        ],
-      ),
-    );
+          );
   }
 }
