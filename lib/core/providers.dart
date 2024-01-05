@@ -9,6 +9,7 @@ import 'package:docdiscovery/domain/repositories/practitioner_repository.dart';
 import 'package:docdiscovery/domain/repositories/user_repository.dart';
 import 'package:docdiscovery/domain/usecases/get_auth_id_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_connected_user_use_case.dart';
+import 'package:docdiscovery/domain/usecases/get_practitioner_by_auth_id_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart';
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart';
 import 'package:docdiscovery/domain/usecases/save_practitioner_use_case.dart';
@@ -93,3 +94,9 @@ GetConnectedUserUseCase getConnectedUserUseCase(
 @riverpod
 GetAuthIdUseCase getAuthIdUseCase(GetAuthIdUseCaseRef ref) =>
     GetAuthIdUseCase(authRepository: ref.read(authRepositoryProvider));
+
+@riverpod
+GetPractitionerByAuthIdUseCase getPractitionerByAuthIdUseCase(
+        GetPractitionerByAuthIdUseCaseRef ref) =>
+    GetPractitionerByAuthIdUseCase(
+        practitionerRepository: ref.read(practitionerRepositoryProvider));

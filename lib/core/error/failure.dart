@@ -32,3 +32,7 @@ class MailFormatFailure extends Failure {
 class NoUserConnectedFailure extends Failure {
   const NoUserConnectedFailure() : super("No user connected");
 }
+
+class NoPractitionerFoundFailure extends Failure {
+  const NoPractitionerFoundFailure() : super("No practitioner found");
+}

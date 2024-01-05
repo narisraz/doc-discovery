@@ -19,6 +19,8 @@ import 'package:docdiscovery/domain/repositories/user_repository.dart' as _i6;
 import 'package:docdiscovery/domain/usecases/get_auth_id_use_case.dart' as _i24;
 import 'package:docdiscovery/domain/usecases/get_connected_user_use_case.dart'
     as _i23;
+import 'package:docdiscovery/domain/usecases/get_practitioner_by_auth_id_use_case.dart'
+    as _i25;
 import 'package:docdiscovery/domain/usecases/get_practitioner_info_use_case.dart'
     as _i14;
 import 'package:docdiscovery/domain/usecases/get_practitioner_profile_use_case.dart'
@@ -322,6 +324,34 @@ class MockPractitionerRepository extends _i1.Mock
           ),
         )),
       ) as _i8.Future<_i2.Either<_i9.Failure, String>>);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>> getByAuthId(
+          String? authId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getByAuthId,
+          [authId],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i10.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #getByAuthId,
+            [authId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i10.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #getByAuthId,
+            [authId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>);
 }
 
 /// A class which mocks [Algolia].
@@ -1206,4 +1236,51 @@ class MockGetAuthIdUseCase extends _i1.Mock implements _i24.GetAuthIdUseCase {
           Invocation.getter(#authRepository),
         ),
       ) as _i5.AuthRepository);
+}
+
+/// A class which mocks [GetPractitionerByAuthIdUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetPractitionerByAuthIdUseCase extends _i1.Mock
+    implements _i25.GetPractitionerByAuthIdUseCase {
+  @override
+  _i4.PractitionerRepository get practitionerRepository => (super.noSuchMethod(
+        Invocation.getter(#practitionerRepository),
+        returnValue: _FakePractitionerRepository_5(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+        returnValueForMissingStub: _FakePractitionerRepository_5(
+          this,
+          Invocation.getter(#practitionerRepository),
+        ),
+      ) as _i4.PractitionerRepository);
+
+  @override
+  _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>> execute(
+          String? authId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #execute,
+          [authId],
+        ),
+        returnValue:
+            _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i10.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [authId],
+          ),
+        )),
+        returnValueForMissingStub:
+            _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>.value(
+                _FakeEither_0<_i9.Failure, _i10.PractitionerEntity>(
+          this,
+          Invocation.method(
+            #execute,
+            [authId],
+          ),
+        )),
+      ) as _i8.Future<_i2.Either<_i9.Failure, _i10.PractitionerEntity>>);
 }

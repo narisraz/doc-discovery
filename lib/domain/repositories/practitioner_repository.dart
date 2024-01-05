@@ -19,4 +19,6 @@ abstract class PractitionerRepository {
 
   Future<Either<Failure, String>> updatePractitionerProfilePicture(
       String practitionerId, String profilePictureUrl);
+
+  Future<Either<Failure, PractitionerEntity>> getByAuthId(String authId);
 }

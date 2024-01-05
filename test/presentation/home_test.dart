@@ -14,9 +14,11 @@ import '../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockGetConnectedUserUseCase getConnectedUseCase;
+  late MockGetPractitionerByAuthIdUseCase getPractitionerByAuthIdUseCase;
 
   setUp(() {
     getConnectedUseCase = MockGetConnectedUserUseCase();
+    getPractitionerByAuthIdUseCase = MockGetPractitionerByAuthIdUseCase();
   });
 
   testWidgets('should go to pro signup page', (tester) async {
@@ -30,10 +32,15 @@ void main() {
             picture: "svg",
           )),
         ));
+    when(getPractitionerByAuthIdUseCase.execute(any)).thenAnswer(
+        (_) => Future.value(const Left(NoPractitionerFoundFailure())));
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          getConnectedUserUseCaseProvider.overrideWithValue(getConnectedUseCase)
+          getConnectedUserUseCaseProvider
+              .overrideWithValue(getConnectedUseCase),
+          getPractitionerByAuthIdUseCaseProvider
+              .overrideWithValue(getPractitionerByAuthIdUseCase)
         ],
         child: const MaterialApp(
           home: Material(
@@ -78,7 +85,7 @@ void main() {
     expect(find.byType(SignInPage), findsOneWidget);
   });
 
-  testWidgets('should display pro button only if connected', (tester) async {
+  testWidgets('should hide pro button if not connected', (tester) async {
     // arrange
     when(getConnectedUseCase.execute()).thenAnswer((_) => Stream.value(
           const Left(NoUserConnectedFailure()),
@@ -98,5 +105,41 @@ void main() {
 
     // assert
     expect(find.byKey(const Key("signup-practitioner-button")), findsNothing);
+  });
+
+  testWidgets(
+      'should display pro button if connected person is not practitioner',
+      (tester) async {
+    // arrange
+    when(getConnectedUseCase.execute()).thenAnswer((_) => Stream.value(
+          const Right(UserEntity(
+            email: "mail@mail.com",
+            authId: "uid",
+            givenName: "John",
+            familyName: "Smith",
+            picture: "svg",
+          )),
+        ));
+    when(getPractitionerByAuthIdUseCase.execute(any)).thenAnswer(
+        (_) => Future.value(const Left(NoPractitionerFoundFailure())));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          getConnectedUserUseCaseProvider
+              .overrideWithValue(getConnectedUseCase),
+          getPractitionerByAuthIdUseCaseProvider
+              .overrideWithValue(getPractitionerByAuthIdUseCase)
+        ],
+        child: const MaterialApp(
+          home: Material(
+            child: Scaffold(body: Home()),
+          ),
+        ),
+      ),
+    );
+
+    // act
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key("signup-practitioner-button")), findsOneWidget);
   });
 }

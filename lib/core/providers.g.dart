@@ -209,5 +209,23 @@ final getAuthIdUseCaseProvider = AutoDisposeProvider<GetAuthIdUseCase>.internal(
 );
 
 typedef GetAuthIdUseCaseRef = AutoDisposeProviderRef<GetAuthIdUseCase>;
+String _$getPractitionerByAuthIdUseCaseHash() =>
+    r'8e88cd1aa2a88e38ee5dfecc8499ffb979e25b58';
+
+/// See also [getPractitionerByAuthIdUseCase].
+@ProviderFor(getPractitionerByAuthIdUseCase)
+final getPractitionerByAuthIdUseCaseProvider =
+    AutoDisposeProvider<GetPractitionerByAuthIdUseCase>.internal(
+  getPractitionerByAuthIdUseCase,
+  name: r'getPractitionerByAuthIdUseCaseProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getPractitionerByAuthIdUseCaseHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetPractitionerByAuthIdUseCaseRef
+    = AutoDisposeProviderRef<GetPractitionerByAuthIdUseCase>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

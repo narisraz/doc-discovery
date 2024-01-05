@@ -20,19 +20,10 @@ class Home extends ConsumerWidget {
               stream: auth,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  if (snapshot.data!.isRight()) {
-                    return FilledButton(
-                      key: const Key("signup-practitioner-button"),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const PractitionerForm(),
-                          ),
-                        );
-                      },
-                      child: const Text("Passer PRO"),
-                    );
-                  }
+                  return snapshot.data!.fold(
+                    (_) => const SizedBox.shrink(),
+                    (userEntity) => Authenticated(authId: userEntity.authId!),
+                  );
                 }
                 return const SizedBox.shrink();
               },
@@ -53,5 +44,42 @@ class Home extends ConsumerWidget {
             ),
           ],
         ));
+  }
+}
+
+class Authenticated extends ConsumerWidget {
+  final String authId;
+
+  const Authenticated({super.key, required this.authId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final practitionerFuture =
+        ref.read(getPractitionerByAuthIdUseCaseProvider).execute(authId);
+    return FutureBuilder(
+        future: practitionerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return snapshot.data!.fold(
+              (_) => buidlProButton(context),
+              (_) => const SizedBox.shrink(),
+            );
+          }
+          return const SizedBox.shrink();
+        });
+  }
+
+  Widget buidlProButton(BuildContext context) {
+    return FilledButton(
+      key: const Key("signup-practitioner-button"),
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const PractitionerForm(),
+          ),
+        );
+      },
+      child: const Text("Passer PRO"),
+    );
   }
 }

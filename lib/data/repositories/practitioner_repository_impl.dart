@@ -78,4 +78,17 @@ class PractitionerRepositoryImpl implements PractitionerRepository {
         .update({'profilePicture': profilePictureUrl}).then(
             (_) => Right(profilePictureUrl));
   }
+
+  @override
+  Future<Either<Failure, PractitionerEntity>> getByAuthId(String authId) {
+    return FirestoreCollections.getPractitionerCollection(firestore)
+        .where('authId', isEqualTo: authId)
+        .get()
+        .then((value) {
+      if (value.docs.isEmpty) {
+        return const Left(NoPractitionerFoundFailure());
+      }
+      return Right(value.docs.first.data().toPractitionerEntity());
+    });
+  }
 }
