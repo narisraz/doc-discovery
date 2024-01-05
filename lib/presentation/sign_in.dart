@@ -2,6 +2,7 @@ import 'package:docdiscovery/core/providers.dart';
 import 'package:docdiscovery/presentation/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 class SignInPage extends ConsumerWidget {
   const SignInPage({super.key});
@@ -65,17 +66,9 @@ class SignInPage extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(vertical: 8),
                           child: SizedBox(
                             width: double.infinity,
-                            child: FilledButton(
-                              key: const Key("signin-button"),
-                              onPressed: () {
-                                ref
-                                    .read(signInUserUseCaseProvider)
-                                    .execute(emailController.text,
-                                        passwordController.text)
-                                    .then(
-                                        (value) => Navigator.of(context).pop());
-                              },
-                              child: const Text("Se connecter"),
+                            child: SignInButton(
+                              emailController: emailController,
+                              passwordController: passwordController,
                             ),
                           ),
                         ),
@@ -101,6 +94,59 @@ class SignInPage extends ConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SignInButton extends ConsumerStatefulWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  const SignInButton(
+      {super.key,
+      required this.emailController,
+      required this.passwordController});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignInButtonState();
+}
+
+class _SignInButtonState extends ConsumerState<SignInButton> {
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      key: const Key("signin-button"),
+      onPressed: () {
+        setState(() {
+          isLoading = true;
+        });
+        ref
+            .read(signInUserUseCaseProvider)
+            .execute(
+              widget.emailController.text,
+              widget.passwordController.text,
+            )
+            .then((_) => Navigator.of(context).pop());
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text("Se connecter"),
+          const Gap(16),
+          if (isLoading)
+            SizedBox(
+              width: 16,
+              height: 16,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Theme.of(context).colorScheme.onPrimary,
+                key: const Key("loading"),
+              ),
+            )
+        ],
       ),
     );
   }
