@@ -36,3 +36,7 @@ class NoUserConnectedFailure extends Failure {
 class NoPractitionerFoundFailure extends Failure {
   const NoPractitionerFoundFailure() : super("No practitioner found");
 }
+
+class SignInFailure extends Failure {
+  const SignInFailure() : super("Sign in failed");
+}

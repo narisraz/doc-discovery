@@ -13,8 +13,9 @@ class SignInUserUseCase {
 
   Future<Either<Failure, UserEntity>> execute(
       String email, String password) async {
-    return authRepository
-        .signIn(email, password)
-        .then((value) => userRepository.getByAuthId(value.getOrElse(() => "")));
+    return authRepository.signIn(email, password).then((value) => value.fold(
+          (failure) => Left(failure),
+          (authId) => userRepository.getByAuthId(authId),
+        ));
   }
 }

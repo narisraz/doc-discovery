@@ -16,10 +16,20 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> signIn(String email, String password) {
-    return auth
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((value) => Right(value.user!.uid));
+  Future<Either<Failure, String>> signIn(String email, String password) async {
+    try {
+      return await auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        final user = value.user;
+        if (user == null) {
+          return const Left(SignInFailure());
+        }
+        return Right(user.uid);
+      });
+    } catch (e) {
+      return const Left(SignInFailure());
+    }
   }
 
   @override
